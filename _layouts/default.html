@@ -13,4 +13,12 @@
       {% include footer.html %}
     <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
 <script src="https://mediafiles.botpress.cloud/7532ac8f-b9ec-476b-9cc8-293b8e57db77/webchat/config.js" defer></script>
+<!-- Your Customized Script -->
+<script>
+    window.botpressWebChat.onEvent(
+        function () {
+            window.botpressWebChat.sendEvent({ type: "show" });
+        },
+        ["LIFECYCLE.LOADED"]
+    );
   </body>
