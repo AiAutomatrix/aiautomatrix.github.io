@@ -14,12 +14,21 @@
     {{ content }}
     {% include footer.html %}
 
-    <!-- Calendly badge widget -->
-    <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);">
-        <a href="javascript:void(0);" onclick="Calendly.showPopupWidget('https://calendly.com/garretgpt/30min?background_color=b4c3d9&text_color=ebebd6&primary_color=3681a8'); return false;">
-            <img src="https://assets.calendly.com/assets/external/widget-button.png" alt="Schedule time with me" style="width: 150px; height: auto;">
-        </a>
-    </div>
+    <!-- Calendly badge widget begin -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            Calendly.initBadgeWidget({
+                url: 'https://calendly.com/garretgpt/30min?background_color=b4c3d9&text_color=ebebd6&primary_color=3681a8',
+                text: 'Schedule time with me',
+                color: '#1378a5',
+                textColor: '#f4f1d3',
+                branding: true
+            });
+        }
+    </script>
+    <!-- Calendly badge widget end -->
 
     <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
     <script src="https://mediafiles.botpress.cloud/7532ac8f-b9ec-476b-9cc8-293b8e57db77/webchat/config.js" defer></script>
@@ -35,3 +44,4 @@
     </script>
 </body>
 </html>
+
