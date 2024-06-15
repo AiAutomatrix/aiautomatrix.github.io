@@ -4,13 +4,11 @@
     {% include head.html %}
     <style>
         /* Add custom CSS for Calendly button positioning */
-        .calendly-badge-widget {
+        .calendly-button-container {
             position: fixed;
-            right: 100px; /* Add 'px' to the value for correct positioning */
-            top: 10px; /* Adjust the bottom position as needed */
+            left: 0;
+            bottom: 10px; /* Adjust the bottom position as needed */
         }
-        
-        
     </style>
 </head>
 <body>
@@ -25,20 +23,21 @@
     {% include footer.html %}
 
     <!-- Calendly badge widget begin -->
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-    <script type="text/javascript">
-        window.onload = function() {
-            Calendly.initBadgeWidget({
-                url: 'https://calendly.com/garretgpt/30min?background_color=5973a0&text_color=ebebc7&primary_color=3681a8',
-                text: 'Schedule time with me',
-                color: '#1378a5',
-                textColor: '#f4f1d3',
-                branding: true
-            });
-            document.querySelector('.calendly-badge-widget').classList.add('calendly-button-container');
-        }
-    </script>
+    <div class="calendly-button-container">
+        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+        <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+        <script type="text/javascript">
+            window.onload = function() {
+                Calendly.initBadgeWidget({
+                    url: 'https://calendly.com/garretgpt/30min?background_color=5973a0&text_color=ebebc7&primary_color=3681a8',
+                    text: 'Schedule time with me',
+                    color: '#1378a5',
+                    textColor: '#f4f1d3',
+                    branding: true
+                });
+            }
+        </script>
+    </div>
     <!-- Calendly badge widget end -->
 
     <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
