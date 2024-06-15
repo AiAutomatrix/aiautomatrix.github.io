@@ -6,8 +6,16 @@
         /* Add custom CSS for Calendly button positioning */
         .calendly-badge-widget {
             position: fixed;
-            left: -100;
+            left: -100px; /* Add 'px' to the value for correct positioning */
             bottom: 10px; /* Adjust the bottom position as needed */
+        }
+        
+        /* Add custom CSS for Botpress chat button positioning */
+        .bpw-bubble-container {
+            position: fixed;
+            bottom: 5px; /* Adjust this value to move the button up or down */
+            right: 20px;  /* Adjust this value to move the button left or right */
+            z-index: 1000; /* Ensure it appears above other elements */
         }
     </style>
 </head>
