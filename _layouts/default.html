@@ -3,12 +3,12 @@
 <head>
     {% include head.html %}
     <style>
-        /* Add custom CSS for Calendly button positioning */
-        .calendly-badge-widget {
+        /* Add custom CSS for Fiverr badge widget positioning */
+        .fiverr-seller-widget {
             position: fixed;
-            right: -80px; /* Correct positioning */
-            top: 10px; /* Adjust the top position as needed */
-            z-index: 999; /* Ensure it doesn't overlap the chat */
+            top: 10px; /* Adjust this value to move the widget up or down */
+            left: 10px; /* Adjust this value to move the widget left or right */
+            z-index: 1000; /* Ensure it appears above other elements */
         }
 
         /* Add custom CSS for Botpress chat button positioning */
@@ -37,9 +37,9 @@
         {% include projects.html %}
     </section>
     {{ content }}
-    
+
     <!-- Fiverr Badge Widget Start -->
-    <div itemscope itemtype='http://schema.org/Person' class='fiverr-seller-widget' style='display: inline-block;'>
+    <div itemscope itemtype='http://schema.org/Person' class='fiverr-seller-widget'>
         <a itemprop='url' href='https://www.fiverr.com/bigtimetreat' rel="nofollow" target="_blank" style='display: inline-block;'>
             <div class='fiverr-seller-content' id='fiverr-seller-widget-content-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f' itemprop='contentURL' style='display: none;'></div>
             <div id='fiverr-widget-seller-data' style='display: none;'>
@@ -55,24 +55,6 @@
     <!-- Fiverr Badge Widget End -->
 
     {% include footer.html %}
-
-    <!-- Calendly badge widget begin -->
-    <div class="calendly-button-container">
-        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-        <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-        <script type="text/javascript">
-            window.onload = function() {
-                Calendly.initBadgeWidget({
-                    url: 'https://calendly.com/garretgpt/30min?background_color=5973a0&text_color=ebebc7&primary_color=3681a8',
-                    text: 'Schedule time with me',
-                    color: '#1378a5',
-                    textColor: '#f4f1d3',
-                    branding: true
-                });
-            }
-        </script>
-    </div>
-    <!-- Calendly badge widget end -->
 
     <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
     <script src="https://mediafiles.botpress.cloud/1513dc4c-7f75-4149-8cc8-72da68fa9bc4/webchat/config.js" defer></script>
