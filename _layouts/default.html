@@ -3,6 +3,29 @@
 <head>
     {% include head.html %}
     <style>
+        /* Add custom CSS for Calendly button positioning */
+        .calendly-badge-widget {
+            position: fixed;
+            right: -80px; /* Correct positioning */
+            top: 10px; /* Adjust the top position as needed */
+            z-index: 999; /* Ensure it doesn't overlap the chat */
+        }
+
+        /* Add custom CSS for Botpress chat button positioning */
+        .bpw-bubble-container {
+            position: fixed;
+            bottom: 20px; /* Adjust this value to move the button up or down */
+            right: 20px;  /* Adjust this value to move the button left or right */
+            z-index: 1000; /* Ensure it appears above other elements */
+        }
+
+        /* Ensure Botpress chat window is correctly positioned and interactive */
+        .bpw-chat-container {
+            position: fixed;
+            bottom: 80px; /* Adjust this value to move the chat window up or down */
+            right: 20px;  /* Adjust this value to move the chat window left or right */
+            z-index: 1001; /* Ensure it appears above other elements */
+        }
     </style>
 </head>
 <body>
@@ -14,27 +37,45 @@
         {% include projects.html %}
     </section>
     {{ content }}
+    
+    <!-- Fiverr Badge Widget Start -->
+    <div itemscope itemtype='http://schema.org/Person' class='fiverr-seller-widget' style='display: inline-block;'>
+        <a itemprop='url' href='https://www.fiverr.com/bigtimetreat' rel="nofollow" target="_blank" style='display: inline-block;'>
+            <div class='fiverr-seller-content' id='fiverr-seller-widget-content-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f' itemprop='contentURL' style='display: none;'></div>
+            <div id='fiverr-widget-seller-data' style='display: none;'>
+                <div itemprop='name'>bigtimetreat</div>
+                <div itemscope itemtype='http://schema.org/Organization'><span itemprop='name'>Fiverr</span></div>
+                <div itemprop='jobtitle'>Seller</div>
+                <div itemprop='description'>Hi, I'm Garret Friesen, a 34-year-old entrepreneur from Canada. With a passion for AI and social media, I specialize in developing custom AI bots using ChatGPT 3.5, 4.0, and GPT-4o. As a Botpress Ambassador, I create advanced customer service bots that integrate seamlessly with various systems to collect data, process payments, provide suggestions, and display media. Additionally, I offer services in social media management and workflow automation to help businesses streamline their operations. Let's collaborate to bring your ideas to life and boost your business with cutting-edge AI solutions.</div>
+            </div>
+        </a>
+    </div>
+
+    <script id='fiverr-seller-widget-script-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f' src='https://widgets.fiverr.com/api/v1/seller/bigtimetreat?widget_id=97fdd3f2-5cca-4a4d-b58c-67277e8bba1f' data-config='{"category_name":"Programming \u0026 Tech"}' async='true' defer='true'></script>
+    <!-- Fiverr Badge Widget End -->
+
     {% include footer.html %}
 
-    <!-- Put this code anywhere in the body of your page where you want the badge to show up. -->
+    <!-- Calendly badge widget begin -->
+    <div class="calendly-button-container">
+        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+        <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+        <script type="text/javascript">
+            window.onload = function() {
+                Calendly.initBadgeWidget({
+                    url: 'https://calendly.com/garretgpt/30min?background_color=5973a0&text_color=ebebc7&primary_color=3681a8',
+                    text: 'Schedule time with me',
+                    color: '#1378a5',
+                    textColor: '#f4f1d3',
+                    branding: true
+                });
+            }
+        </script>
+    </div>
+    <!-- Calendly badge widget end -->
 
-<div itemscope itemtype='http://schema.org/Person' class='fiverr-seller-widget' style='display: inline-block;'>
-    <a itemprop='url' href=https://www.fiverr.com/bigtimetreat rel="nofollow" target="_blank" style='display: inline-block;'>
-       <div class='fiverr-seller-content' id='fiverr-seller-widget-content-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f' itemprop='contentURL' style='display: none;'></div>
-       <div id='fiverr-widget-seller-data' style='display: none;'>
-           <div itemprop='name' >bigtimetreat</div>
-           <div itemscope itemtype='http://schema.org/Organization'><span itemprop='name'>Fiverr</span></div>
-           <div itemprop='jobtitle'>Seller</div>
-           <div itemprop='description'>Hi, I'm Garret Friesen, a 34-year-old entrepreneur from Canada. With a passion for AI and social media, I specialize in developing custom AI bots using ChatGPT 3.5, 4.0, and GPT-4o. As a Botpress Ambassador, I create advanced customer service bots that integrate seamlessly with various systems to collect data, process payments, provide suggestions, and display media. Additionally, I offer services in social media management and workflow automation to help businesses streamline their operations. Let's collaborate to bring your ideas to life and boost your business with cutting-edge AI solutions</div>
-       </div>
-   </a>
-</div>
-
-<script id='fiverr-seller-widget-script-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f' src='https://widgets.fiverr.com/api/v1/seller/bigtimetreat?widget_id=97fdd3f2-5cca-4a4d-b58c-67277e8bba1f' data-config='{"category_name":"Programming \u0026 Tech"}' async='true' defer='true'></script>
-
-
-    <script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
-<script src="https://mediafiles.botpress.cloud/3c1de60c-b4f5-4f9a-ad07-f54cadf00c0e/webchat/config.js" defer></script>
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script src="https://mediafiles.botpress.cloud/1513dc4c-7f75-4149-8cc8-72da68fa9bc4/webchat/config.js" defer></script>
     
     <!-- Your Customized Script -->
     <script>
