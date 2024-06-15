@@ -3,14 +3,6 @@
 <head>
     {% include head.html %}
     <style>
-        /* Add custom CSS for Calendly button positioning */
-        .calendly-badge-widget {
-            position: fixed;
-            left: 100%; /* Correct positioning */
-            right: 0%;
-            top: 10px; /* Adjust the top position as needed */
-            z-index: 999;
-        }
     </style>
 </head>
 <body>
@@ -23,24 +15,6 @@
     </section>
     {{ content }}
     {% include footer.html %}
-
-    <!-- Calendly badge widget begin -->
-    <div class="calendly-button-container">
-        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-        <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-        <script type="text/javascript">
-            window.onload = function() {
-                Calendly.initBadgeWidget({
-                    url: 'https://calendly.com/garretgpt/30min?background_color=5973a0&text_color=ebebc7&primary_color=3681a8',
-                    text: 'Schedule time with me',
-                    color: '#1378a5',
-                    textColor: '#f4f1d3',
-                    branding: true
-                });
-            }
-        </script>
-    </div>
-    <!-- Calendly badge widget end -->
 
     <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
     <script src="https://mediafiles.botpress.cloud/1513dc4c-7f75-4149-8cc8-72da68fa9bc4/webchat/config.js" defer></script>
