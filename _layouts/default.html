@@ -3,7 +3,7 @@
 <head>
     {% include head.html %}
     <style>
-        /* Add custom CSS for Fiverr badge widget positioning */
+        /* Custom CSS for Fiverr badge widget positioning */
         .fiverr-seller-widget {
             position: fixed;
             top: 10px; /* Adjust this value to move the widget up or down */
@@ -11,7 +11,7 @@
             z-index: 1000; /* Ensure it appears above other elements */
         }
 
-        /* Add custom CSS for Botpress chat button positioning */
+        /* Custom CSS for Botpress chat button positioning */
         .bpw-bubble-container {
             position: fixed;
             bottom: 20px; /* Adjust this value to move the button up or down */
@@ -46,8 +46,8 @@
                 <div itemprop='name'>bigtimetreat</div>
                 <div itemscope itemtype='http://schema.org/Organization'><span itemprop='name'>Fiverr</span></div>
                 <div itemprop='jobtitle'>Seller</div>
-                <div itemprop='description'>Hi, I'm Garret Friesen, a 34-year-old entrepreneur from Canada. With a passion for AI and social media, I specialize in developing custom AI bots using ChatGPT 3.5, 4.0, and GPT-4o. As a Botpress Ambassador, I create advanced customer service bots that integrate seamlessly with various systems to collect data, process payments, provide suggestions, and display media. Additionally, I offer services in social media management and workflow automation to help businesses streamline their operations. Let's collaborate to bring your ideas to life and boost your business with cutting-edge AI solutions.</div>
-                <img id="garret-image" src="{{ '/assets/img/Garret.jpeg' | prepend: site.baseurl }}" alt="Garret Friesen" style="width: 100px; height: auto; border-radius: 50%; display: block; margin-bottom: 10px;">
+                <div itemprop='description'>Hi, I'm Garret Friesen, a 34-year-old entrepreneur from Canada. With a passion for AI and social media, I specialize in developing custom AI bots using ChatGPT 3.5, 4.0, and GPT-4. As a Botpress Ambassador, I create advanced customer service bots that integrate seamlessly with various systems to collect data, process payments, provide suggestions, and display media. Additionally, I offer services in social media management and workflow automation to help businesses streamline their operations. Let's collaborate to bring your ideas to life and boost your business with cutting-edge AI solutions.</div>
+                <img id="garret-image" src="{{ 'assets/img/Garret.jpg' | prepend: site.baseurl }}" alt="Garret Friesen" style="width: 100px; height: auto; border-radius: 50%; display: block; margin-bottom: 10px;">
             </div>
         </a>
     </div>
@@ -59,7 +59,7 @@
 
     <!-- Botpress Chat Widget -->
     <script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
-<script src="https://mediafiles.botpress.cloud/3c1de60c-b4f5-4f9a-ad07-f54cadf00c0e/webchat/config.js" defer></script>
+    <script src="https://mediafiles.botpress.cloud/3c1de60c-b4f5-4f9a-ad07-f54cadf00c0e/webchat/config.js" defer></script>
 
     <!-- Your Customized Script -->
     <script>
