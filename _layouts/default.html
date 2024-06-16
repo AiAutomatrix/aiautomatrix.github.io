@@ -86,8 +86,9 @@
                     img.style.display = "block";
                     img.style.marginBottom = "10px";
 
-                    // Insert the image into the widget
-                    fiverrContent.insertAdjacentElement('afterbegin', img);
+                    // Insert the image into the widget at the beginning
+                    var widgetLink = document.querySelector('.fiverr-seller-widget a');
+                    widgetLink.insertAdjacentElement('afterbegin', img);
                 }
             }, 100); // Check every 100ms
         });
