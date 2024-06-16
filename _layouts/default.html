@@ -47,6 +47,7 @@
                 <div itemscope itemtype='http://schema.org/Organization'><span itemprop='name'>Fiverr</span></div>
                 <div itemprop='jobtitle'>Seller</div>
                 <div itemprop='description'>Hi, I'm Garret Friesen, a 34-year-old entrepreneur from Canada. With a passion for AI and social media, I specialize in developing custom AI bots using ChatGPT 3.5, 4.0, and GPT-4o. As a Botpress Ambassador, I create advanced customer service bots that integrate seamlessly with various systems to collect data, process payments, provide suggestions, and display media. Additionally, I offer services in social media management and workflow automation to help businesses streamline their operations. Let's collaborate to bring your ideas to life and boost your business with cutting-edge AI solutions.</div>
+                <img id="garret-image" src="{{ '/assets/img/Garret.jpeg' | prepend: site.baseurl }}" alt="Garret Friesen" style="width: 100px; height: auto; border-radius: 50%; display: block; margin-bottom: 10px;">
             </div>
         </a>
     </div>
@@ -57,9 +58,9 @@
     {% include footer.html %}
 
     <!-- Botpress Chat Widget -->
-    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
-    <script src="https://mediafiles.botpress.cloud/1513dc4c-7f75-4149-8cc8-72da68fa9bc4/webchat/config.js" defer></script>
-    
+    <script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
+    <script src="https://mediafiles.botpress.cloud/3c1de60c-b4f5-4f9a-ad07-f54cadf00c0e/webchat/config.js" defer></script>
+
     <!-- Your Customized Script -->
     <script>
         window.botpressWebChat.onEvent(
@@ -69,31 +70,18 @@
             ["LIFECYCLE.LOADED"]
         );
 
-        // Script to replace the placeholder profile picture in the Fiverr widget
+        // Script to ensure the Fiverr widget displays the custom image
         document.addEventListener("DOMContentLoaded", function() {
-            // Check if the Fiverr widget is loaded
+            // Check if the Fiverr widget content is visible
             var checkFiverrWidget = setInterval(function() {
-                var fiverrWidget = document.querySelector('.fiverr-seller-content');
-                if (fiverrWidget && fiverrWidget.style.display !== 'none') {
+                var fiverrWidgetContent = document.getElementById('fiverr-seller-widget-content-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f');
+                if (fiverrWidgetContent && fiverrWidgetContent.style.display !== 'none') {
                     clearInterval(checkFiverrWidget);
-
-                    // Locate the placeholder image and replace it with your custom image
-                    var profilePicPlaceholder = fiverrWidget.querySelector('img');
-                    if (profilePicPlaceholder) {
-                        profilePicPlaceholder.src = "{{ '/assets/img/Garret.jpeg' | prepend: site.baseurl }}";
-                        profilePicPlaceholder.alt = "Garret Friesen";
-                    } else {
-                        // If there's no img element, create one and insert it
-                        var img = document.createElement('img');
-                        img.src = src = "{{ "/assets/img/Garret.jpeg;" | prepend: site.baseurl }}";
-                        img.alt = "Garret Friesen";
-                        img.style.width = "100px";
-                        img.style.height = "auto";
-                        img.style.borderRadius = "50%";
-                        img.style.display = "block";
-                        img.style.marginBottom = "10px";
-
-                        fiverrWidget.insertAdjacentElement('afterbegin', img);
+                    
+                    // Ensure the custom image is visible in the widget
+                    var garretImage = document.getElementById('garret-image');
+                    if (garretImage) {
+                        garretImage.style.display = 'block';
                     }
                 }
             }, 100); // Check every 100ms
