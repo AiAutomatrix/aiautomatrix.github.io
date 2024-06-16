@@ -85,7 +85,7 @@
                     } else {
                         // If there's no img element, create one and insert it
                         var img = document.createElement('img');
-                        img.src = "{{ '/assets/img/Garret.jpeg' | prepend: site.baseurl }}";
+                        img.src = src = "{{ "/assets/img/Garret.jpeg;" | prepend: site.baseurl }}";
                         img.alt = "Garret Friesen";
                         img.style.width = "100px";
                         img.style.height = "auto";
