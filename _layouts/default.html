@@ -68,27 +68,32 @@
             ["LIFECYCLE.LOADED"]
         );
 
-        // Script to add the image to the Fiverr widget dynamically
+        // Script to replace the placeholder profile picture in the Fiverr widget
         document.addEventListener("DOMContentLoaded", function() {
             // Check if the Fiverr widget is loaded
             var checkFiverrWidget = setInterval(function() {
-                var fiverrContent = document.getElementById('fiverr-seller-widget-content-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f');
-                if (fiverrContent && fiverrContent.style.display !== 'none') {
+                var fiverrWidget = document.querySelector('.fiverr-seller-content');
+                if (fiverrWidget && fiverrWidget.style.display !== 'none') {
                     clearInterval(checkFiverrWidget);
 
-                    // Create an image element
-                    var img = document.createElement('img');
-                    img.alt = "owner";
-                    img.src = "{{ '/assets/img/Garret.jpeg' | prepend: site.baseurl }}";
-                    img.style.width = "100px";
-                    img.style.height = "auto";
-                    img.style.borderRadius = "50%";
-                    img.style.display = "block";
-                    img.style.marginBottom = "10px";
+                    // Locate the placeholder image and replace it with your custom image
+                    var profilePicPlaceholder = document.querySelector('.fiverr-seller-content img');
+                    if (profilePicPlaceholder) {
+                        profilePicPlaceholder.src = "{{ '/assets/img/Garret.jpeg' | prepend: site.baseurl }}";
+                        profilePicPlaceholder.alt = "Garret Friesen";
+                    } else {
+                        // If there's no img element, create one and insert it
+                        var img = document.createElement('img');
+                        img.src = "{{ '/assets/img/Garret.jpeg' | prepend: site.baseurl }}";
+                        img.alt = "Garret Friesen";
+                        img.style.width = "100px";
+                        img.style.height = "auto";
+                        img.style.borderRadius = "50%";
+                        img.style.display = "block";
+                        img.style.marginBottom = "10px";
 
-                    // Insert the image into the widget at the beginning
-                    var widgetLink = document.querySelector('.fiverr-seller-widget a');
-                    widgetLink.insertAdjacentElement('afterbegin', img);
+                        fiverrWidget.insertAdjacentElement('afterbegin', img);
+                    }
                 }
             }, 100); // Check every 100ms
         });
