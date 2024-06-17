@@ -1,62 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% include head.html %}
-    <style>
-        /* Custom CSS for user details and tech sections */
-        .user-details {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .user-details h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        .user-details p {
-            font-size: 1.2em;
-        }
-
-        .user {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .tech {
-            width: 30%;
-            min-width: 250px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .tech h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-
-        .tech i {
-            font-size: 3em;
-            margin: 10px;
-        }
-
-        .tech p {
-            font-size: 1em;
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-    {% include header.html %}
-    
-    <div class="user-details">
-        <h1>My Expertise</h1>
-        <p>{{site.user_description}}</p>
-    </div>
-    
-    {{ content }}
+ <div class="user-details">
+  <h1> My Expertise </h1>
+  <p> {{site.user_description}} </p>
+</div>
+{{ content }}
 
     <!-- Fiverr Badge Widget Start -->
     <div itemscope itemtype="http://schema.org/Person" class="fiverr-seller-widget">
@@ -74,30 +20,31 @@
     <script id="fiverr-seller-widget-script-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f" src="https://widgets.fiverr.com/api/v1/seller/bigtimetreat?widget_id=97fdd3f2-5cca-4a4d-b58c-67277e8bba1f" data-config='{"category_name":"Programming \u0026 Tech"}' async defer></script>
     <!-- Fiverr Badge Widget End -->
 
-    <div class="user">
-        <div class="tech">
-            <h2>Design</h2>
-            <i class="devicon-html5-plain-wordmark"></i>
-            <i class="devicon-bootstrap-plain-wordmark colored"></i>
-            <i class="devicon-sass-original colored"></i>
-            <p>Immerse your audience in captivating visuals crafted to perfection. Our design skills transform concepts into visual narratives that resonate. Elevate your brand's presence with designs that inspire and captivate.</p>
-        </div>
-        <div class="tech">
-            <h2>Code</h2>
-            <i class="devicon-javascript-plain colored"></i>
-            <i class="devicon-react-original-wordmark colored"></i>
-            <i class="devicon-nodejs-plain-wordmark"></i>
-            <p>Unleash the power of flawless code that fuels seamless functionality. Our coding prowess turns ideas into reality, ensuring your digital solutions are robust, responsive, and innovative. Experience technology that just works.</p>
-        </div>
-        <div class="tech">
-            <h2>Tools</h2>
-            <i class="devicon-git-plain"></i>
-            <i class="devicon-gulp-plain colored"></i>
-            <i class="devicon-atom-original-wordmark"></i>
-            <p>From conception to execution, we wield cutting-edge tools that redefine what's achievable. Our toolset empowers us to create dynamic, efficient, and future-ready solutions. Witness the magic that emerges when innovation meets technology.</p>
-        </div>
+    <script id='fiverr-seller-widget-script-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f' src='https://widgets.fiverr.com/api/v1/seller/bigtimetreat?widget_id=97fdd3f2-5cca-4a4d-b58c-67277e8bba1f' data-config='{"category_name":"Programming \u0026 Tech"}' async='true' defer='true'></script>
+    <!-- Fiverr Badge Widget End -->
+  <div class="user">
+    <div class="tech">
+      <h2>Design</h2>
+      <i class="devicon-html5-plain-wordmark"></i>
+      <i class="devicon-bootstrap-plain-wordmark colored"></i>
+      <i class="devicon-sass-original colored"></i>
+      <p>Immerse your audience in captivating visuals crafted to perfection. Our design skills transform concepts into visual narratives that resonate. Elevate your brand's presence with designs that inspire and captivate.
+        Vinyl XOXO lumbersexual</p>
     </div>
-    
-    {% include footer.html %}
-</body>
-</html>
+    <div class="tech">
+      <h2>Code</h2>
+      <i class="devicon-javascript-plain colored"></i>
+      <i class="devicon-react-original-wordmark colored"></i>
+      <i class="devicon-nodejs-plain-wordmark"></i>
+      <p>Unleash the power of flawless code that fuels seamless functionality. Our coding prowess turns ideas into reality, ensuring your digital solutions are robust, responsive, and innovative. Experience technology that just works.
+        Vinyl XOXO lumbersexual</p>
+    </div>
+    <div class="tech">
+      <h2>Tools</h2>
+      <i class="devicon-git-plain"></i>
+      <i class="devicon-gulp-plain colored"></i>
+      <i class="devicon-atom-original-wordmark"></i>
+      <p>From conception to execution, we wield cutting-edge tools that redefine what's achievable. Our toolset empowers us to create dynamic, efficient, and future-ready solutions. Witness the magic that emerges when innovation meets technology.
+        Vinyl XOXO lumbersexual</p>
+    </div>
+</div>
