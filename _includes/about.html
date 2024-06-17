@@ -1,54 +1,82 @@
- <div class="user-details">
-  <h1> My Expertise </h1>
-  <p> {{site.user_description}} </p>
-</div>
-{{ content }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include head.html %}
+    <style>
+        /* Custom CSS to center all content in the middle of the window */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    <!-- Fiverr Badge Widget Start -->
-    <div itemscope itemtype="http://schema.org/Person" class="fiverr-seller-widget">
-        <a itemprop="url" href="https://www.fiverr.com/bigtimetreat" rel="nofollow" target="_blank" style="display: inline-block;">
-            <div class="fiverr-seller-content" id="fiverr-seller-widget-content-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f" itemprop="contentURL" style="display: none;"></div>
-            <div id="fiverr-widget-seller-data" style="display: none;">
-                <div itemprop="name">bigtimetreat</div>
-                <div itemscope itemtype="http://schema.org/Organization"><span itemprop="name">Fiverr</span></div>
-                <div itemprop="jobtitle">Seller</div>
-                <div itemprop="description">Hi, I'm Garret Friesen, a 34-year-old entrepreneur from Canada. With a passion for AI and social media, I specialize in developing custom AI bots using ChatGPT 3.5, 4.0, and GPT-4. As a Botpress Ambassador, I create advanced customer service bots that integrate seamlessly with various systems to collect data, process payments, provide suggestions, and display media. Additionally, I offer services in social media management and workflow automation to help businesses streamline their operations. Let's collaborate to bring your ideas to life and boost your business with cutting-edge AI solutions.</div>
-            </div>
+        .center-container {
+            text-align: center;
+        }
+
+        .fiverr-seller-widget {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="center-container">
+        <div class="user-details">
+            <h1> My Expertise </h1>
+            <p> {{site.user_description}} </p>
+        </div>
+        {{ content }}
+
+        <!-- Fiverr Badge Widget Start -->
+        <div itemscope itemtype="http://schema.org/Person" class="fiverr-seller-widget">
+            <a itemprop="url" href="https://www.fiverr.com/bigtimetreat" rel="nofollow" target="_blank" style="display: inline-block;">
+                <div class="fiverr-seller-content" id="fiverr-seller-widget-content-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f" itemprop="contentURL" style="display: none;"></div>
+                <div id="fiverr-widget-seller-data" style="display: none;">
+                    <div itemprop="name">bigtimetreat</div>
+                    <div itemscope itemtype="http://schema.org/Organization"><span itemprop="name">Fiverr</span></div>
+                    <div itemprop="jobtitle">Seller</div>
+                    <div itemprop="description">Hi, I'm Garret Friesen, a 34-year-old entrepreneur from Canada. With a passion for AI and social media, I specialize in developing custom AI bots using ChatGPT 3.5, 4.0, and GPT-4. As a Botpress Ambassador, I create advanced customer service bots that integrate seamlessly with various systems to collect data, process payments, provide suggestions, and display media. Additionally, I offer services in social media management and workflow automation to help businesses streamline their operations. Let's collaborate to bring your ideas to life and boost your business with cutting-edge AI solutions.</div>
+                </div>
+            </a>
+        </div>
+        <script id="fiverr-seller-widget-script-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f" src="https://widgets.fiverr.com/api/v1/seller/bigtimetreat?widget_id=97fdd3f2-5cca-4a4d-b58c-67277e8bba1f" data-config='{"category_name":"Programming \u0026 Tech"}' async defer></script>
+        <!-- Fiverr Badge Widget End -->
+
+        <!--Start rollercoin.com code-->
+        <a href="https://rollercoin.com/?r=lxijszlg">
+            <img src="https://static.rollercoin.com/static/img/ref/gen2/w320h320.gif" alt="Rollercoin Ad"/>
         </a>
-    </div>
-    <script id="fiverr-seller-widget-script-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f" src="https://widgets.fiverr.com/api/v1/seller/bigtimetreat?widget_id=97fdd3f2-5cca-4a4d-b58c-67277e8bba1f" data-config='{"category_name":"Programming \u0026 Tech"}' async defer></script>
-    <!-- Fiverr Badge Widget End -->
+        <!--End rollercoin.com code-->
 
-    <script id='fiverr-seller-widget-script-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f' src='https://widgets.fiverr.com/api/v1/seller/bigtimetreat?widget_id=97fdd3f2-5cca-4a4d-b58c-67277e8bba1f' data-config='{"category_name":"Programming \u0026 Tech"}' async='true' defer='true'></script>
-    <!-- Fiverr Badge Widget End -->
-     <!--Start rollercoin.com code-->
-  <a href="https://rollercoin.com/?r=lxijszlg">
-  <img src="https://static.rollercoin.com/static/img/ref/gen2/w320h320.gif"/> 
-  </a> 
-<!--End rollercoin.com code-->  
-  <div class="user">
-    <div class="tech">
-      <h2>Design</h2>
-      <i class="devicon-html5-plain-wordmark"></i>
-      <i class="devicon-bootstrap-plain-wordmark colored"></i>
-      <i class="devicon-sass-original colored"></i>
-      <p>Immerse your audience in captivating visuals crafted to perfection. Our design skills transform concepts into visual narratives that resonate. Elevate your brand's presence with designs that inspire and captivate.
-        Vinyl XOXO lumbersexual</p>
+        <div class="user">
+            <div class="tech">
+                <h2>Design</h2>
+                <i class="devicon-html5-plain-wordmark"></i>
+                <i class="devicon-bootstrap-plain-wordmark colored"></i>
+                <i class="devicon-sass-original colored"></i>
+                <p>Immerse your audience in captivating visuals crafted to perfection. Our design skills transform concepts into visual narratives that resonate. Elevate your brand's presence with designs that inspire and captivate.
+                    Vinyl XOXO lumbersexual</p>
+            </div>
+            <div class="tech">
+                <h2>Code</h2>
+                <i class="devicon-javascript-plain colored"></i>
+                <i class="devicon-react-original-wordmark colored"></i>
+                <i class="devicon-nodejs-plain-wordmark"></i>
+                <p>Unleash the power of flawless code that fuels seamless functionality. Our coding prowess turns ideas into reality, ensuring your digital solutions are robust, responsive, and innovative. Experience technology that just works.
+                    Vinyl XOXO lumbersexual</p>
+            </div>
+            <div class="tech">
+                <h2>Tools</h2>
+                <i class="devicon-git-plain"></i>
+                <i class="devicon-gulp-plain colored"></i>
+                <i class="devicon-atom-original-wordmark"></i>
+                <p>From conception to execution, we wield cutting-edge tools that redefine what's achievable. Our toolset empowers us to create dynamic, efficient, and future-ready solutions. Witness the magic that emerges when innovation meets technology.
+                    Vinyl XOXO lumbersexual</p>
+            </div>
+        </div>
     </div>
-    <div class="tech">
-      <h2>Code</h2>
-      <i class="devicon-javascript-plain colored"></i>
-      <i class="devicon-react-original-wordmark colored"></i>
-      <i class="devicon-nodejs-plain-wordmark"></i>
-      <p>Unleash the power of flawless code that fuels seamless functionality. Our coding prowess turns ideas into reality, ensuring your digital solutions are robust, responsive, and innovative. Experience technology that just works.
-        Vinyl XOXO lumbersexual</p>
-    </div>
-    <div class="tech">
-      <h2>Tools</h2>
-      <i class="devicon-git-plain"></i>
-      <i class="devicon-gulp-plain colored"></i>
-      <i class="devicon-atom-original-wordmark"></i>
-      <p>From conception to execution, we wield cutting-edge tools that redefine what's achievable. Our toolset empowers us to create dynamic, efficient, and future-ready solutions. Witness the magic that emerges when innovation meets technology.
-        Vinyl XOXO lumbersexual</p>
-    </div>
-</div>
+</body>
+</html>
