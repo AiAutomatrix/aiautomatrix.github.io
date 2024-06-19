@@ -2,29 +2,6 @@
 <html lang="en">
 <head>
     {% include head.html %}
-    <style>
-        /* Custom CSS for positioning */
-        .ad-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center; /* Adjust alignment as needed */
-            margin-top: 20px;
-            width: 100%; /* Ensure full width */
-            max-width: 600px; /* Adjust max width as needed */
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .ad-container .rollercoin-ad {
-            flex: 1;
-            text-align: center; /* Center align content */
-        }
-
-        .fiverr-seller-widget {
-            flex: 1;
-            margin-right: 20px; /* Adjust margin as needed */
-        }
-    </style>
 </head>
 <body>
     <div class="center-container">
@@ -33,17 +10,20 @@
             <p>{{site.user_description}}</p>
         </div>
 
-        <!-- Container for Rollercoin and Fiverr widgets -->
-        <div class="ad-container">
-            <!-- First Rollercoin Advertisement on the left -->
-            <div class="rollercoin-ad">
-                <a href="https://rollercoin.com/?r=lxijszlg">
-                    <img src="https://static.rollercoin.com/static/img/ref/gen2/w120h240.gif" alt="Rollercoin Advertisement"/> 
-                </a>
-            </div>
+        <!--Start rollercoin.com code-->
+        <div style="text-align: left; margin-bottom: 20px;">
+            <a href="https://rollercoin.com/?r=lxijszlg">
+                <img src="https://static.rollercoin.com/static/img/ref/gen2/w120h240.gif" alt="Rollercoin Advertisement"/> 
+            </a>
+        </div>
+        <!--End rollercoin.com code-->
+        
+        {{ content }}
 
-            <!-- Fiverr Badge Widget -->
-            <div itemscope itemtype="http://schema.org/Person" class="fiverr-seller-widget">
+        <!-- Container for widgets -->
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+            <!-- Fiverr Badge Widget Start -->
+            <div itemscope itemtype="http://schema.org/Person" class="fiverr-seller-widget" style="margin-right: 20px;">
                 <a itemprop="url" href="https://www.fiverr.com/bigtimetreat" rel="nofollow" target="_blank" style="display: inline-block;">
                     <div class="fiverr-seller-content" id="fiverr-seller-widget-content-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f" itemprop="contentURL" style="display: none;"></div>
                     <div id="fiverr-widget-seller-data" style="display: none;">
@@ -57,9 +37,10 @@
                 </a>
             </div>
             <script id="fiverr-seller-widget-script-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f" src="https://widgets.fiverr.com/api/v1/seller/bigtimetreat?widget_id=97fdd3f2-5cca-4a4d-b58c-67277e8bba1f" data-config='{"category_name":"Programming \u0026 Tech"}' async defer></script>
+            <!-- Fiverr Badge Widget End -->
 
             <!-- Second Rollercoin Advertisement on the right -->
-            <div class="rollercoin-ad">
+            <div style="text-align: right;">
                 <a href="https://rollercoin.com/?r=lxijszlg">
                     <img src="https://static.rollercoin.com/static/img/ref/gen2/w120h240.gif" alt="Rollercoin Advertisement"/> 
                 </a>
