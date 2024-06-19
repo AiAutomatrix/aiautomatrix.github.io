@@ -59,22 +59,17 @@
 
     <!-- Calendly badge widget begin -->
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-    <script type="text/javascript">
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <script>
+        // Move the Calendly badge widget to the bottom left corner
         window.onload = function() {
-            Calendly.initBadgeWidget({
-                url: 'https://calendly.com/aiautomatrix/30min',
-                text: 'Schedule time with me',
-                color: '#0069ff',
-                textColor: '#ffffff',
-                branding: undefined
-            });
-            // Move the Calendly badge widget to the bottom left corner
             const calendlyBadge = document.querySelector('.calendly-badge-widget');
             if (calendlyBadge) {
-                calendlyBadge.classList.add('calendly-badge-widget');
+                calendlyBadge.style.bottom = '20px'; // Adjust bottom position if needed
+                calendlyBadge.style.left = '20px'; // Adjust left position if needed
+                calendlyBadge.style.zIndex = '1000'; // Adjust zIndex if needed
             }
-        }
+        };
     </script>
     <!-- Calendly badge widget end -->
 
