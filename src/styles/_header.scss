@@ -1,59 +1,55 @@
 #particles-js {
-  background: $main; /* Assuming $main is your main background color */
-  display: flex;
-  vertical-align: bottom;
+  position: relative; /* Ensure position relative for absolute positioning of overlay */
   width: 100%;
   min-height: 100vh;
+  background: $main; /* Assuming $main is your main background color */
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  position: relative; /* Ensure position relative for absolute positioning of overlay */
-  
-  /* Adjust these properties to position your background image */
-  /* background: url('/path/to/your/image.png') no-repeat center center/cover; */
-  
+  overflow: hidden; /* Ensure the overlay doesn't overflow */
+
+  /* Particles canvas styles */
   .particles-js-canvas-el {
     width: 100% !important;
     height: 100vh !important;
   }
-  
+
   /* Transparent overlay with background image */
-  &::before {
+  &::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/assets/img/nebula.jpeg'); /* Path to your overlay image */
+    background-image: url('/path/to/your/image.png'); /* Path to your overlay image */
     opacity: 0.5; /* Adjust opacity as needed */
-    z-index: 0;
+    z-index: 1; /* Place overlay above the background */
     background-size: cover;
     background-repeat: no-repeat;
   }
 }
 
 .header {
-  z-index: 1;
+  position: relative; /* Ensure position relative for z-index stacking */
+  z-index: 2; /* Place header above the overlay */
   text-align: center;
   color: #FFF;
-  position: absolute;
+  margin: 0 auto;
   top: 50%;
   left: 50%;
-  margin: 0 auto;
   transform: translate(-50%, -50%);
-  
+
   .site-title {
     font-size: 50px;
     display: block;
     line-height: 1;
     color: #FFF;
     @media only screen and (min-width: $cut) {
-      margin: 0;
       font-size: 100px;
     }
   }
-  
+
   .site-description {
     font-size: 20px;
     display: block;
@@ -68,13 +64,13 @@
 
 .header-links {
   margin: 10px;
-  
+
   .link {
     color: #FFF;
     text-decoration: none;
     font-size: 15px;
     margin: 10px;
-    
+
     @media only screen and (min-width: $cut) {
       font-size: 20px;
     }
@@ -85,7 +81,7 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  
+
   .icon {
     text-align: center;
     color: #a5e8ffe9;
@@ -97,13 +93,13 @@
     border-radius: 50%;
     border: 2px solid #19b3e7db;
     transition: all .7s;
-    
+
     &:hover,
     &:active {
       color: $main;
       background: #FFF;
     }
-    
+
     @media only screen and (min-width: $cut) {
       width: 35px;
       height: 35px;
@@ -122,7 +118,7 @@
   text-align: center;
   font-size: 30px;
   cursor: pointer;
-  
+
   .icon {
     position: absolute;
     transform-style: preserve-3d;
@@ -133,7 +129,7 @@
     height: 100px;
     fill: #fff;
     animation: pulse 1.3s infinite;
-    
+
     &:hover,
     &:active {
       color: $sec;
