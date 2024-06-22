@@ -1,19 +1,48 @@
 <div id="particles-js">
   <div class="header">
       <h1>
-        <span class="site-title">{{site.username}}</span>
-        <span class="site-description">{{site.user_title}}</span>
+          <span class="site-title">{{site.username}}</span>
+          <span class="site-description">{{site.user_title}}</span>
       </h1>
       <div class="header-icons">
-        <a aria-label="Send email" href="#"><i class="icon fa fa-envelope"></i></a>
-        <a aria-label="My Instagram" target="_blank" href="#"><i class="icon fa fa-instagram" aria-hidden="true"></i></a>
-        <a aria-label="My Facebook" target="_blank" href="#"><i class="icon fa fa-facebook" aria-hidden="true"></i></a>
-        <a aria-label="My Github" target="_blank" href="#"><i class="icon fa fa-github-alt" aria-hidden="true"></i></a>
+          <a aria-label="Send email" href="#"><i class="icon fa fa-envelope"></i></a>
+          <a aria-label="My Instagram" target="_blank" href="#"><i class="icon fa fa-instagram" aria-hidden="true"></i></a>
+          <a aria-label="My Facebook" target="_blank" href="#"><i class="icon fa fa-facebook" aria-hidden="true"></i></a>
+          <a aria-label="My Github" target="_blank" href="#"><i class="icon fa fa-github-alt" aria-hidden="true"></i></a>
       </div>
       <div class="header-links">
-        <a class="link" href="#about" data-scroll>About Me</a>
-        <a class="link" href="#projects" data-scroll>Projects</a>
+          <a class="link" href="#about" data-scroll>About Me</a>
+          <a class="link" href="#projects" data-scroll>Projects</a>
       </div>
   </div>
   <a class="down" href="#about" data-scroll><i class="icon fa fa-chevron-down" aria-hidden="true"></i></a>
 </div>
+
+<style>
+  /* Background with particle animation */
+  #particles-js {
+      position: relative;
+      background: url('/assets/img/nebula.jpeg') no-repeat center center fixed;
+      background-size: cover;
+  }
+
+  /* Adding a transparent white overlay */
+  #particles-js::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.5); /* Adjust the alpha value for transparency */
+      pointer-events: none; /* Ensure the overlay does not interfere with any interactions */
+      z-index: 0; /* Ensure the overlay is below the content but above the background */
+  }
+
+  /* Ensure all child elements are above the overlay */
+  #particles-js .header,
+  #particles-js .down {
+      position: relative;
+      z-index: 1;
+  }
+</style>
