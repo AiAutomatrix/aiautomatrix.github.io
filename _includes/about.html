@@ -2,6 +2,17 @@
 <html lang="en">
 <head>
     {% include head.html %}
+    <style>
+        .widget-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .widget-container > div {
+            margin: 0 10px; /* Adjust this value to control the spacing */
+        }
+    </style>
 </head>
 <body>
     <div class="center-container">
@@ -21,9 +32,16 @@
         {{ content }}
 
         <!-- Container for widgets -->
-        <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+        <div class="widget-container">
+            <!-- First Rollercoin Advertisement on the left -->
+            <div>
+                <a href="https://rollercoin.com/?r=lxijszlg">
+                    <img src="https://static.rollercoin.com/static/img/ref/gen2/w120h240.gif" alt="Rollercoin Advertisement"/> 
+                </a>
+            </div>
+
             <!-- Fiverr Badge Widget Start -->
-            <div itemscope itemtype="http://schema.org/Person" class="fiverr-seller-widget" style="margin-right: 20px;">
+            <div itemscope itemtype="http://schema.org/Person" class="fiverr-seller-widget">
                 <a itemprop="url" href="https://www.fiverr.com/bigtimetreat" rel="nofollow" target="_blank" style="display: inline-block;">
                     <div class="fiverr-seller-content" id="fiverr-seller-widget-content-97fdd3f2-5cca-4a4d-b58c-67277e8bba1f" itemprop="contentURL" style="display: none;"></div>
                     <div id="fiverr-widget-seller-data" style="display: none;">
@@ -40,7 +58,7 @@
             <!-- Fiverr Badge Widget End -->
 
             <!-- Second Rollercoin Advertisement on the right -->
-            <div style="text-align: right;">
+            <div>
                 <a href="https://rollercoin.com/?r=lxijszlg">
                     <img src="https://static.rollercoin.com/static/img/ref/gen2/w120h240.gif" alt="Rollercoin Advertisement"/> 
                 </a>
