@@ -1,72 +1,20 @@
 <div id="particles-js">
   <div class="header">
       <h1>
-          <span class="site-title">{{site.username}}</span>
-          <span class="site-description">{{site.user_title}}</span>
+        <span class="site-title">{{site.username}}</span>
+        <span class="site-description">{{site.user_title}}</span>
       </h1>
       <div class="header-icons">
-          <a aria-label="Send email" href="#"><i class="icon fa fa-envelope"></i></a>
-          <a aria-label="My Instagram" target="_blank" href="#"><i class="icon fa fa-instagram" aria-hidden="true"></i></a>
-          <a aria-label="My Facebook" target="_blank" href="#"><i class="icon fa fa-facebook" aria-hidden="true"></i></a>
-          <a aria-label="My Github" target="_blank" href="#"><i class="icon fa fa-github-alt" aria-hidden="true"></i></a>
+        <a aria-label="Send email" href="#"><i class="icon fa fa-envelope"></i></a>
+        <a aria-label="My Instagram" target="_blank" href="#"><i class="icon fa fa-instagram" aria-hidden="true"></i></a>
+        <a aria-label="My Facebook" target="_blank" href="#"><i class="icon fa fa-facebook" aria-hidden="true"></i></a>
+        <a aria-label="My Github" target="_blank" href="#"><i class="icon fa fa-github-alt" aria-hidden="true"></i></a>
       </div>
       <div class="header-links">
-          <a class="link" href="#about" data-scroll>About Me</a>
-          <a class="link" href="#projects" data-scroll>Projects</a>
+        <a class="link" href="#about" data-scroll>About Me</a>
+        <a class="link" href="#projects" data-scroll>Projects</a>
       </div>
   </div>
   <a class="down" href="#about" data-scroll><i class="icon fa fa-chevron-down" aria-hidden="true"></i></a>
 </div>
 
-<style>
-  /* Background with particle animation */
-  #particles-js {
-      position: relative;
-      background: url('/assets/img/nebula.jpeg') no-repeat center center fixed;
-      background-size: cover;
-      width: 100%; /* Ensure full width */
-      height: 100vh; /* Adjust height as needed */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff; /* Text color */
-      text-align: center;
-  }
-
-  /* Particle container styles */
-  .header {
-      position: relative;
-      z-index: 1; /* Ensure header content is above particles */
-  }
-
-  .header-icons {
-      margin-top: 20px; /* Adjust spacing */
-  }
-
-  .header-icons a {
-      color: #fff; /* Icon color */
-      margin: 0 10px; /* Adjust spacing between icons */
-      font-size: 24px; /* Adjust icon size */
-  }
-
-  .header-links {
-      margin-top: 20px; /* Adjust spacing */
-  }
-
-  .header-links .link {
-      color: #fff; /* Link color */
-      margin: 0 15px; /* Adjust spacing between links */
-      text-decoration: none; /* Remove underline */
-      font-size: 18px; /* Adjust link size */
-  }
-
-  .down {
-      position: absolute;
-      bottom: 20px; /* Adjust position */
-      left: 50%; /* Center horizontally */
-      transform: translateX(-50%); /* Center horizontally */
-      color: #fff; /* Arrow color */
-      font-size: 24px; /* Arrow size */
-      text-decoration: none; /* Remove underline */
-  }
-</style>
