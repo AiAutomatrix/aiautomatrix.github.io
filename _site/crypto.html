@@ -33,7 +33,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.857); /* Adjust the alpha value for transparency */
+            background: rgba(0, 0, 0, 0.857); /* Adjust the alpha value for transparency */
             pointer-events: none; /* Ensure the overlay does not interfere with any interactions */
             z-index: 1; /* Ensure the overlay is above the background but below any other content */
         }
@@ -65,7 +65,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>TradingView Carousel</title>
   <style>
     .tabs {
         display: flex;
@@ -92,7 +91,7 @@
     .carousel {
         display: flex;
         transition: transform 0.5s ease-in-out;
-        height: 100%;
+        height: 90%;
     }
     .carousel-item {
         min-width: 100%;
@@ -104,16 +103,67 @@
     }
   </style>
 </head>
-<body>
-  
-  <h1>TradingView Widgets</h1>
-
-  <div class="tabs">
-      <div class="tab active" data-index="0">Chart</div>
-      <div class="tab" data-index="1">Screener</div>
-      <div class="tab" data-index="2">Heatmap</div>
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+    "symbols": [
+      {
+        "proName": "BITSTAMP:BTCUSD",
+        "title": "Bitcoin"
+      },
+      {
+        "proName": "BITSTAMP:ETHUSD",
+        "title": "Ethereum"
+      },
+      {
+        "description": "PEPE",
+        "proName": "KUCOIN:PEPEUSDT"
+      },
+      {
+        "description": "PEPE2",
+        "proName": "KUCOIN:PEPE2USDT"
+      },
+      {
+        "description": "MOG",
+        "proName": "BITGET:MOGUSDT"
+      },
+      {
+        "description": "BOB",
+        "proName": "KUCOIN:BOBUSDT"
+      },
+      {
+        "description": "BRETT",
+        "proName": "BITGET:BRETTUSDT"
+      },
+      {
+        "description": "DOGE",
+        "proName": "KUCOIN:DOGEUSDT"
+      },
+      {
+        "description": "SHIB",
+        "proName": "KUCOIN:SHIBUSDT"
+      },
+      {
+        "description": "FLOKI",
+        "proName": "KUCOIN:FLOKIUSDT"
+      },
+      {
+        "description": "TURBO",
+        "proName": "BITGET:TURBOUSDT"
+      }
+    ],
+    "showSymbolLogo": true,
+    "isTransparent": false,
+    "displayMode": "adaptive",
+    "colorTheme": "dark",
+    "locale": "en"
+  }
+    </script>
   </div>
-
+  <!-- TradingView Widget END -->
+<body>
   <div class="carousel-container">
       <div class="carousel">
           <div class="carousel-item">
@@ -205,6 +255,12 @@
               </div>
           </div>
       </div>
+  </div>
+
+  <div class="tabs">
+      <div class="tab active" data-index="0">Chart</div>
+      <div class="tab" data-index="1">Screener</div>
+      <div class="tab" data-index="2">Heatmap</div>
   </div>
 
   <script>
