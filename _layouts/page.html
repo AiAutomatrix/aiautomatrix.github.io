@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% include head.html %}
     <style>
         /* Custom CSS for Botpress chat button positioning */
         .bpw-bubble-container {
@@ -17,22 +16,6 @@
             bottom: 80px; /* Adjust this value to move the chat window up or down */
             right: 20px;  /* Adjust this value to move the chat window left or right */
             z-index: 1001; /* Ensure it appears above other elements */
-        }
-
-        /* Custom CSS for Rollercoin advertisement positioning */
-        .rollercoin-ad {
-            position: sticky;
-            top: 20px;  /* Adjust this value to move the ad up or down */
-            left: 20px; /* Adjust this value to move the ad left or right */
-            z-index: 1000; /* Ensure it appears above other elements */
-        }
-
-        /* Custom CSS for Calendly button positioning */
-        .calendly-badge-widget {
-            position: fixed;
-            bottom: 80px; /* Adjust this value to move the badge up or down */
-            left: 20px;  /* Adjust this value to move the badge left or right */
-            z-index: 1000; /* Ensure it appears above other elements */
         }
 
         /* Background with particle animation */
@@ -63,15 +46,11 @@
     </style>
 </head>
 <body>
-    {% include header.html %}
-    <section id="about">
-        {% include about.html %}
-    </section>
-    <section id="projects">
-        {% include projects.html %}
-    </section>
+    {% include header2.html %}
 
-    {% include footer.html %}
+    <!-- Placeholder for page content -->
+    {{ content }}
 
+   
 </body>
 </html>
