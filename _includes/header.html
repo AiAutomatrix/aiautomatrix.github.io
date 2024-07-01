@@ -1,25 +1,39 @@
 <div id="particles-js">
   <div class="header">
-      <h1>
-        <span class="site-title">{{site.username}}</span>
-        <span class="site-description">{{site.user_title}}</span>
-      </h1>
-      <div class="header-icons">
-        <a aria-label="Send email" href="#"><i class="icon fa fa-envelope"></i></a>
-        <a aria-label="My Instagram" target="_blank" href="#"><i class="icon fa fa-instagram" aria-hidden="true"></i></a>
-        <a aria-label="My Facebook" target="_blank" href="#"><i class="icon fa fa-facebook" aria-hidden="true"></i></a>
-        <a aria-label="My Github" target="_blank" href="#"><i class="icon fa fa-github-alt" aria-hidden="true"></i></a>
-      </div>
-      <div class="header-links">
-        <a class="link" href="#about" data-scroll>About Me</a>
-        <a class="link" href="#projects" data-scroll>Projects</a>
-        <a class="link" href="{{ site.baseurl }}/crypto.html">Crypto</a>
-      </div>
-      <nav>
-        <ul>
-        </ul>
-      </nav>      
+    <!-- Adding the top text section -->
+    <div class="top-text-section">
+      Custom Ai | Bots | Integrations | Automation
+    </div>
+
+    <h1>
+      <span class="site-title">{{site.username}}</span>
+      <span class="site-description">{{site.user_title}}</span>
+    </h1>
+    <div class="header-icons">
+      <a aria-label="Send email" href="#"><i class="icon fa fa-envelope"></i></a>
+      <a aria-label="My Instagram" target="_blank" href="#"><i class="icon fa fa-instagram" aria-hidden="true"></i></a>
+      <a aria-label="My Facebook" target="_blank" href="#"><i class="icon fa fa-facebook" aria-hidden="true"></i></a>
+      <a aria-label="My Github" target="_blank" href="#"><i class="icon fa fa-github-alt" aria-hidden="true"></i></a>
+    </div>
+    <div class="header-links">
+      <a class="link" href="#about" data-scroll>About Me</a>
+      <a class="link" href="#projects" data-scroll>Projects</a>
+      <a class="link" href="{{ site.baseurl }}/crypto.html">Crypto</a>
+    </div>
+    <nav>
+      <ul>
+      </ul>
+    </nav>
   </div>
   <a class="down" href="#about" data-scroll><i class="icon fa fa-chevron-down" aria-hidden="true"></i></a>
 </div>
 
+<style>
+  /* Custom CSS for the top text section */
+  .top-text-section {
+    text-align: center;
+    font-size: 0.85em; /* Adjust the font size as needed */
+    margin: 10px 0; /* Adjust the margin as needed */
+    font-weight: normal; /* Adjust the font weight as needed */
+  }
+</style>
