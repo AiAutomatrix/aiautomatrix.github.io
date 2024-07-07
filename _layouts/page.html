@@ -3,14 +3,14 @@
 <head>
     <meta name="google-site-verification" content="cwrUjb5cLEe0UtKVAJcmuAjxKL70S_pg_SnJGw0WM4s" />
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NSMC9NWY0H"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSMC9NWY0H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-NSMC9NWY0H');
-</script>
+      gtag('config', 'G-NSMC9NWY0H');
+    </script>
     <style>
         /* Custom CSS for Botpress chat button positioning */
         .bpw-bubble-container {
@@ -33,19 +33,7 @@
             position: relative;
             background: url('/assets/img/nebula.jpeg') no-repeat center center fixed;
             background-size: cover;
-        }
-
-        /* Adding a transparent white overlay */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.857); /* Adjust the alpha value for transparency */
-            pointer-events: none; /* Ensure the overlay does not interfere with any interactions */
-            z-index: 1; /* Ensure the overlay is above the background but below any other content */
+            
         }
 
         /* Ensure all child elements are above the overlay */
@@ -61,6 +49,8 @@
     <!-- Placeholder for page content -->
     {{ content }}
 
-   
+    <!-- Include chart.html -->
+    {% include chart.html %}
+
 </body>
 </html>
