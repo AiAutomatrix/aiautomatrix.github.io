@@ -72,7 +72,7 @@
             justify-content: center;
             align-items: center;
             background-color: #fff; /* Adjust background color if needed */
-            z-index: 10; /* Ensure it's on top of other elements */
+            z-index: 1; /* Ensure it's on top of other elements */
         }
         .header {
             display: flex;
@@ -159,6 +159,7 @@
         </script>
     </div>
     
+    
     <!-- Main Content -->
     <div class="carousel-container">
         <div class="carousel">
@@ -196,7 +197,7 @@
                         </script>
                     </div>
                 </div>
-            </div>
+            </div>    
             <div class="carousel-item">
                 <div id="screenerContainer" class="screener-container">
                     <!-- Screener Widget -->
@@ -242,8 +243,12 @@
                 </div>
             </div>
         </div>
+         <!-- Container for tech.html content -->
+         <div id="techContainer" class="fixed-widget-container">
+            {% include tech.html %}
+        </div>
     </div>
-    
+
     <!-- Script for tab navigation and toggle functionality -->
     <script>
         const tabs = document.querySelectorAll('.tab');
@@ -252,6 +257,8 @@
         const screenerContainer = document.getElementById('screenerContainer');
         const heatmapContainer = document.getElementById('heatmapContainer');
         const toggleSwitch = document.getElementById('toggleWidth');
+        const techContainer = document.getElementById('techContainer');
+        let techVisible = false;
 
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
@@ -266,12 +273,19 @@
                     chartContainer.style.width = '70%';
                     screenerContainer.style.width = '70%';
                     heatmapContainer.style.width = '70%';
+                    
                 } else {
                     chartContainer.style.width = '100%';
                     screenerContainer.style.width = '100%';
                     heatmapContainer.style.width = '100%';
+                    
                 }
             });
+        });
+
+        toggleSwitch.addEventListener('change', () => {
+            techVisible = !techVisible;
+            techContainer.style.display = techVisible ? 'flex' : 'none';
         });
 
         function toggleContainerWidth() {
@@ -279,10 +293,13 @@
                 chartContainer.style.width = '70%';
                 screenerContainer.style.width = '70%';
                 heatmapContainer.style.width = '70%';
+               
+                
             } else {
                 chartContainer.style.width = '100%';
                 screenerContainer.style.width = '100%';
                 heatmapContainer.style.width = '100%';
+                
             }
         }
     </script>
