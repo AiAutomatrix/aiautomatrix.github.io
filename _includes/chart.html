@@ -45,18 +45,18 @@
             align-items: center;
         }
         .chart-container {
-            width: 100%;
+            width: 70%;
             height: 100%;
         }
         .screener-container {
-            width: 100%;
+            width: 70%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .heatmap-container {
-            width: 100%;
+            width: 70%;
             height: 100%;
             display: flex;
             justify-content: center;
@@ -68,7 +68,7 @@
             top: 0;
             width: 30%;
             height: 100%;
-            display: none;
+            display: flex;
             justify-content: center;
             align-items: center;
             background-color: #fff; /* Adjust background color if needed */
@@ -86,7 +86,7 @@
         }
         .toggle-label {
             margin-right: 1px;
-            color: #f7f7f7
+            color: #f7f7f7;
         }
         .toggle-switch {
             -webkit-appearance: none;
@@ -126,7 +126,7 @@
         <div class="toggle-container">
             <span class="toggle-label">Technicals | CryptoGPT:</span>
             <label class="switch">
-                <input id="toggleWidth" class="toggle-switch" type="checkbox" onchange="toggleContainerWidth()">
+                <input id="toggleWidth" class="toggle-switch" type="checkbox" onchange="toggleContainerWidth()" checked>
                 <span class="slider round"></span>
             </label>
         </div>
@@ -175,7 +175,7 @@
                                 "width": "100%",
                                 "height": "100%",
                                 "autosize": true,
-                                "symbol": "KUCOIN:BTCUSDT",
+                                "symbol": "KUCOIN:PEPEUSDT",
                                 "interval": "D",
                                 "timezone": "exchange",
                                 "theme": "dark",
@@ -243,65 +243,54 @@
                 </div>
             </div>
         </div>
-         <!-- Container for tech.html content -->
-         <div id="techContainer" class="fixed-widget-container">
+        <!-- Container for tech.html content -->
+        <div id="techContainer" class="fixed-widget-container">
             {% include tech.html %}
         </div>
     </div>
-
-    <!-- Script for tab navigation and toggle functionality -->
+    
     <script>
         const tabs = document.querySelectorAll('.tab');
         const carousel = document.querySelector('.carousel');
+        const toggleSwitch = document.getElementById('toggleWidth');
         const chartContainer = document.getElementById('chartContainer');
         const screenerContainer = document.getElementById('screenerContainer');
         const heatmapContainer = document.getElementById('heatmapContainer');
-        const toggleSwitch = document.getElementById('toggleWidth');
         const techContainer = document.getElementById('techContainer');
-        let techVisible = false;
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const index = tab.getAttribute('data-index');
-                carousel.style.transform = `translateX(-${index * 100}%)`;
+        // Function to update the carousel position
+        function updateCarousel(index) {
+            const offset = -index * 100;
+            carousel.style.transform = `translateX(${offset}%)`;
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabs[index].classList.add('active');
+        }
 
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-
-                // Adjust container widths based on toggle state
-                if (toggleSwitch.checked) {
-                    chartContainer.style.width = '70%';
-                    screenerContainer.style.width = '70%';
-                    heatmapContainer.style.width = '70%';
-                    
-                } else {
-                    chartContainer.style.width = '100%';
-                    screenerContainer.style.width = '100%';
-                    heatmapContainer.style.width = '100%';
-                    
-                }
-            });
+        // Event listener for tabs
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => updateCarousel(index));
         });
 
-        toggleSwitch.addEventListener('change', () => {
-            techVisible = !techVisible;
-            techContainer.style.display = techVisible ? 'flex' : 'none';
-        });
-
+        // Function to toggle container width
         function toggleContainerWidth() {
             if (toggleSwitch.checked) {
                 chartContainer.style.width = '70%';
                 screenerContainer.style.width = '70%';
                 heatmapContainer.style.width = '70%';
-               
-                
+                techContainer.style.display = 'block';
             } else {
                 chartContainer.style.width = '100%';
                 screenerContainer.style.width = '100%';
                 heatmapContainer.style.width = '100%';
-                
+                techContainer.style.display = 'none';
             }
         }
+
+        // Initialize with default widths and active tab
+        updateCarousel(0);
+        toggleContainerWidth();
     </script>
 </body>
 </html>
+
+ 
