@@ -8,7 +8,6 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-NSMC9NWY0H');
     </script>
     <style>
@@ -29,11 +28,21 @@
         }
 
         /* Background with particle animation */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
         body {
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
             background: url('/assets/img/nebula.jpeg') no-repeat center center fixed;
             background-size: cover;
-            
         }
 
         /* Ensure all child elements are above the overlay */
@@ -41,16 +50,27 @@
             position: relative;
             z-index: 2;
         }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     {% include header2.html %}
 
     <!-- Placeholder for page content -->
-    {{ content }}
+    <div class="content">
+        {{ content }}
+    </div>
 
     <!-- Include chart.html -->
     {% include chart.html %}
-
 </body>
 </html>
