@@ -3,7 +3,7 @@
 <head>
     <meta name="google-site-verification" content="cwrUjb5cLEe0UtKVAJcmuAjxKL70S_pg_SnJGw0WM4s" />
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NSMC9NWY0H"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSMC9NWY0H"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bot Setup Form</title>
@@ -93,6 +93,15 @@
             <div class="form-group">
                 <label for="additionalInfo">Additional Information</label>
                 <textarea id="additionalInfo" name="additionalInfo" rows="4"></textarea>
+            </div>
+            <!-- New file upload fields -->
+            <div class="form-group">
+                <label for="uploadTxt">Upload Text Document</label>
+                <input type="file" id="uploadTxt" name="uploadTxt" accept=".txt">
+            </div>
+            <div class="form-group">
+                <label for="uploadImage">Upload Image</label>
+                <input type="file" id="uploadImage" name="uploadImage" accept="image/*">
             </div>
             <div class="form-group">
                 <button type="submit">Submit</button>
