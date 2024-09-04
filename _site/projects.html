@@ -103,7 +103,6 @@
         <a aria-label="My Github" target="_blank" href="#"><i class="icon fa fa-github-alt" aria-hidden="true"></i></a>
       </div>
       <div class="header-links">
-        <a class="link" href="#projects" data-scroll>Projects</a>
         <a class="link" href="/">Home</a>
         <a class="link" href="/crypto.html">Crypto</a>
       </div>
@@ -114,6 +113,21 @@
     </div>
     <a class="down" href="#projects" data-scroll><i class="icon fa fa-chevron-down" aria-hidden="true"></i></a>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Delay the scroll by 2 seconds (2000 milliseconds)
+      setTimeout(function() {
+        const projectsSection = document.querySelector('#projects');
+        if (projectsSection) {
+          // Smooth scroll with a 1000ms (1 second) duration
+          projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 600); // Adjust the delay as needed (2000ms = 2 seconds)
+    });
+  </script>
+  
+  
   
   <style>
     /* Custom CSS for the top text section */
@@ -140,7 +154,7 @@
       <li> Featured Bot Skills</li>
     </ul>
     <p>Our automated bot streamlines content management across Facebook, LinkedIn, and Instagram, enabling seamless scheduling, posting, and engagement. By leveraging advanced automation, it simplifies the process of creating, scheduling, and publishing content, ensuring consistent updates across all platforms. Whether managing campaigns, monitoring analytics, or engaging with followers, our bot empowers users to optimize their social media presence effortlessly.</p>
-    <a class="project-link" href="/botDemo1.html">Check it out</a>
+    <a class="project-link" href="/demo.html">Check it out</a>
   </div>
 </div>
 <div class="user-projects">
