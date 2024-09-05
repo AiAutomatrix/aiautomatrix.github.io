@@ -12,13 +12,20 @@
         .widget-container > div {
             margin: 0 10px; /* Adjust this value to control the spacing */
         }
+        /* Smooth animation for logos */
+        .tech i {
+            transition: transform 0.3s ease-in-out;
+        }
+        .tech i:hover {
+            transform: scale(1.2);
+        }
     </style>
 </head>
 <body>
     <div class="center-container">
         <div class="user-details">
             <h1>My Expertise</h1>
-            <p>{{site.user_description}}</p>
+            <p>Empowering businesses through AI, automation, and seamless integrations. With expertise in cutting-edge tools like Botpress, AWS, and OpenAI, I craft innovative solutions that drive growth and efficiency.</p>
         </div>
         
         {{ content }}
@@ -27,26 +34,34 @@
         <div class="widget-container">
 
         <div class="user">
+            <!-- Design Section Update -->
             <div class="tech">
                 <h2>Design</h2>
-                <i class="devicon-html5-plain-wordmark"></i>
+                <i class="devicon-html5-plain-wordmark colored"></i>
+                <i class="devicon-css3-plain-wordmark colored"></i>
                 <i class="devicon-bootstrap-plain-wordmark colored"></i>
-                <i class="devicon-sass-original colored"></i>
-                <p>Immerse your audience in captivating visuals crafted to perfection. Our design skills transform concepts into visual narratives that resonate. Elevate your brand's presence with designs that inspire and captivate.</p>
+                <p>Transform your audience’s experience with engaging and intuitive designs. From static HTML/CSS to modern interfaces, our designs breathe life into your brand. Elevate your brand's presence with visuals that inspire and captivate.</p>
             </div>
+
+            <!-- Code Section Update -->
             <div class="tech">
                 <h2>Code</h2>
                 <i class="devicon-javascript-plain colored"></i>
-                <i class="devicon-react-original-wordmark colored"></i>
-                <i class="devicon-nodejs-plain-wordmark"></i>
-                <p>Unleash the power of flawless code that fuels seamless functionality. Our coding prowess turns ideas into reality, ensuring your digital solutions are robust, responsive, and innovative. Experience technology that just works.</p>
+                <i class="devicon-nodejs-plain-wordmark colored"></i>
+                <i class="devicon-botpress-plain"></i>
+                <i class="devicon-openai-plain-wordmark"></i>
+                <i class="devicon-kucoin-plain-wordmark"></i>
+                <p>From dynamic front-end interfaces to scalable backend solutions, our coding expertise in JavaScript, Node.js, and cutting-edge tools like Botpress and OpenAI ensures robust performance and seamless functionality.</p>
             </div>
+
+            <!-- Tools Section Update -->
             <div class="tech">
                 <h2>Tools</h2>
-                <i class="devicon-git-plain"></i>
-                <i class="devicon-gulp-plain colored"></i>
-                <i class="devicon-atom-original-wordmark"></i>
-                <p>From conception to execution, we wield cutting-edge tools that redefine what's achievable. Our toolset empowers us to create dynamic, efficient, and future-ready solutions. Witness the magic that emerges when innovation meets technology.</p>
+                <i class="devicon-git-plain-wordmark"></i>
+                <i class="devicon-aws-plain-wordmark"></i>
+                <i class="devicon-openai-plain-wordmark"></i>
+                <i class="devicon-kucoin-plain-wordmark"></i>
+                <p>Our toolset includes Git for version control, AWS for cloud deployment, Botpress for automation, and Kucoin for cryptocurrency integrations. Experience seamless workflows with the latest technologies at your fingertips.</p>
             </div>
         </div>
     </div>
