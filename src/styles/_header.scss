@@ -1,21 +1,21 @@
 #particles-js {
-  position: relative; // Ensure position relative for absolute positioning of overlay
+  position: relative;
   width: 100%;
   min-height: 100vh;
-  background: $main; // Your main background color as fallback
+  background: $main;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  overflow: hidden; // Ensure the overlay doesn't overflow
-  
+  overflow: hidden;
+
   video {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; // Ensures video covers the container
-    z-index: -2; // Places the video behind the content
+    object-fit: cover;
+    z-index: -2;
   }
 
   #headerVideo {
@@ -25,10 +25,17 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 1; // Ensure this is lower than the content
+    z-index: 1;
     pointer-events: none;
   }
-  
+
+  /* Ensure the video container resizes properly on smaller screens */
+  @media only screen and (max-width: 768px) {
+    video, #headerVideo {
+      width: 100vw; /* Ensure the video takes the full viewport width */
+      height: auto; /* Maintain aspect ratio for height */
+    }
+  }
 
   /* Particles canvas styles */
   .particles-js-canvas-el {
@@ -44,9 +51,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('assets/img/nebula.jpeg'); /* Path to your overlay image */
-    opacity: 0.5; /* Adjust opacity as needed */
-    z-index: 1; /* Place overlay above the background */
+    background-image: url('assets/img/nebula.jpeg');
+    opacity: 0.5;
+    z-index: 1;
     background-size: cover;
     background-repeat: no-repeat;
   }
