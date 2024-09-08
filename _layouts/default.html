@@ -3,46 +3,45 @@
 <head>
     <meta name="google-site-verification" content="cwrUjb5cLEe0UtKVAJcmuAjxKL70S_pg_SnJGw0WM4s" />
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NSMC9NWY0H"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSMC9NWY0H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-NSMC9NWY0H');
-</script>
+      gtag('config', 'G-NSMC9NWY0H');
+    </script>
+    
     {% include head.html %}
+    
     <style>
         /* Custom CSS for Botpress chat button positioning */
         .bpw-bubble-container {
             position: fixed;
-            bottom: 20px; /* Adjust this value to move the button up or down */
-            right: 20px;  /* Adjust this value to move the button left or right */
-            z-index: 1000; /* Ensure it appears above other elements */
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
         }
 
-        /* Ensure Botpress chat window is correctly positioned and interactive */
         .bpw-chat-container {
             position: fixed;
-            bottom: 80px; /* Adjust this value to move the chat window up or down */
-            right: 20px;  /* Adjust this value to move the chat window left or right */
-            z-index: 1001; /* Ensure it appears above other elements */
+            bottom: 80px;
+            right: 20px;
+            z-index: 1001;
         }
 
-        /* Custom CSS for Rollercoin advertisement positioning */
         .rollercoin-ad {
             position: sticky;
-            top: 20px;  /* Adjust this value to move the ad up or down */
-            left: 20px; /* Adjust this value to move the ad left or right */
-            z-index: 1000; /* Ensure it appears above other elements */
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
         }
 
-        /* Custom CSS for Calendly button positioning */
         .calendly-badge-widget {
             position: fixed;
-            bottom: 80px; /* Adjust this value to move the badge up or down */
-            left: 20px;  /* Adjust this value to move the badge left or right */
-            z-index: 1000; /* Ensure it appears above other elements */
+            bottom: 80px;
+            left: 20px;
+            z-index: 1000;
         }
 
         /* Background with particle animation */
@@ -60,9 +59,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.857); /* Adjust the alpha value for transparency */
-            pointer-events: none; /* Ensure the overlay does not interfere with any interactions */
-            z-index: 1; /* Ensure the overlay is above the background but below any other content */
+            background: rgba(255, 255, 255, 0.857); 
+            pointer-events: none;
+            z-index: 1; 
         }
 
         /* Ensure all child elements are above the overlay */
@@ -74,11 +73,11 @@
 </head>
 <body>
     {% include header.html %}
+    
     <section id="about">
         {% include about.html %}
     </section>
 
     {% include footer.html %}
-
 </body>
 </html>

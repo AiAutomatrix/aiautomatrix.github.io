@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: $main;
+  background: transparent;  // Set background transparent for the video visibility
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -12,38 +12,19 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw; // Full screen width
+    height: 100vh; // Full screen height
     object-fit: cover;
-    z-index: -2;
+    z-index: -1;  // Ensure the video is behind particles and header
   }
 
-  #headerVideo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  /* Ensure the video container resizes properly on smaller screens */
-  @media only screen and (max-width: 768px) {
-    video, #headerVideo {
-      width: 100vw; /* Ensure the video takes the full viewport width */
-      height: auto; /* Maintain aspect ratio for height */
-    }
-  }
-
-  /* Particles canvas styles */
   .particles-js-canvas-el {
-    width: 100% !important;
+    width: 100vw !important;
     height: 100vh !important;
+    z-index: 0; // Particles above the video, behind the header
   }
 
-  /* Transparent overlay with background image */
+  // Semi-transparent overlay with background image
   &::after {
     content: '';
     position: absolute;
@@ -52,16 +33,24 @@
     width: 100%;
     height: 100%;
     background-image: url('assets/img/nebula.jpeg');
-    opacity: 0.5;
-    z-index: 1;
+    opacity: 0.5;  // Adjust opacity for visibility
+    z-index: 1;  // Ensure it's above the particles, but below the header
     background-size: cover;
     background-repeat: no-repeat;
+  }
+
+  // Ensure proper scaling on smaller screens
+  @media only screen and (max-width: 768px) {
+    video, .particles-js-canvas-el {
+      width: 100vw; // Take full viewport width
+      height: auto; // Maintain aspect ratio
+    }
   }
 }
 
 .header {
-  position: relative; /* Ensure position relative for z-index stacking */
-  z-index: 2; /* Place header above the overlay */
+  position: relative;  // Ensure position relative for z-index stacking
+  z-index: 2;  // Place header content above particles and video
   text-align: center;
   color: #FFF;
   margin: 0 auto;
