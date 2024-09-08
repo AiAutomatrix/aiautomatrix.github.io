@@ -1,31 +1,42 @@
 #particles-js {
-  position: relative;
+  position: relative; // Ensure position relative for absolute positioning of overlay
   width: 100%;
   min-height: 100vh;
-  background: transparent;  // Set background transparent for the video visibility
+  background: $main; // Your main background color as fallback
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  overflow: hidden;
-
+  overflow: hidden; // Ensure the overlay doesn't overflow
+  
   video {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw; // Full screen width
-    height: 100vh; // Full screen height
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Ensures video covers the container
+    z-index: -2; // Places the video behind the content
+  }
+
+  #headerVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    z-index: -1;  // Ensure the video is behind particles and header
+    z-index: -1; // Ensure this is lower than the content
+    pointer-events: none;
   }
+  
 
-
+  /* Particles canvas styles */
   .particles-js-canvas-el {
-    width: 100vw !important;
+    width: 100% !important;
     height: 100vh !important;
-    z-index: 0; // Particles above the video, behind the header
   }
 
-  // Semi-transparent overlay with background image
+  /* Transparent overlay with background image */
   &::after {
     content: '';
     position: absolute;
@@ -33,25 +44,17 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('assets/img/nebula.jpeg');
-    opacity: 0.5;  // Adjust opacity for visibility
-    z-index: 1;  // Ensure it's above the particles, but below the header
+    background-image: url('assets/img/nebula.jpeg'); /* Path to your overlay image */
+    opacity: 0.5; /* Adjust opacity as needed */
+    z-index: 1; /* Place overlay above the background */
     background-size: cover;
     background-repeat: no-repeat;
-  }
-
-  // Ensure proper scaling on smaller screens
-  @media only screen and (max-width: 768px) {
-    video, .particles-js-canvas-el {
-      width: 100vw; // Take full viewport width
-      height: auto; // Maintain aspect ratio
-    }
   }
 }
 
 .header {
-  position: relative;  // Ensure position relative for z-index stacking
-  z-index: 2;  // Place header content above particles and video
+  position: relative; /* Ensure position relative for z-index stacking */
+  z-index: 2; /* Place header above the overlay */
   text-align: center;
   color: #FFF;
   margin: 0 auto;
