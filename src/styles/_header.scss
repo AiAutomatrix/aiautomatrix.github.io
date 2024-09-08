@@ -12,7 +12,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 90vw; // Full screen width
+    width: 100vw; // Full screen width
     height: 100vh; // Full screen height
     object-fit: cover;
     z-index: -1;  // Ensure the video is behind particles and header
