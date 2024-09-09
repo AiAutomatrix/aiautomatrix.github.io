@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta name="google-site-verification" content="cwrUjb5cLEe0UtKVAJcmuAjxKL70S_pg_SnJGw0WM4s" />
+    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSMC9NWY0H"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-NSMC9NWY0H');
     </script>
     
@@ -30,7 +30,7 @@
             z-index: 1001;
         }
 
-
+        /* Calendly widget positioning */
         .calendly-badge-widget {
             position: fixed;
             bottom: 80px;
@@ -38,13 +38,17 @@
             z-index: 1000;
         }
 
-
         /* Ensure all child elements are above the overlay */
         body > * {
             position: relative;
             z-index: 2;
         }
     </style>
+
+    <!-- Botpress Webchat Integration -->
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script src="https://mediafiles.botpress.cloud/c6b57904-e8fe-4358-9701-486a72ed4af0/webchat/config.js" defer></script>
+
 </head>
 <body>
     {% include header.html %}
