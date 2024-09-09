@@ -25,6 +25,7 @@
 </head>
 
     <style>
+    
         /* Custom CSS for Botpress chat button positioning */
         .bpw-bubble-container {
             position: fixed;
@@ -41,14 +42,6 @@
             z-index: 1001; /* Ensure it appears above other elements */
         }
 
-        /* Custom CSS for Rollercoin advertisement positioning */
-        .rollercoin-ad {
-            position: sticky;
-            top: 20px;  /* Adjust this value to move the ad up or down */
-            left: 20px; /* Adjust this value to move the ad left or right */
-            z-index: 1000; /* Ensure it appears above other elements */
-        }
-
         /* Custom CSS for Calendly button positioning */
         .calendly-badge-widget {
             position: fixed;
@@ -56,6 +49,7 @@
             left: 20px;  /* Adjust this value to move the badge left or right */
             z-index: 1000; /* Ensure it appears above other elements */
         }
+
 
         /* Background with particle animation */
         body {
@@ -86,6 +80,13 @@
 </head>
 <body>
     <div id="particles-js">
+  <video autoplay muted loop playsinline id="headerVideo">
+
+    <source src="/assets/mp4/header.mp4" type="video/mp4">
+    
+    Your browser does not support the video tag.
+    
+    </video>    
     <div class="header">
       <h1>
         <span class="site-title">Ai Automatrix</span>
@@ -137,6 +138,33 @@
       margin: 10px 0; /* Adjust the margin as needed */
       font-weight: normal; /* Adjust the font weight as needed */
     }
+
+    #headerVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    z-index: -2;
+    pointer-events: none;
+  }
+
+  /* Transparent overlay on top of video */
+  #particles-js::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(46, 55, 91, 0.857); /* Adjust transparency here */
+    pointer-events: none; /* Ensure the overlay does not interfere with interactions */
+    z-index: 0; /* Ensure the overlay is above the video but below content */
+  }
+  
+
   </style>
   
     </section>
