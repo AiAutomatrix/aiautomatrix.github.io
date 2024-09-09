@@ -161,14 +161,50 @@
             margin-top: 20px;
         }
         .widget-container > div {
-            margin: 0 10px; /* Adjust this value to control the spacing */
+            margin: 0 10px;
         }
-        /* Smooth animation for logos */
         .tech i {
             transition: transform 0.3s ease-in-out;
         }
         .tech i:hover {
             transform: scale(1.2);
+        }
+        /* Styling for the table update */
+        .table-section {
+            margin-top: 40px;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .table-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .dynamic-table {
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            font-size: 1.2rem;
+            background: #f9f9f9;
+        }
+        .dynamic-table th, .dynamic-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        .dynamic-table th {
+            background-color: #007bff;
+            color: white;
+        }
+        /* Emoji icons for stages */
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        /* Animation effect */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -183,40 +219,94 @@
         
         
 
-        <!-- Container for widgets -->
+        <!-- Container for widgets (Design, Code, Tools sections) -->
         <div class="widget-container">
+            <div class="user">
+                <!-- Design Section -->
+                <div class="tech">
+                    <h2>Design</h2>
+                    <i class="devicon-html5-plain-wordmark colored"></i>
+                    <i class="devicon-css3-plain-wordmark colored"></i>
+                    <i class="devicon-bootstrap-plain-wordmark colored"></i>
+                    <p>Transform your audience’s experience with engaging and intuitive designs. From static HTML/CSS to modern interfaces, our designs breathe life into your brand. Elevate your brand's presence with visuals that inspire and captivate.</p>
+                </div>
 
-        <div class="user">
-            <!-- Design Section Update -->
-            <div class="tech">
-                <h2>Design</h2>
-                <i class="devicon-html5-plain-wordmark colored"></i>
-                <i class="devicon-css3-plain-wordmark colored"></i>
-                <i class="devicon-bootstrap-plain-wordmark colored"></i>
-                <p>Transform your audience’s experience with engaging and intuitive designs. From static HTML/CSS to modern interfaces, our designs breathe life into your brand. Elevate your brand's presence with visuals that inspire and captivate.</p>
-            </div>
+                <!-- Code Section -->
+                <div class="tech">
+                    <h2>Code</h2>
+                    <i class="devicon-javascript-plain colored"></i>
+                    <i class="devicon-nodejs-plain-wordmark colored"></i>
+                    <i class="devicon-botpress-plain"></i>
+                    <i class="devicon-openai-plain-wordmark"></i>
+                    <i class="devicon-kucoin-plain-wordmark"></i>
+                    <p>From dynamic front-end interfaces to scalable backend solutions, our coding expertise in JavaScript, Node.js, and cutting-edge tools like Botpress and OpenAI ensures robust performance and seamless functionality.</p>
+                </div>
 
-            <!-- Code Section Update -->
-            <div class="tech">
-                <h2>Code</h2>
-                <i class="devicon-javascript-plain colored"></i>
-                <i class="devicon-nodejs-plain-wordmark colored"></i>
-                <i class="devicon-botpress-plain"></i>
-                <i class="devicon-openai-plain-wordmark"></i>
-                <i class="devicon-kucoin-plain-wordmark"></i>
-                <p>From dynamic front-end interfaces to scalable backend solutions, our coding expertise in JavaScript, Node.js, and cutting-edge tools like Botpress and OpenAI ensures robust performance and seamless functionality.</p>
-            </div>
-
-            <!-- Tools Section Update -->
-            <div class="tech">
-                <h2>Tools</h2>
-                <i class="devicon-git-plain-wordmark"></i>
-                <i class="devicon-aws-plain-wordmark"></i>
-                <i class="devicon-openai-plain-wordmark"></i>
-                <i class="devicon-kucoin-plain-wordmark"></i>
-                <p>Our toolset includes Git for version control, AWS for cloud deployment, Botpress for automation, and Kucoin for cryptocurrency integrations. Experience seamless workflows with the latest technologies at your fingertips.</p>
+                <!-- Tools Section -->
+                <div class="tech">
+                    <h2>Tools</h2>
+                    <i class="devicon-git-plain-wordmark"></i>
+                    <i class="devicon-aws-plain-wordmark"></i>
+                    <i class="devicon-openai-plain-wordmark"></i>
+                    <i class="devicon-kucoin-plain-wordmark"></i>
+                    <p>Our toolset includes Git for version control, AWS for cloud deployment, Botpress for automation, and Kucoin for cryptocurrency integrations. Experience seamless workflows with the latest technologies at your fingertips.</p>
+                </div>
             </div>
         </div>
+
+        <!-- Separate container for the table to ensure it stays below the widgets -->
+        <div class="table-section">
+            <h2>AI Bot Development & Integration Flow</h2>
+            <table class="dynamic-table">
+                <thead>
+                    <tr>
+                        <th>Stage</th>
+                        <th>Description</th>
+                        <th>Tools/Technologies</th>
+                        <th>Outcome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="emoji">💼</span>Client Purchase</td>
+                        <td>Client selects and buys a custom AI bot from Aiautomatrix's website.</td>
+                        <td>Website form, Botpress Knowledgebase API</td>
+                        <td>Client details and project requirements are captured automatically.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">⚙️</span>Automated Setup</td>
+                        <td>Botpress uses the client details to automatically configure the bot's knowledgebase and setup environment.</td>
+                        <td>Botpress LLMz Engine, AWS Lambda</td>
+                        <td>A customized bot is developed with the client’s specific data and requirements.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">📚</span>Knowledgebase Setup</td>
+                        <td>Using client input (docs, images, etc.), the bot’s knowledgebase is built to reflect the company’s services.</td>
+                        <td>Botpress Knowledgebase API, OpenAI's ChatGPT4o</td>
+                        <td>A domain-specific bot ready for deployment.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">🔗</span>Bot Integration</td>
+                        <td>API code snippets are shared with the client to integrate the bot into their platform.</td>
+                        <td>API integrations, Webhook code snippets</td>
+                        <td>Client can easily integrate the bot into their system.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">🛠️</span>Custom Project Development</td>
+                        <td>Client hires your team to build out a custom AI or automation solution.</td>
+                        <td>OpenAI's ChatGPT4o, Botpress LLMz Engine, AWS Lambda, Webhooks</td>
+                        <td>Fully customized AI solution delivered.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">🔄</span>Ongoing Updates & Support</td>
+                        <td>Your team provides ongoing updates and support for the deployed bots.</td>
+                        <td>Botpress Knowledgebase API, AWS Lambda, Botpress Studio</td>
+                        <td>The bot evolves with the client’s business needs.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 </body>
 </html>

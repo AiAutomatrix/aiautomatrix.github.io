@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot Demo - Aiautomatrix</title>
+    <title>Custom AI Chatbots by Aiautomatrix</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -60,7 +60,7 @@
         }
     </style>
 </head>
-<body>
+<body></body>
     <div class="container">
         <div class="info-container">
             <h1>Custom AI Chatbots by Aiautomatrix</h1>
@@ -78,6 +78,11 @@
             <!-- Chatbot Embed Code -->
             <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
             <script src="https://mediafiles.botpress.cloud/e924a7d7-4a19-427e-89cd-3e9fe771fd6d/webchat/config.js" defer></script>
+            <script>
+                window.botpressWebChat.onEvent(function () {
+                    window.botpressWebChat.sendEvent({ type: "show" });
+                }, ["LIFECYCLE.LOADED"]);
+            </script>
         </div>
     </div>
 </body>
