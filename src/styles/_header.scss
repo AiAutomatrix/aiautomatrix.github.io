@@ -9,32 +9,32 @@
   overflow: hidden; // Ensure nothing overflows beyond the container
 
   video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw; // Ensure video takes full viewport width
-    height: 100vh; // Ensure video takes full viewport height
-    object-fit: cover; // Ensure video covers the entire container proportionally
-    z-index: -2; // Place video behind other elements
-  }
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    object-fit: cover !important;
+    z-index: -2 !important;
+}
 
-  #headerVideo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw; // Full width of the viewport
-    height: 100vh; // Full height of the viewport
-    object-fit: cover;
-    z-index: -1; // Ensure video stays behind the content
-    pointer-events: none; // Disable interaction with the video
-    overflow: hidden; // Prevent the video from overflowing
-  }
+#headerVideo {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    object-fit: cover !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+    overflow: hidden !important;
+}
 
   /* Particles canvas styles */
   .particles-js-canvas-el {
     width: 100vw !important; // Match the width of the video
     height: 100vh !important; // Match the height of the video
-    z-index: 0; // Ensure particles are on top of the video
+    z-index: -3; // Ensure particles are on top of the video
   }
 
   /* Semi-transparent overlay with background image */
