@@ -8,7 +8,16 @@
   background-attachment: fixed;
   overflow: hidden; // Ensure the overlay doesn't overflow
   
-  
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Ensures video covers the container
+    z-index: -2; // Places the video behind the content
+  }
+
   /* Particles canvas styles */
   .particles-js-canvas-el {
     width: 100% !important;
