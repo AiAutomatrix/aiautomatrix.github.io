@@ -13,8 +13,8 @@
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
+    width: 100% !important; // Match the width of the header
+    height: 100% !important; // Match the height of the header
     object-fit: cover !important;
     z-index: -2 !important;
 }
@@ -23,13 +23,14 @@
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
+    width: 100% !important; // Fit within the header container width
+    height: 100% !important; // Fit within the header container height
     object-fit: cover !important;
     z-index: -1 !important;
-    pointer-events: none !important;
+    pointer-events: none !important; // Prevent interaction
     overflow: hidden !important;
 }
+
 
   /* Particles canvas styles */
   .particles-js-canvas-el {
