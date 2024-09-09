@@ -1,48 +1,61 @@
 #particles-js {
-  position: relative; // Ensure position relative for absolute positioning of overlay
+  position: relative;
   width: 100%;
   min-height: 100vh;
-  background: $main; // Your main background color as fallback
+  background: $main;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  overflow: hidden; // Ensure the overlay doesn't overflow
-  
+  overflow: hidden; // Ensure nothing overflows beyond the container
+
   video {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: fixed; // Ensures video covers the container
-    z-index: -2; // Places the video behind the content
+    width: 100vw; // Ensure video takes full viewport width
+    height: 100vh; // Ensure video takes full viewport height
+    object-fit: cover; // Ensure video covers the entire container proportionally
+    z-index: -2; // Place video behind other elements
+  }
+
+  #headerVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw; // Full width of the viewport
+    height: 100vh; // Full height of the viewport
+    object-fit: cover;
+    z-index: -1; // Ensure video stays behind the content
+    pointer-events: none; // Disable interaction with the video
+    overflow: hidden; // Prevent the video from overflowing
   }
 
   /* Particles canvas styles */
   .particles-js-canvas-el {
-    width: 100% !important;
-    height: 100vh !important;
+    width: 100vw !important; // Match the width of the video
+    height: 100vh !important; // Match the height of the video
+    z-index: 0; // Ensure particles are on top of the video
   }
 
-  /* Transparent overlay with background image */
+  /* Semi-transparent overlay with background image */
   &::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('assets/img/nebula.jpeg'); /* Path to your overlay image */
-    opacity: 0.5; /* Adjust opacity as needed */
-    z-index: 1; /* Place overlay above the background */
+    width: 100vw;
+    height: 100vh;
+    background-image: url('assets/img/nebula.jpeg'); // Background image
+    opacity: 0.5; // Adjust opacity for the overlay
+    z-index: 1; // Ensure overlay is above the video, but below the content
     background-size: cover;
     background-repeat: no-repeat;
   }
 }
 
 .header {
-  position: relative; /* Ensure position relative for z-index stacking */
-  z-index: 2; /* Place header above the overlay */
+  position: relative;
+  z-index: 2; // Ensure header is above particles and video
   text-align: center;
   color: #FFF;
   margin: 0 auto;
