@@ -6,7 +6,8 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  overflow: hidden; // Ensure nothing overflows beyond the container
+  overflow: hidden;
+  z-index: -3; // Ensure nothing overflows beyond the container
 
   video {
     position: absolute !important;
@@ -34,7 +35,7 @@
   .particles-js-canvas-el {
     width: 100vw !important; // Match the width of the video
     height: 100vh !important; // Match the height of the video
-    z-index: -3; // Ensure particles are on top of the video
+    z-index: 0; // Ensure particles are on top of the video
   }
 
   /* Semi-transparent overlay with background image */
