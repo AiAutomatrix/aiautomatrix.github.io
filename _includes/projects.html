@@ -220,7 +220,10 @@
 
         // Function to display the project
         function showProject(projectId) {
+            // Hide all descriptions
             descriptions.forEach(desc => desc.classList.remove('active'));
+            
+            // Show the selected description
             document.getElementById(projectId).classList.add('active');
         }
 
@@ -241,7 +244,8 @@
 
                     buttonContainer.appendChild(button);
                 });
-                // Show first project by default when a category is selected
+                
+                // Show the first project by default when a category is selected
                 showProject(botProjects[botType][0].id);
             }
         });
