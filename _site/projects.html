@@ -169,74 +169,254 @@
   
     </section>
     <section id="projects">
-        <div class="user-details">
-  <h1> Featured Projects </h1>
-</div>
-<div class="user-projects">
-  <div class="images-right">
-    <img alt="bot" src="https://files.bpcontent.cloud/2024/08/23/16/20240823163412-XD7C36H9.png" />
-</div>
-  <div class="contents">
-    <h3> Media Post Automation </h3>
-    <ul>
-      <li> Featured Bot Skills</li>
-    </ul>
-    <p>Our automated bot streamlines content management across Facebook, LinkedIn, and Instagram, enabling seamless scheduling, posting, and engagement. By leveraging advanced automation, it simplifies the process of creating, scheduling, and publishing content, ensuring consistent updates across all platforms. Whether managing campaigns, monitoring analytics, or engaging with followers, our bot empowers users to optimize their social media presence effortlessly.</p>
-    <a class="project-link" href="/demo.html">Check it out</a>
-  </div>
-</div>
-<div class="user-projects">
-  <div class="images-left">
-    <img alt="car" src="/assets/img/car.jpeg" />
-  </div>
-  <div class="contents-right">
-    <h3> Vehicle Price Estimate Bot</h3>
-    <ul>
-      <li> Featured Bot Skills</li>
-    </ul>
-    <p>Revolutionizing the way you navigate the automotive market, our AI bot is your ultimate guide to vehicle transactions. With the power to instantly provide accurate price estimates based on real-time data, you can confidently assess a vehicle's worth without the guesswork.</p>
-    <a class="project-link" href="/form.html">Check it out</a>
-  </div>
-</div>
-<div class="user-projects">
-  <div class="images-right">
-    <img alt="face" src="/assets/img/aiFace.jpeg" />
-  </div>
-  <div class="contents">
-    <h3> Company Assistant AI </h3>
-    <ul>
-      <li> Featured Bot Skills</li>
-    </ul>
-    <p>Our Company Assistant AI enhances productivity by handling personalized conversations, booking meetings, and showcasing visual elements effortlessly. Built with customizable actions, it automates tedious tasks, allowing business owners to focus on their core passions and responsibilities. Whether managing schedules, engaging clients, or presenting visually compelling content, our AI empowers businesses to streamline operations and deliver exceptional customer experiences.</p>
-    <a class="project-link" href="/form.html">Check it out</a>
-  </div>
-</div>
-<div class="user-projects">
-  <div class="images-left">
-    <img alt="crypto" src="/assets/img/crypto.jpeg" />
-  </div>
-  <div class="contents-right">
-    <h3> Crypto Bot  </h3>
-    <ul>
-      <li> Featured Bot Skills</li>
-    </ul>
-    <p>Our Crypto Bot integrates advanced trading strategies developed on TradingView, rigorously back-tested for optimal performance. Once validated, these strategies trigger alerts seamlessly integrated into our Botpress AI workflow. This AI-driven system executes and monitors trades autonomously, providing an additional layer of security and precision to cryptocurrency trading. By leveraging cutting-edge technology, our Crypto Bot empowers traders with reliable, data-driven decision-making capabilities, ensuring strategic advantage in dynamic crypto markets.</p>
-    <a class="project-link" href="/form.html">Check it out</a>
-  </div>
-</div>
-<div class="user-projects">
-  <div class="images-right">
-    <img alt="sports" src="/assets/img/sportHost.jpeg" />
-  </div>
-  <div class="contents">
-    <h3> SportGPT </h3>
-    <ul>
-      <li> Featured Bot Skills</li>
-    </ul>
-    <p>Meet our SportGPT bot, your ultimate companion for sports betting intelligence. Harnessing team matchup statistics, team performance metrics, and standings data, our bot meticulously analyzes disparities to pinpoint strategic advantages between competing teams. Armed with cutting-edge predictive capabilities, our bot forecasts match outcomes with up to 100% accuracy at times during the season. Empowering you with unmatched insights, our SportGPT bot revolutionizes your betting strategy, ensuring informed decisions and maximizing parlay bet success.</p>
-    <a class="project-link" href="/form.html">Check it out</a>
-  </div>
-</div>
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+
+    <style>
+        /* General Layout Styling */
+        .projects-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* Dropdown Styling */
+        .project-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .dropdown {
+            margin-right: 20px;
+            font-size: 1.2rem;
+            padding: 5px;
+        }
+
+        /* Buttons Styling */
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .project-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .project-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Carousel Styling */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            overflow: hidden;
+            margin-top: 40px;
+        }
+
+        .carousel-content {
+            display: flex;
+            transition: transform 1s ease;
+        }
+
+        .project-description {
+            display: none;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .user-projects {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .images-right img, .images-left img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .contents, .contents-right {
+            width: calc(100% - 320px);
+        }
+
+        .images-right {
+            order: 2;
+        }
+
+        .images-left {
+            order: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Projects Container -->
+    <div class="projects-container">
+        <div class="project-selector">
+            <select class="dropdown" id="botTypeDropdown">
+                <option value="">Select Bot Type</option>
+                <option value="social">Social Media Bots</option>
+                <option value="automation">Automation Bots</option>
+                <option value="ai">AI Bots</option>
+                <option value="crypto">Crypto Bots</option>
+            </select>
+
+            <!-- Dynamic Buttons will appear here -->
+            <div class="button-container" id="buttonContainer"></div>
+        </div>
+
+        <!-- Project Description Carousel -->
+        <div class="carousel-container">
+            <div class="carousel-content" id="carouselContent">
+                <!-- Media Post Automation -->
+                <div class="project-description user-projects" id="project1">
+                    <div class="images-right">
+                        <img alt="bot" src="https://files.bpcontent.cloud/2024/08/23/16/20240823163412-XD7C36H9.png" />
+                    </div>
+                    <div class="contents">
+                        <h3>Media Post Automation</h3>
+                        <ul>
+                            <li>Featured Bot Skills</li>
+                        </ul>
+                        <p>Our automated bot streamlines content management across Facebook, LinkedIn, and Instagram...</p>
+                        <a class="project-link" href="/demo.html">Check it out</a>
+                    </div>
+                </div>
+
+                <!-- Vehicle Price Estimate Bot -->
+                <div class="project-description user-projects" id="project2">
+                    <div class="images-left">
+                        <img alt="car" src="/assets/img/car.jpeg" />
+                    </div>
+                    <div class="contents-right">
+                        <h3>Vehicle Price Estimate Bot</h3>
+                        <ul>
+                            <li>Featured Bot Skills</li>
+                        </ul>
+                        <p>Revolutionizing the way you navigate the automotive market, our AI bot is your ultimate guide to vehicle transactions...</p>
+                        <a class="project-link" href="/form.html">Check it out</a>
+                    </div>
+                </div>
+
+                <!-- Company Assistant AI -->
+                <div class="project-description user-projects" id="project3">
+                    <div class="images-right">
+                        <img alt="face" src="/assets/img/aiFace.jpeg" />
+                    </div>
+                    <div class="contents">
+                        <h3>Company Assistant AI</h3>
+                        <ul>
+                            <li>Featured Bot Skills</li>
+                        </ul>
+                        <p>Our Company Assistant AI enhances productivity by handling personalized conversations, booking meetings...</p>
+                        <a class="project-link" href="/form.html">Check it out</a>
+                    </div>
+                </div>
+
+                <!-- Crypto Bot -->
+                <div class="project-description user-projects" id="project4">
+                    <div class="images-left">
+                        <img alt="crypto" src="/assets/img/crypto.jpeg" />
+                    </div>
+                    <div class="contents-right">
+                        <h3>CryptoGPT Bot</h3>
+                        <ul>
+                            <li>Featured Bot Skills</li>
+                        </ul>
+                        <p>Our Crypto Bot integrates advanced trading strategies developed on TradingView...</p>
+                        <a class="project-link" href="/form.html">Check it out</a>
+                    </div>
+                </div>
+
+                <!-- SportGPT -->
+                <div class="project-description user-projects" id="project5">
+                    <div class="images-right">
+                        <img alt="sports" src="/assets/img/sportHost.jpeg" />
+                    </div>
+                    <div class="contents">
+                        <h3>SportGPT</h3>
+                        <ul>
+                            <li>Featured Bot Skills</li>
+                        </ul>
+                        <p>Meet our SportGPT bot, your ultimate companion for sports betting intelligence...</p>
+                        <a class="project-link" href="/form.html">Check it out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Section -->
+    <script>
+        const botTypeDropdown = document.getElementById('botTypeDropdown');
+        const buttonContainer = document.getElementById('buttonContainer');
+        const descriptions = document.querySelectorAll('.project-description');
+        
+        const botProjects = {
+            social: [{id: 'project1', name: 'Media Post Automation'}],
+            automation: [{id: 'project2', name: 'Vehicle Price Estimate Bot'}],
+            ai: [
+                {id: 'project3', name: 'Company Assistant AI'}, 
+                {id: 'project4', name: 'CryptoGPT Bot'}
+            ],
+            crypto: [
+                {id: 'project4', name: 'CryptoGPT Bot'}, 
+                {id: 'project5', name: 'SportGPT'}
+            ]
+        };
+
+        let currentIndex = null;
+
+        // Function to display the project
+        function showProject(projectId) {
+            descriptions.forEach(desc => desc.classList.remove('active'));
+            document.getElementById(projectId).classList.add('active');
+        }
+
+        // Populate buttons when dropdown is selected
+        botTypeDropdown.addEventListener('change', function () {
+            const botType = botTypeDropdown.value;
+            buttonContainer.innerHTML = ''; // Clear buttons
+
+            if (botType && botProjects[botType]) {
+                botProjects[botType].forEach(project => {
+                    const button = document.createElement('button');
+                    button.classList.add('project-button');
+                    button.textContent = project.name;
+                    button.setAttribute('data-project', project.id);
+
+                    // Add button click listener
+                    button.addEventListener('click', () => showProject(project.id));
+
+                    buttonContainer.appendChild(button);
+                });
+                // Show first project by default when a category is selected
+                showProject(botProjects[botType][0].id);
+            }
+        });
+    </script>
+</body>
+</html>
 
     </section>
 
