@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta name="google-site-verification" content="cwrUjb5cLEe0UtKVAJcmuAjxKL70S_pg_SnJGw0WM4s" />
+    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSMC9NWY0H"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-NSMC9NWY0H');
     </script>
     
@@ -42,7 +42,7 @@
             z-index: 1001;
         }
 
-
+        /* Calendly widget positioning */
         .calendly-badge-widget {
             position: fixed;
             bottom: 80px;
@@ -50,13 +50,17 @@
             z-index: 1000;
         }
 
-
         /* Ensure all child elements are above the overlay */
         body > * {
             position: relative;
             z-index: 2;
         }
     </style>
+
+    <!-- Botpress Webchat Integration -->
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script src="https://mediafiles.botpress.cloud/c6b57904-e8fe-4358-9701-486a72ed4af0/webchat/config.js" defer></script>
+
 </head>
 <body>
     <div id="particles-js">
@@ -253,10 +257,67 @@
                 </div>
             </div>
         </div>
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Bot Development & Integration Flow</title>
+    
+    <!-- Compiled CSS from the SCSS file -->
+    <style>
+        .dynamic-table {
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            font-size: 1.2rem;
+            background: #f9f9f9;
+            transition: transform 0.5s ease-in-out; /* Smooth transition for sliding effect */
+        }
+        .dynamic-table th, .dynamic-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        .dynamic-table th {
+            background-color: #007bff;
+            color: white;
+        }
+        .table-section {
+            margin-top: 40px;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .table-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-        <!-- Separate container for the table to ensure it stays below the widgets -->
-        <div class="table-section">
-            <h2>AI Bot Development & Integration Flow</h2>
+        /* Responsive styles for the table */
+        @media (max-width: 768px) {
+            .dynamic-table {
+                font-size: 0.9rem;
+            }
+            .dynamic-table th, .dynamic-table td {
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Table Section -->
+    <div class="table-section">
+        <h2>AI Bot Development & Integration Flow</h2>
+        <div class="dynamic-table-wrapper">
             <table class="dynamic-table">
                 <thead>
                     <tr>
@@ -293,19 +354,59 @@
                     </tr>
                     <tr>
                         <td><span class="emoji">🛠️</span>Custom Project Development</td>
-                        <td>Client hires your team to build out a custom AI or automation solution.</td>
+                        <td>Client hires our team to build out a custom AI or automation solution.</td>
                         <td>OpenAI's ChatGPT4o, Botpress LLMz Engine, AWS Lambda, Webhooks</td>
                         <td>Fully customized AI solution delivered.</td>
                     </tr>
                     <tr>
                         <td><span class="emoji">🔄</span>Ongoing Updates & Support</td>
-                        <td>Your team provides ongoing updates and support for the deployed bots.</td>
+                        <td>Aiautomatrix team provides ongoing updates and support for the deployed bots.</td>
                         <td>Botpress Knowledgebase API, AWS Lambda, Botpress Studio</td>
                         <td>The bot evolves with the client’s business needs.</td>
                     </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <!-- Compiled JS from the table-carousel.js file -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const table = document.querySelector('.dynamic-table');
+            const tableWrapper = document.querySelector('.dynamic-table-wrapper');
+            const totalColumns = table.querySelectorAll('thead th').length;
+            const columnsToShow = 3; // Number of columns to display
+            const totalWidth = 100 / (totalColumns - 1); // Percentage width per column
+            let currentIndex = 0;
+            let isMobile = window.matchMedia("(max-width: 500px)").matches;
+
+            function updateTable() {
+                const offset = -currentIndex * totalWidth;
+                table.style.transform = `translateX(${offset}%)`;
+            }
+
+            function slideColumns() {
+                if (isMobile) {
+                    currentIndex = (currentIndex + 1) % (totalColumns - columnsToShow + 1);
+                    updateTable();
+                }
+            }
+
+            function checkScreenSize() {
+                isMobile = window.matchMedia("(max-width: 500px)").matches;
+                if (!isMobile) {
+                    // Reset the table if not on mobile
+                    table.style.transform = 'translateX(0%)';
+                }
+            }
+
+            window.addEventListener('resize', checkScreenSize);
+            setInterval(slideColumns, 5000); // Slide every 5 seconds
+        });
+    </script>
+</body>
+</html>
+
 
     </div>
 </body>

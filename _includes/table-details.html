@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Bot Development & Integration Flow</title>
+    
+    <!-- Compiled CSS from the SCSS file -->
+    <style>
+        .dynamic-table {
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            font-size: 1.2rem;
+            background: #f9f9f9;
+            transition: transform 0.5s ease-in-out; /* Smooth transition for sliding effect */
+        }
+        .dynamic-table th, .dynamic-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        .dynamic-table th {
+            background-color: #007bff;
+            color: white;
+        }
+        .table-section {
+            margin-top: 40px;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .table-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive styles for the table */
+        @media (max-width: 768px) {
+            .dynamic-table {
+                font-size: 0.9rem;
+            }
+            .dynamic-table th, .dynamic-table td {
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Table Section -->
+    <div class="table-section">
+        <h2>AI Bot Development & Integration Flow</h2>
+        <div class="dynamic-table-wrapper">
+            <table class="dynamic-table">
+                <thead>
+                    <tr>
+                        <th>Stage</th>
+                        <th>Description</th>
+                        <th>Tools/Technologies</th>
+                        <th>Outcome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="emoji">💼</span>Client Purchase</td>
+                        <td>Client selects and buys a custom AI bot from Aiautomatrix's website.</td>
+                        <td>Website form, Botpress Knowledgebase API</td>
+                        <td>Client details and project requirements are captured automatically.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">⚙️</span>Automated Setup</td>
+                        <td>Botpress uses the client details to automatically configure the bot's knowledgebase and setup environment.</td>
+                        <td>Botpress LLMz Engine, AWS Lambda</td>
+                        <td>A customized bot is developed with the client’s specific data and requirements.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">📚</span>Knowledgebase Setup</td>
+                        <td>Using client input (docs, images, etc.), the bot’s knowledgebase is built to reflect the company’s services.</td>
+                        <td>Botpress Knowledgebase API, OpenAI's ChatGPT4o</td>
+                        <td>A domain-specific bot ready for deployment.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">🔗</span>Bot Integration</td>
+                        <td>API code snippets are shared with the client to integrate the bot into their platform.</td>
+                        <td>API integrations, Webhook code snippets</td>
+                        <td>Client can easily integrate the bot into their system.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">🛠️</span>Custom Project Development</td>
+                        <td>Client hires our team to build out a custom AI or automation solution.</td>
+                        <td>OpenAI's ChatGPT4o, Botpress LLMz Engine, AWS Lambda, Webhooks</td>
+                        <td>Fully customized AI solution delivered.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">🔄</span>Ongoing Updates & Support</td>
+                        <td>Aiautomatrix team provides ongoing updates and support for the deployed bots.</td>
+                        <td>Botpress Knowledgebase API, AWS Lambda, Botpress Studio</td>
+                        <td>The bot evolves with the client’s business needs.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Compiled JS from the table-carousel.js file -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const table = document.querySelector('.dynamic-table');
+            const tableWrapper = document.querySelector('.dynamic-table-wrapper');
+            const totalColumns = table.querySelectorAll('thead th').length;
+            const columnsToShow = 3; // Number of columns to display
+            const totalWidth = 100 / (totalColumns - 1); // Percentage width per column
+            let currentIndex = 0;
+            let isMobile = window.matchMedia("(max-width: 500px)").matches;
+
+            function updateTable() {
+                const offset = -currentIndex * totalWidth;
+                table.style.transform = `translateX(${offset}%)`;
+            }
+
+            function slideColumns() {
+                if (isMobile) {
+                    currentIndex = (currentIndex + 1) % (totalColumns - columnsToShow + 1);
+                    updateTable();
+                }
+            }
+
+            function checkScreenSize() {
+                isMobile = window.matchMedia("(max-width: 500px)").matches;
+                if (!isMobile) {
+                    // Reset the table if not on mobile
+                    table.style.transform = 'translateX(0%)';
+                }
+            }
+
+            window.addEventListener('resize', checkScreenSize);
+            setInterval(slideColumns, 5000); // Slide every 5 seconds
+        });
+    </script>
+</body>
+</html>

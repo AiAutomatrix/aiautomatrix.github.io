@@ -102,59 +102,7 @@
                 </div>
             </div>
         </div>
-
-        <!-- Separate container for the table to ensure it stays below the widgets -->
-        <div class="table-section">
-            <h2>AI Bot Development & Integration Flow</h2>
-            <table class="dynamic-table">
-                <thead>
-                    <tr>
-                        <th>Stage</th>
-                        <th>Description</th>
-                        <th>Tools/Technologies</th>
-                        <th>Outcome</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="emoji">💼</span>Client Purchase</td>
-                        <td>Client selects and buys a custom AI bot from Aiautomatrix's website.</td>
-                        <td>Website form, Botpress Knowledgebase API</td>
-                        <td>Client details and project requirements are captured automatically.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="emoji">⚙️</span>Automated Setup</td>
-                        <td>Botpress uses the client details to automatically configure the bot's knowledgebase and setup environment.</td>
-                        <td>Botpress LLMz Engine, AWS Lambda</td>
-                        <td>A customized bot is developed with the client’s specific data and requirements.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="emoji">📚</span>Knowledgebase Setup</td>
-                        <td>Using client input (docs, images, etc.), the bot’s knowledgebase is built to reflect the company’s services.</td>
-                        <td>Botpress Knowledgebase API, OpenAI's ChatGPT4o</td>
-                        <td>A domain-specific bot ready for deployment.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="emoji">🔗</span>Bot Integration</td>
-                        <td>API code snippets are shared with the client to integrate the bot into their platform.</td>
-                        <td>API integrations, Webhook code snippets</td>
-                        <td>Client can easily integrate the bot into their system.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="emoji">🛠️</span>Custom Project Development</td>
-                        <td>Client hires our team to build out a custom AI or automation solution.</td>
-                        <td>OpenAI's ChatGPT4o, Botpress LLMz Engine, AWS Lambda, Webhooks</td>
-                        <td>Fully customized AI solution delivered.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="emoji">🔄</span>Ongoing Updates & Support</td>
-                        <td>Aiautomatrix team provides ongoing updates and support for the deployed bots.</td>
-                        <td>Botpress Knowledgebase API, AWS Lambda, Botpress Studio</td>
-                        <td>The bot evolves with the client’s business needs.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        {% include table-details.html %}
 
     </div>
 </body>

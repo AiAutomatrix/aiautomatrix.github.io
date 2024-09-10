@@ -1,0 +1,57 @@
+/* Responsive Table Styling */
+.dynamic-table {
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    font-size: 1.2rem;
+    background: #f9f9f9;
+}
+
+.dynamic-table th,
+.dynamic-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.dynamic-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+@media only screen and (max-width: 768px) {
+    .dynamic-table {
+        display: block;
+        width: 100%;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    .dynamic-table th,
+    .dynamic-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .dynamic-table tbody {
+        display: flex;
+        overflow: hidden;
+    }
+
+    /* Keep first two columns visible */
+    .dynamic-table tr {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .dynamic-table td:nth-child(1),
+    .dynamic-table td:nth-child(2) {
+        width: 50%;
+    }
+
+    /* Hide the extra columns for mobile view */
+    .dynamic-table td:nth-child(n+3) {
+        display: none;
+    }
+}
