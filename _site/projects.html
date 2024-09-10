@@ -241,7 +241,7 @@
         }
 
         .active {
-            display: block;
+            display: block !important;
         }
 
         .user-projects {
@@ -370,51 +370,60 @@
 
     <!-- Script Section -->
     <script>
-        const botTypeDropdown = document.getElementById('botTypeDropdown');
-        const buttonContainer = document.getElementById('buttonContainer');
-        const descriptions = document.querySelectorAll('.project-description');
-        
-        const botProjects = {
-            social: [{id: 'project1', name: 'Media Post Automation'}],
-            automation: [{id: 'project2', name: 'Vehicle Price Estimate Bot'}],
-            ai: [
-                {id: 'project3', name: 'Company Assistant AI'}, 
-                {id: 'project4', name: 'CryptoGPT Bot'}
-            ],
-            crypto: [
-                {id: 'project4', name: 'CryptoGPT Bot'}, 
-                {id: 'project5', name: 'SportGPT'}
-            ]
-        };
+        document.addEventListener('DOMContentLoaded', function () {
+            const botTypeDropdown = document.getElementById('botTypeDropdown');
+            const buttonContainer = document.getElementById('buttonContainer');
+            const descriptions = document.querySelectorAll('.project-description');
+            
+            const botProjects = {
+                social: [{id: 'project1', name: 'Media Post Automation'}],
+                automation: [{id: 'project2', name: 'Vehicle Price Estimate Bot'}],
+                ai: [
+                    {id: 'project3', name: 'Company Assistant AI'}, 
+                    {id: 'project4', name: 'CryptoGPT Bot'}
+                ],
+                crypto: [
+                    {id: 'project4', name: 'CryptoGPT Bot'}, 
+                    {id: 'project5', name: 'SportGPT'}
+                ]
+            };
 
-        let currentIndex = null;
+            let currentIndex = null;
 
-        // Function to display the project
-        function showProject(projectId) {
-            descriptions.forEach(desc => desc.classList.remove('active'));
-            document.getElementById(projectId).classList.add('active');
-        }
-
-        // Populate buttons when dropdown is selected
-        botTypeDropdown.addEventListener('change', function () {
-            const botType = botTypeDropdown.value;
-            buttonContainer.innerHTML = ''; // Clear buttons
-
-            if (botType && botProjects[botType]) {
-                botProjects[botType].forEach(project => {
-                    const button = document.createElement('button');
-                    button.classList.add('project-button');
-                    button.textContent = project.name;
-                    button.setAttribute('data-project', project.id);
-
-                    // Add button click listener
-                    button.addEventListener('click', () => showProject(project.id));
-
-                    buttonContainer.appendChild(button);
-                });
-                // Show first project by default when a category is selected
-                showProject(botProjects[botType][0].id);
+            // Function to display the project
+            function showProject(projectId) {
+                // Hide all descriptions
+                descriptions.forEach(desc => desc.classList.remove('active'));
+                
+                // Show the selected description
+                document.getElementById(projectId).classList.add('active');
             }
+
+            // Initially hide all descriptions
+            descriptions.forEach(desc => desc.style.display = 'none');
+
+            // Populate buttons when dropdown is selected
+            botTypeDropdown.addEventListener('change', function () {
+                const botType = botTypeDropdown.value;
+                buttonContainer.innerHTML = ''; // Clear buttons
+
+                if (botType && botProjects[botType]) {
+                    botProjects[botType].forEach(project => {
+                        const button = document.createElement('button');
+                        button.classList.add('project-button');
+                        button.textContent = project.name;
+                        button.setAttribute('data-project', project.id);
+
+                        // Add button click listener
+                        button.addEventListener('click', () => showProject(project.id));
+
+                        buttonContainer.appendChild(button);
+                    });
+                    
+                    // Show the first project by default when a category is selected
+                    showProject(botProjects[botType][0].id);
+                }
+            });
         });
     </script>
 </body>
