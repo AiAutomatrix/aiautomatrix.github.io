@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>TradingView Widgets</title>
     <style>
+        /* Your CSS styles here */
         .tabs {
             display: flex;
             justify-content: center;
@@ -44,23 +45,11 @@
             justify-content: center;
             align-items: center;
         }
-        .chart-container {
-            width: 70%;
+        .chart-container, .screener-container, .heatmap-container {
+            width: 100%;
             height: 100%;
-        }
-        .screener-container {
-            width: 70%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .heatmap-container {
-            width: 70%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background-color: #1e1e1e;
+            border-radius: 5px;
         }
         .fixed-widget-container {
             position: absolute;
@@ -71,8 +60,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #fff; /* Adjust background color if needed */
-            z-index: 1; /* Ensure it's on top of other elements */
+            background-color: #fff;
+            z-index: 1;
         }
         .toggle-container {
             display: flex;
@@ -107,74 +96,37 @@
         .toggle-switch:checked::before {
             left: calc(100% - 18px);
         }
-
-                /* chart.scss */
-        .carousel-container {
-            position: relative;
-            width: 100%;
-            height: 80vh;
-            overflow: hidden;
-        }
-
-        .carousel {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .carousel-item {
-            min-width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .chart-container, .screener-container, .heatmap-container {
-            width: 100%;
-            height: 100%;
-            background-color: #1e1e1e;
-            border-radius: 5px;
-        }
-
-        /* Ticker Tape */
-        .tradingview-widget-container {
-            margin-bottom: 20px;
-            width: 100%;
-            background-color: #131722;
-        }
-
-        /* Mobile Styles */
         @media screen and (max-width: 768px) {
             .carousel-container {
                 height: 60vh;
             }
-
             .carousel-item {
                 height: 60vh;
             }
         }
-
     </style>
 </head>
 <body>
-                <!-- Main Content -->
-                <div class="carousel-container">
-                    <div class="carousel">
-                        <div class="carousel-item">
-                            <div id="chartContainer" class="chart-container">
-                                <!-- Tabs and Toggle Switch -->
-                <div class="header">
-                    <div class="tabs">
-                        <div class="tab active" data-index="0">Chart</div>
-                        <div class="tab" data-index="1">Screener</div>
-                        <div class="tab" data-index="2">Heatmap</div>
+    <!-- Main Content -->
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-item">
+                <div id="chartContainer" class="chart-container">
+                    <!-- Tabs and Toggle Switch -->
+                    <div class="header">
+                        <div class="tabs">
+                            <div class="tab active" data-index="0">Chart</div>
+                            <div class="tab" data-index="1">Screener</div>
+                            <div class="tab" data-index="2">Heatmap</div>
+                        </div>
+                        <div class="toggle-container">
+                            <span class="toggle-label">Technicals | CryptoGPT:</span>
+                            <label class="switch">
+                                <input id="toggleWidth" class="toggle-switch" type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
                     </div>
-                    <div class="toggle-container">
-                        <span class="toggle-label">Technicals | CryptoGPT:</span>
-                        <label class="switch">
-                            <input id="toggleWidth" class="toggle-switch" type="checkbox" onchange="toggleContainerWidth()" checked>
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                </div>
                     <!-- Chart Widget -->
                     <div class="tradingview-widget-container" style="width: 100%; height: 100%;">
                         <div id="technical-analysis-chart-demo" style="width: 100%; height: 100%;"></div>
@@ -249,18 +201,61 @@
                             "height": "100%"
                         }
                         </script>
-                        <script src="carousel.js"></script>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Container for tech.html content -->
-        <div id="techContainer" class="fixed-widget-container">
-            {% include tech.html %}
-        </div>
-    </div>
-    
+        
+        <!-- Technical Analysis Section -->
+        <section class="crypto-tech-section">
+            <div id="techContainer" class="fixed-widget-container">
+                {% include tech.html %}
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const tabs = document.querySelectorAll('.tab');
+            const carousel = document.querySelector('.carousel');
+            const toggleSwitch = document.getElementById('toggleWidth');
+            const chartContainer = document.getElementById('chartContainer');
+            const screenerContainer = document.getElementById('screenerContainer');
+            const heatmapContainer = document.getElementById('heatmapContainer');
+            const techContainer = document.getElementById('techContainer');
+
+            // Function to update the carousel position
+            function updateCarousel(index) {
+                const offset = -index * 100;
+                carousel.style.transform = `translateX(${offset}%)`;
+                tabs.forEach(tab => tab.classList.remove('active'));
+                tabs[index].classList.add('active');
+            }
+
+            // Event listener for tabs
+            tabs.forEach((tab, index) => {
+                tab.addEventListener('click', () => updateCarousel(index));
+            });
+
+            // Function to toggle container width
+            function toggleContainerWidth() {
+                if (toggleSwitch.checked) {
+                    chartContainer.style.width = '100%';
+                    screenerContainer.style.width = '100%';
+                    heatmapContainer.style.width = '100%';
+                    techContainer.style.display = 'block';
+                } else {
+                    chartContainer.style.width = '100%';
+                    screenerContainer.style.width = '100%';
+                    heatmapContainer.style.width = '100%';
+                    techContainer.style.display = 'none';
+                }
+            }
+
+            // Initialize with default widths and active tab
+            updateCarousel(0);
+            toggleContainerWidth();
+        });
+    </script>
 </body>
 </html>
-
- 
