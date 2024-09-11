@@ -121,7 +121,6 @@
     <div class="projects-container">
         <div class="project-selector">
             <select class="dropdown" id="botTypeDropdown">
-                <option value="">Select Bot Type</option>
                 <option value="social">Social Media Bots</option>
                 <option value="automation">Automation Bots</option>
                 <option value="ai">AI Bots</option>
@@ -213,8 +212,8 @@
         </div>
     </div>
 
-    <!-- Script Section -->
-    <script>
+     <!-- Script Section -->
+     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const botTypeDropdown = document.getElementById('botTypeDropdown');
             const buttonContainer = document.getElementById('buttonContainer');
@@ -269,6 +268,10 @@
                     showProject(botProjects[botType][0].id);
                 }
             });
+
+            // Automatically select "Automation Bots" and display the default project
+            botTypeDropdown.value = 'automation'; // Set default dropdown value to "Automation Bots"
+            botTypeDropdown.dispatchEvent(new Event('change')); // Trigger the change event to load the default description
         });
     </script>
 </body>
