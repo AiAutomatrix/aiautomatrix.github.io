@@ -1,0 +1,43 @@
+/* chart.scss */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    min-width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.chart-container, .screener-container, .heatmap-container {
+    width: 100%;
+    height: 100%;
+    background-color: #1e1e1e;
+    border-radius: 5px;
+}
+
+/* Ticker Tape */
+.tradingview-widget-container {
+    margin-bottom: 20px;
+    width: 100%;
+    background-color: #131722;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+    .carousel-container {
+        height: 60vh;
+    }
+
+    .carousel-item {
+        height: 60vh;
+    }
+}

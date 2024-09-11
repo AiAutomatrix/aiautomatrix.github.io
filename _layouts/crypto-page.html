@@ -1,76 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="google-site-verification" content="cwrUjb5cLEe0UtKVAJcmuAjxKL70S_pg_SnJGw0WM4s" />
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSMC9NWY0H"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-NSMC9NWY0H');
-    </script>
-    <style>
-        /* Custom CSS for Botpress chat button positioning */
-        .bpw-bubble-container {
-            position: fixed;
-            bottom: 20px; /* Adjust this value to move the button up or down */
-            right: 20px;  /* Adjust this value to move the button left or right */
-            z-index: 1000; /* Ensure it appears above other elements */
-        }
-
-        /* Ensure Botpress chat window is correctly positioned and interactive */
-        .bpw-chat-container {
-            position: fixed;
-            bottom: 80px; /* Adjust this value to move the chat window up or down */
-            right: 20px;  /* Adjust this value to move the chat window left or right */
-            z-index: 1001; /* Ensure it appears above other elements */
-        }
-
-        /* Background with particle animation */
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            background: url('/assets/img/nebula.jpeg') no-repeat center center fixed;
-            background-size: cover;
-        }
-
-        /* Ensure all child elements are above the overlay */
-        body > * {
-            position: relative;
-            z-index: 2;
-        }
-
-        .content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            text-align: center;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Analysis</title>
 </head>
 <body>
-    {% include header3.html %}
-
-    <!-- Placeholder for page content -->
-    <div class="content">
-        {{ content }}
-    </div>
-
-    <!-- Include chart.html -->
-    {% include chart.html %}
+    <!-- Header Section -->
+    <header class="crypto-header">
+    </header>
+        <!-- Technical Analysis Section -->
+        <section class="crypto-tech-section">
+            <div id="chartContainer" class="chart-container">
+                {% include chart.html %}
+            </div>
+        </section>
+    </main>
 </body>
 </html>
+
