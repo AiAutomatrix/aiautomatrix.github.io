@@ -243,7 +243,6 @@
             </div>
         </section>
     </div>
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const tabs = document.querySelectorAll('.tab');
@@ -294,6 +293,52 @@
             adjustCarouselWidth();
         });
         </script>
+
+        <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const widgetContainer = document.querySelector('.tradingview-widget-container');
+        const carousel = document.querySelector('.carousel');
+
+        // Function to scroll to the bottom of the widget
+        function scrollToWidgetBottom() {
+            // Check if the widget has content loaded
+            const checkWidgetLoaded = setInterval(function () {
+                if (widgetContainer && widgetContainer.clientHeight > 0) {
+                    clearInterval(checkWidgetLoaded); // Stop checking once it's loaded
+
+                    // Scroll to the widget's bottom
+                    widgetContainer.scrollIntoView({
+                        behavior: "smooth",  // Smooth scrolling
+                        block: "end"  // Align to the bottom of the widget
+                    });
+
+                    // Optionally scroll down further to ensure the widget is fully visible
+                    setTimeout(() => {
+                        window.scrollBy({
+                            top: 100,  // Adjust this value to scroll beyond the widget
+                            behavior: "smooth"
+                        });
+                    }, 500);  // Delay to ensure smooth transition
+                }
+            }, 100); // Check every 100ms if the widget is loaded
+        }
+
+        // Call scrollToWidgetBottom when the page loads
+        scrollToWidgetBottom();
+
+        // Optional: Set the carousel to the correct position for the selected tab
+        function updateCarouselPosition(index) {
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const offset = -index * carouselItems[0].offsetWidth;  // Calculate the current carousel position
+            carousel.style.transform = `translateX(${offset}px)`;  // Move the carousel to the correct position
+        }
+
+        // Get the active tab and update carousel position
+        const activeTab = document.querySelector('.tab.active');
+        const activeIndex = parseInt(activeTab.getAttribute('data-index'), 10);
+        updateCarouselPosition(activeIndex);
+    });
+</script>
         
 </body>
 </html>
