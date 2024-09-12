@@ -126,7 +126,7 @@
             width: 100%;
             height: 100%;
             background-color: #1e1e1e;
-            border-radius: 5px;
+            border-radius: 2px;
         }
 
         .fixed-widget-container {
@@ -282,54 +282,55 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-        const tabs = document.querySelectorAll('.tab');
-        const carousel = document.querySelector('.carousel');
-        const toggleSwitch = document.getElementById('toggleSwitch');
-        const techContainer = document.getElementById('techContainer');
-        const carouselItems = document.querySelectorAll('.carousel-item');
-
-        // Update carousel position based on tab selection
-        function updateCarousel(index) {
-            const offset = -index * (toggleSwitch.checked ? 70 : 100); // Adjust based on toggle switch
-            carousel.style.transform = `translateX(${offset}%)`;
-            tabs.forEach(tab => tab.classList.remove('active'));
-            tabs[index].classList.add('active');
-        }
-
-        // Adjust carousel width based on tech section visibility
-        function adjustCarouselWidth() {
-            const widthPercentage = toggleSwitch.checked ? 70 : 100;
-
-            // Apply transition for smooth animation
-            carousel.style.transition = 'none'; // Remove transition initially to avoid flicker
-            carouselItems.forEach(item => {
-                item.style.width = `${widthPercentage}%`;
+            const tabs = document.querySelectorAll('.tab');
+            const carousel = document.querySelector('.carousel');
+            const toggleSwitch = document.getElementById('toggleSwitch');
+            const techContainer = document.getElementById('techContainer');
+            const carouselItems = document.querySelectorAll('.carousel-item');
+        
+            // Update carousel position based on tab selection
+            function updateCarousel(index) {
+                const itemWidth = carouselItems[0].offsetWidth;
+                const offset = -index * itemWidth; // Calculate based on the current width of the carousel items
+                carousel.style.transform = `translateX(${offset}px)`; // Use px for precise positioning
+                tabs.forEach(tab => tab.classList.remove('active'));
+                tabs[index].classList.add('active');
+            }
+        
+            // Adjust carousel width based on tech section visibility
+            function adjustCarouselWidth() {
+                const widthPercentage = toggleSwitch.checked ? 70 : 100;
+        
+                // Apply smooth transition for carousel width changes
+                carousel.style.transition = 'transform 0.6s ease'; // Add smooth transitions for carousel movements
+        
+                // Adjust each carousel item's width
+                carouselItems.forEach(item => {
+                    item.style.width = `${widthPercentage}%`;
+                });
+                techContainer.style.display = toggleSwitch.checked ? 'block' : 'none';
+        
+                // Update carousel position to ensure it's centered after resizing
+                const activeIndex = document.querySelector('.tab.active').getAttribute('data-index');
+                updateCarousel(activeIndex);
+            }
+        
+            // Event listener for tab click
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const index = parseInt(tab.getAttribute('data-index'));
+                    updateCarousel(index);
+                });
             });
-            techContainer.style.display = toggleSwitch.checked ? 'block' : 'none';
-
-            // Trigger reflow to reset transition
-            carousel.offsetHeight; // Trigger a reflow
-
-            // Apply transition and update carousel position
-            updateCarousel(document.querySelector('.tab.active').getAttribute('data-index')); // Reapply the correct position
-        }
-
-        // Event listener for tab click
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const index = parseInt(tab.getAttribute('data-index'));
-                updateCarousel(index);
-            });
+        
+            // Event listener for toggle switch to adjust carousel width
+            toggleSwitch.addEventListener('change', adjustCarouselWidth);
+        
+            // Initialize layout
+            adjustCarouselWidth();
         });
-
-        // Event listener for toggle switch
-        toggleSwitch.addEventListener('change', adjustCarouselWidth);
-
-        // Initialize layout
-        adjustCarouselWidth();
-    });
-
-    </script>
+        </script>
+        
 </body>
 </html>
 
