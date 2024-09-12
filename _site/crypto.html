@@ -18,71 +18,54 @@
     <meta charset="UTF-8">
     <title>TradingView Widgets</title>
     <style>
-        /* Your CSS styles here */
+        /* Fullscreen and reset margins */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        body {
+            background-color: #1e1e1e;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
         .tabs {
             display: flex;
             justify-content: center;
-            margin: 1px 0;
+            align-items: center;
+            padding: 10px 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 2;
+            background-color: #333;
         }
         .tab {
-            margin: 0 5px;
-            padding: 5px 15px;
+            margin: 0 10px;
+            padding: 8px 20px;
             cursor: pointer;
             background-color: #333;
             color: white;
             border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
         .tab.active {
             background-color: #555;
         }
-        .carousel-container {
-            position: relative;
-            width: 100%;
-            height: 80vh;
-            overflow: hidden;
-        }
-        .carousel {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-            height: 100%;
-        }
-        .carousel-item {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            flex-shrink: 0;
-        }
-        .widget-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .chart-container, .screener-container, .heatmap-container {
-            width: 100%;
-            height: 100%;
-            background-color: #1e1e1e;
-            border-radius: 5px;
-        }
-        .fixed-widget-container {
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 30%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #fff;
-            z-index: 1;
-        }
         .toggle-container {
+            margin-left: auto;
+            margin-right: 20px;
             display: flex;
             align-items: center;
         }
         .toggle-label {
-            margin-right: 1px;
+            margin-right: 5px;
             color: #f7f7f7;
         }
         .toggle-switch {
@@ -110,6 +93,55 @@
         .toggle-switch:checked::before {
             left: calc(100% - 18px);
         }
+        
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Fullscreen height */
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            height: calc(100% - 50px); /* Adjust height to account for the tabs */
+            margin-top: 50px; /* Push widgets below tabs */
+        }
+
+        .carousel-item {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+        }
+
+        .widget-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chart-container, .screener-container, .heatmap-container {
+            width: 100%;
+            height: 100%;
+            background-color: #1e1e1e;
+            border-radius: 5px;
+        }
+
+        .fixed-widget-container {
+            position: absolute;
+            right: 0;
+            top: 50px; /* Align with carousel start */
+            width: 30%;
+            height: calc(100vh - 50px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            z-index: 1;
+        }
+
         @media screen and (max-width: 768px) {
             .carousel-container {
                 height: 60vh;
@@ -123,24 +155,22 @@
 <body>
     <!-- Main Content -->
     <div class="carousel-container">
+        <!-- Tabs and Toggle Switch -->
+        <div class="tabs">
+            <div class="tab active" data-index="0">Chart</div>
+            <div class="tab" data-index="1">Screener</div>
+            <div class="tab" data-index="2">Heatmap</div>
+            <!-- Toggle Switch for Tech Section -->
+            <div class="toggle-container">
+                <label for="toggleSwitch" class="toggle-label">Toggle Tech</label>
+                <input type="checkbox" id="toggleSwitch" class="toggle-switch" checked>
+            </div>
+        </div>
+
+        <!-- Carousel -->
         <div class="carousel">
             <div class="carousel-item">
                 <div id="chartContainer" class="chart-container">
-                    <!-- Tabs and Toggle Switch -->
-                    <div class="header">
-                        <div class="tabs">
-                            <div class="tab active" data-index="0">Chart</div>
-                            <div class="tab" data-index="1">Screener</div>
-                            <div class="tab" data-index="2">Heatmap</div>
-                        </div>
-                        <div class="toggle-container">
-                            <span class="toggle-label">Technicals | CryptoGPT:</span>
-                            <label class="switch">
-                                <input id="toggleWidth" class="toggle-switch" type="checkbox" checked>
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                    </div>
                     <!-- Chart Widget -->
                     <div class="tradingview-widget-container" style="width: 100%; height: 100%;">
                         <div id="technical-analysis-chart-demo" style="width: 100%; height: 100%;"></div>
@@ -173,7 +203,7 @@
                         </script>
                     </div>
                 </div>
-            </div>    
+            </div>
             <div class="carousel-item">
                 <div id="screenerContainer" class="screener-container">
                     <!-- Screener Widget -->
@@ -219,7 +249,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Technical Analysis Section -->
         <section class="crypto-tech-section">
             <div id="techContainer" class="fixed-widget-container">
@@ -248,50 +278,57 @@
 
             </div>
         </section>
-    </main>
+    </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const tabs = document.querySelectorAll('.tab');
-            const carousel = document.querySelector('.carousel');
-            const toggleSwitch = document.getElementById('toggleWidth');
-            const chartContainer = document.getElementById('chartContainer');
-            const screenerContainer = document.getElementById('screenerContainer');
-            const heatmapContainer = document.getElementById('heatmapContainer');
-            const techContainer = document.getElementById('techContainer');
+        const tabs = document.querySelectorAll('.tab');
+        const carousel = document.querySelector('.carousel');
+        const toggleSwitch = document.getElementById('toggleSwitch');
+        const techContainer = document.getElementById('techContainer');
+        const carouselItems = document.querySelectorAll('.carousel-item');
 
-            // Function to update the carousel position
-            function updateCarousel(index) {
-                const offset = -index * 100;
-                carousel.style.transform = `translateX(${offset}%)`;
-                tabs.forEach(tab => tab.classList.remove('active'));
-                tabs[index].classList.add('active');
-            }
+        // Update carousel position based on tab selection
+        function updateCarousel(index) {
+            const offset = -index * (toggleSwitch.checked ? 70 : 100); // Adjust based on toggle switch
+            carousel.style.transform = `translateX(${offset}%)`;
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabs[index].classList.add('active');
+        }
 
-            // Event listener for tabs
-            tabs.forEach((tab, index) => {
-                tab.addEventListener('click', () => updateCarousel(index));
+        // Adjust carousel width based on tech section visibility
+        function adjustCarouselWidth() {
+            const widthPercentage = toggleSwitch.checked ? 70 : 100;
+
+            // Apply transition for smooth animation
+            carousel.style.transition = 'none'; // Remove transition initially to avoid flicker
+            carouselItems.forEach(item => {
+                item.style.width = `${widthPercentage}%`;
             });
+            techContainer.style.display = toggleSwitch.checked ? 'block' : 'none';
 
-            // Function to toggle container width
-            function toggleContainerWidth() {
-                if (toggleSwitch.checked) {
-                    chartContainer.style.width = '100%';
-                    screenerContainer.style.width = '100%';
-                    heatmapContainer.style.width = '100%';
-                    techContainer.style.display = 'block';
-                } else {
-                    chartContainer.style.width = '100%';
-                    screenerContainer.style.width = '100%';
-                    heatmapContainer.style.width = '100%';
-                    techContainer.style.display = 'none';
-                }
-            }
+            // Trigger reflow to reset transition
+            carousel.offsetHeight; // Trigger a reflow
 
-            // Initialize with default widths and active tab
-            updateCarousel(0);
-            toggleContainerWidth();
+            // Apply transition and update carousel position
+            updateCarousel(document.querySelector('.tab.active').getAttribute('data-index')); // Reapply the correct position
+        }
+
+        // Event listener for tab click
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const index = parseInt(tab.getAttribute('data-index'));
+                updateCarousel(index);
+            });
         });
+
+        // Event listener for toggle switch
+        toggleSwitch.addEventListener('change', adjustCarouselWidth);
+
+        // Initialize layout
+        adjustCarouselWidth();
+    });
+
     </script>
 </body>
 </html>
