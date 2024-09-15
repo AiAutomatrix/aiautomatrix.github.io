@@ -101,7 +101,7 @@
         .fixed-widget-container {
             width: 100%;
             height: 100%;
-            display: flex;
+            display: fill;
             justify-content: center;
             align-items: center;
             background-color: #fff;
@@ -111,8 +111,8 @@
         .mini-carousel-container {
             position: absolute;
             right: 0;
-            top: 20px; /* Align with carousel start */
-            width: 30%;
+            top: 100px; /* Align with carousel start */
+            width: 100%;
             height: calc(100vh - 20px);
             display: flex;
             overflow: hidden;
@@ -141,7 +141,7 @@
             position: absolute;
             right: 0;
             top: 0;
-            width: 30%;
+            width: 25%;
             height: 100%;
             display: none; /* Hidden by default */
         }
@@ -165,7 +165,8 @@
         <!-- Toggle Switch for Tech Section -->
         <div class="toggle-container">
             <div class="tab" id="cryptoGPTTab">CryptoGPT</div>
-            <label for="toggleSwitch" class="toggle-label">Toggle Tech</label>
+            <div class="tab" id="techTab">Tech</div>
+            <label for="toggleSwitch" class="toggle-label">Section</label>
             <input type="checkbox" id="toggleSwitch" class="toggle-switch" checked>
         </div>
     </div>
@@ -206,62 +207,104 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-        const tabs = document.querySelectorAll('.tab');
-        const carousel = document.querySelector('.carousel');
-        const carouselItems = document.querySelectorAll('.carousel-item');
-        const toggleSwitch = document.getElementById('toggleSwitch');
-        const cryptoGPTTab = document.getElementById('cryptoGPTTab');
-        const techContainer = document.getElementById('techContainer');
-        const cryptoBotContainer = document.getElementById('cryptoBotContainer');
-        const techItem = document.getElementById('techItem');
-        const cryptoGPTItem = document.getElementById('cryptoBotItem');
+            const tabs = document.querySelectorAll('.tab');
+            const carousel = document.querySelector('.carousel');
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const toggleSwitch = document.getElementById('toggleSwitch');
+            const cryptoGPTTab = document.getElementById('cryptoGPTTab');
+            const techTab = document.getElementById('techTab');
+            const techContainer = document.getElementById('techContainer');
+            const cryptoBotContainer = document.getElementById('cryptoBotContainer');
+            const techItem = document.getElementById('techItem');
+            const cryptoBotItem = document.getElementById('cryptoBotItem');
 
-        function updateCarousel(index) {
-            const itemWidth = carouselItems[0].offsetWidth;
-            const offset = -index * itemWidth;
-            carousel.style.transform = `translateX(${offset}px)`;
-            tabs.forEach(tab => tab.classList.remove('active'));
-            tabs[index].classList.add('active');
-        }
-
-        function adjustCarouselWidth() {
-            const widthPercentage = toggleSwitch.checked ? 83.6 : 100;
-            carouselItems.forEach(item => {
-                item.style.width = `${widthPercentage}%`;
-            });
-
-            techContainer.style.display = toggleSwitch.checked ? 'block' : 'none';
-            const activeIndex = document.querySelector('.tab.active').getAttribute('data-index');
-            updateCarousel(activeIndex);
-        }
-
-        function toggleMiniCarousel(isCryptoGPTActive) {
-            if (isCryptoGPTActive) {
-                cryptoBotContainer.classList.add('active');
-                techContainer.classList.remove('active');
-            } else {
-                techContainer.classList.add('active');
-                cryptoBotContainer.classList.remove('active');
+            function updateCarousel(index) {
+                const itemWidth = carouselItems[0].offsetWidth;
+                const offset = -index * itemWidth;
+                carousel.style.transform = `translateX(${offset}px)`;
+                tabs.forEach(tab => tab.classList.remove('active'));
+                tabs[index].classList.add('active');
             }
-        }
 
-        cryptoGPTTab.addEventListener('click', function () {
-            const isCryptoGPTActive = cryptoBotContainer.classList.contains('active');
-            toggleMiniCarousel(!isCryptoGPTActive);
-        });
+            function adjustCarouselWidth() {
+                const widthPercentage = toggleSwitch.checked ? 86.6 : 100;
+                carouselItems.forEach(item => {
+                    item.style.width = `${widthPercentage}%`;
+                });
 
-        toggleSwitch.addEventListener('change', adjustCarouselWidth);
+                // Ensure containers are visible based on the toggle switch
+                techContainer.style.display = toggleSwitch.checked ? 'block' : 'none';
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const index = parseInt(tab.getAttribute('data-index'));
-                updateCarousel(index);
+                // Ensure the carousel is updated based on the current active tab
+                const activeTab = document.querySelector('.tab.active');
+                const activeIndex = activeTab ? parseInt(activeTab.getAttribute('data-index')) : 0;
+                updateCarousel(activeIndex);
+            }
+
+            function toggleContent(activeTab) {
+                if (toggleSwitch.checked) {
+                    if (activeTab === 'CryptoGPT') {
+                        cryptoBotContainer.classList.add('active');
+                        techContainer.classList.remove('active');
+                        cryptoBotItem.classList.remove('hidden');
+                        techItem.classList.add('hidden');
+                    } else if (activeTab === 'Tech') {
+                        techContainer.classList.add('active');
+                        cryptoBotContainer.classList.remove('active');
+                        techItem.classList.remove('hidden');
+                        cryptoBotItem.classList.add('hidden');
+                    }
+                } else {
+                    // Ensure both items are hidden if toggle is off
+                    cryptoBotItem.classList.add('hidden');
+                    techItem.classList.add('hidden');
+                }
+            }
+
+            cryptoGPTTab.addEventListener('click', function () {
+                if (toggleSwitch.checked) {
+                    toggleContent('CryptoGPT');
+                    cryptoGPTTab.classList.add('active');
+                    techTab.classList.remove('active');
+                }
             });
+
+            techTab.addEventListener('click', function () {
+                if (toggleSwitch.checked) {
+                    toggleContent('Tech');
+                    techTab.classList.add('active');
+                    cryptoGPTTab.classList.remove('active');
+                }
+            });
+
+            // Initial state setup
+            techTab.classList.add('active');
+            cryptoGPTTab.classList.remove('active');
+            toggleContent('Tech'); // Make sure Tech content is shown by default
+
+            // Adjust carousel and content based on the toggle switch state
+            toggleSwitch.addEventListener('change', function () {
+                adjustCarouselWidth();
+                if (!toggleSwitch.checked) {
+                    techContainer.style.display = 'none';
+                    cryptoBotContainer.style.display = 'none';
+                } else {
+                    // Ensure Tech content is visible by default if toggle is on
+                    toggleContent('Tech');
+                }
+            });
+
+            // Handle tab clicks to update the carousel
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const index = parseInt(tab.getAttribute('data-index'));
+                    updateCarousel(index);
+                });
+            });
+
+            // Initial call to set carousel width and visibility
+            adjustCarouselWidth();
         });
-
-        adjustCarouselWidth();
-    });
-
     </script>
 </body>
 </html>
