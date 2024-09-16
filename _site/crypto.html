@@ -115,7 +115,7 @@
             position: absolute;
             top: 0;
             right: 0;
-            width: 100%;
+            width: 150%;
             height: 100%;
             background-color: #fff;
             transition: transform 0.6s ease;
@@ -125,7 +125,7 @@
             position: absolute;
             right: 0;
             top: 0;
-            width: 100%;
+            width: 150%;
             height: 100%;
             display: flex;
             overflow: hidden;
@@ -136,14 +136,14 @@
     
         .mini-carousel-item {
             display: flex;
-            width: 100%;
+            width: 150%;
             height: 100%;
             flex-shrink: 0;
             transition: transform 0.6s ease;
         }
     
         .mini-carousel-item.hidden {
-            transform: translateX(100%); /* Move out of view */
+            transform: translateX(150%); /* Move out of view */
         }
     
         .mini-carousel-item.visible {
@@ -154,7 +154,7 @@
             position: absolute;
             right: 0;
             top: 40px;
-            width: 23.6%;
+            width: 18.6%;
             height: 115%;
             display: none; /* Hidden by default */
         }
@@ -309,8 +309,8 @@
         <div id="cryptoBotContainer" class="fixed-widget-container">
             <div class="mini-carousel-item hidden" id="cryptoBotItem">
     <div id="cryptoBotContainer" class="fixed-widget-container">
-        <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
-        <script src="https://mediafiles.botpress.cloud/c2ba49ac-361a-4ec1-a603-37fea09edf48/webchat/config.js" defer></script>
+        <script src="https://cdn.botpress.cloud/webchat/v2.1/inject.js"></script>
+        <script src="https://mediafiles.botpress.cloud/ada29316-3349-48b1-9f2f-cbd41b37cc43/webchat/v2.1/config.js"></script>
     </div>
 </div>
 
@@ -339,7 +339,7 @@
             }
 
             function adjustCarouselWidth() {
-                const widthPercentage = toggleSwitch.checked ? 87.4 : 100;
+                const widthPercentage = toggleSwitch.checked ? 90.4 : 100;
                 carouselItems.forEach(item => {
                     item.style.width = `${widthPercentage}%`;
                 });
