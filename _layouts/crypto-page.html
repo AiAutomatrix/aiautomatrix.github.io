@@ -224,8 +224,8 @@
             const cryptoGPTTab = document.getElementById('cryptoGPTTab');
             const techTab = document.getElementById('techTab');
             const techContainer = document.getElementById('techContainer');
-            const cryptoBotContainer = document.getElementById('cryptoBotContainer');
             const techItem = document.getElementById('techItem');
+            const cryptoBotContainer = document.getElementById('cryptoBotContainer');
             const cryptoBotItem = document.getElementById('cryptoBotItem');
 
             function updateCarousel(index) {
@@ -242,9 +242,26 @@
                     item.style.width = `${widthPercentage}%`;
                 });
 
-                // Ensure containers are visible based on the toggle switch
-                techContainer.style.display = toggleSwitch.checked ? 'block' : 'none';
-                
+                // Ensure containers are visible based on the toggle switch and active tab
+                if (toggleSwitch.checked) {
+                    // By default, show the techContainer if no tab is active
+                    techContainer.style.display = 'block';
+                    cryptoBotContainer.style.display = 'none';
+                    
+                    // If either CryptoGPT or Tech tab is active, show the respective container
+                    if (cryptoGPTTab.classList.contains('active')) {
+                        techContainer.style.display = 'none';
+                        cryptoBotContainer.style.display = 'block';
+                    } else if (techTab.classList.contains('active')) {
+                        techContainer.style.display = 'block';
+                        cryptoBotContainer.style.display = 'none';
+                    }
+                } else {
+                    // If toggle is off, hide both containers
+                    techContainer.style.display = 'none';
+                    cryptoBotContainer.style.display = 'none';
+                }
+
                 // Ensure the carousel is updated based on the current active tab
                 const activeTab = document.querySelector('.tab.active');
                 const activeIndex = activeTab ? parseInt(activeTab.getAttribute('data-index')) : 0;
