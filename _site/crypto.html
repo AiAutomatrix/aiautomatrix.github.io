@@ -323,7 +323,7 @@
 
         <!-- CryptoGPT Bot (overlaps techContainer when active) -->
         <div id="cryptoBotContainer" class="fixed-widget-container">
-            <!-- crypto/webchat.html -->
+            <!-- crypto/webchat.html (as a snippet) -->
 <div id="cryptoBotItem" class="chat-container">
     <div class="chat-header">CryptoGPT WebChat</div>
     <div class="chat-messages" id="chatMessages"></div>
@@ -332,17 +332,18 @@
       <button onclick="sendMessage()">Send</button>
     </div>
   </div>
+  
   <style>
-    /* Scoped webchat styles */
+    /* Scoped styles for the webchat only */
     #cryptoBotItem {
+      position: relative;
       width: 100%;
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between; /* Push header to top and input to bottom */
       background: #2a2d3a;
       color: white;
+      box-sizing: border-box;
     }
+    /* Header at the top */
     #cryptoBotItem .chat-header {
       background: #404979;
       padding: 15px;
@@ -350,33 +351,28 @@
       font-size: 18px;
       font-weight: bold;
     }
+    /* Chat messages area positioned between header and input */
     #cryptoBotItem .chat-messages {
-      flex: 1;
+      position: absolute;
+      top: 60px;          /* Adjust if header height changes */
+      bottom: 70px;       /* Reserve space for the input */
+      left: 0;
+      right: 0;
       padding: 10px;
       overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      min-height: 0; /* Ensures proper flex behavior */
+      box-sizing: border-box;
     }
-    #cryptoBotItem .message {
-      padding: 10px;
-      margin: 5px;
-      border-radius: 5px;
-      max-width: 80%;
-    }
-    #cryptoBotItem .bot-message {
-      background: #3e4a6b;
-      align-self: flex-start;
-    }
-    #cryptoBotItem .user-message {
-      background: #7681bc;
-      align-self: flex-end;
-    }
+    /* Input area fixed at the bottom */
     #cryptoBotItem .chat-input {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;       /* Fixed height for the input area */
+      background: #323963;
       display: flex;
       padding: 10px;
-      background: #323963;
-      margin-top: auto;  /* Forces the input to the bottom */
+      box-sizing: border-box;
     }
     #cryptoBotItem .chat-input input {
       flex: 1;
@@ -394,24 +390,42 @@
       cursor: pointer;
       border-radius: 5px;
     }
+    /* Message styling */
+    #cryptoBotItem .message {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      max-width: 80%;
+    }
+    #cryptoBotItem .bot-message {
+      background: #3e4a6b;
+      align-self: flex-start;
+    }
+    #cryptoBotItem .user-message {
+      background: #7681bc;
+      align-self: flex-end;
+    }
   </style>
+  
   <script>
     function sendMessage() {
-      let input = document.getElementById("userInput");
-      let message = input.value.trim();
+      const input = document.getElementById("userInput");
+      const message = input.value.trim();
       if (message) {
         addMessage(message, "user-message");
         input.value = "";
+        // Simulate a bot response
         setTimeout(() => addMessage("Processing...", "bot-message"), 1000);
       }
     }
     
     function addMessage(text, className) {
-      let chatBox = document.getElementById("chatMessages");
-      let messageDiv = document.createElement("div");
+      const chatBox = document.getElementById("chatMessages");
+      const messageDiv = document.createElement("div");
       messageDiv.className = "message " + className;
       messageDiv.textContent = text;
       chatBox.appendChild(messageDiv);
+      // Auto-scroll to the bottom of the messages container
       chatBox.scrollTop = chatBox.scrollHeight;
     }
   </script>
