@@ -164,13 +164,18 @@
             right: 0;
             top: 40px;
             width: 18.6%;
-            height: 95.6%; /* Adjusted to fit properly */
+            height: 95.6%; /* Ensures sufficient height */
             display: none;
-            overflow: hidden; /* Prevents overflow issues */
+            overflow: hidden;
+        }
+
+        /* When active, display as flex so inner webchat can flex */
+        #cryptoBotContainer.active {
+            display: flex;
         }
 
     
-        #techContainer.active, #cryptoBotContainer.active {
+        #techContainer.active {
             display: flex;
         }
     </style>
@@ -318,117 +323,104 @@
 
         <!-- CryptoGPT Bot (overlaps techContainer when active) -->
         <div id="cryptoBotContainer" class="fixed-widget-container">
-            <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CryptoGPT WebChat</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #1e1e1e;
-            font-family: Arial, sans-serif;
-        }
-        .chat-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            background: #2a2d3a;
-            color: white;
-        }
-        .chat-header {
-            background: #404979;
-            padding: 15px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .chat-messages {
-            flex: 1;
-            padding: 10px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-        }
-        .message {
-            padding: 10px;
-            margin: 5px;
-            border-radius: 5px;
-            max-width: 80%;
-        }
-        .bot-message {
-            background: #3e4a6b;
-            align-self: flex-start;
-        }
-        .user-message {
-            background: #7681bc;
-            align-self: flex-end;
-        }
-        .chat-input {
-            display: flex;
-            padding: 10px;
-            background: #323963;
-        }
-        .chat-input input {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            outline: none;
-        }
-        .chat-input button {
-            margin-left: 10px;
-            padding: 10px;
-            background: #7681bc;
-            border: none;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
-    <div class="chat-container">
-        <div class="chat-header">CryptoGPT WebChat</div>
-        <div class="chat-messages" id="chatMessages"></div>
-        <div class="chat-input">
-            <input type="text" id="userInput" placeholder="Type a message...">
-            <button onclick="sendMessage()">Send</button>
-        </div>
+            <!-- crypto/webchat.html -->
+<div id="cryptoBotItem" class="chat-container">
+    <div class="chat-header">CryptoGPT WebChat</div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Type a message...">
+      <button onclick="sendMessage()">Send</button>
     </div>
-    <script>
-        function sendMessage() {
-            let input = document.getElementById("userInput");
-            let message = input.value.trim();
-            if (message) {
-                addMessage(message, "user-message");
-                input.value = "";
-                setTimeout(() => addMessage("Processing...", "bot-message"), 1000);
-            }
-        }
-
-        function addMessage(text, className) {
-            let chatBox = document.getElementById("chatMessages");
-            let messageDiv = document.createElement("div");
-            messageDiv.className = "message " + className;
-            messageDiv.textContent = text;
-            chatBox.appendChild(messageDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-    </script>
-</body>
-</html>
-
+  </div>
+  <style>
+    /* Scoped webchat styles */
+    #cryptoBotItem {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* Push header to top and input to bottom */
+      background: #2a2d3a;
+      color: white;
+    }
+    #cryptoBotItem .chat-header {
+      background: #404979;
+      padding: 15px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    #cryptoBotItem .chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      min-height: 0; /* Ensures proper flex behavior */
+    }
+    #cryptoBotItem .message {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      max-width: 80%;
+    }
+    #cryptoBotItem .bot-message {
+      background: #3e4a6b;
+      align-self: flex-start;
+    }
+    #cryptoBotItem .user-message {
+      background: #7681bc;
+      align-self: flex-end;
+    }
+    #cryptoBotItem .chat-input {
+      display: flex;
+      padding: 10px;
+      background: #323963;
+      margin-top: auto;  /* Forces the input to the bottom */
+    }
+    #cryptoBotItem .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+    }
+    #cryptoBotItem .chat-input button {
+      margin-left: 10px;
+      padding: 10px;
+      background: #7681bc;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
+  <script>
+    function sendMessage() {
+      let input = document.getElementById("userInput");
+      let message = input.value.trim();
+      if (message) {
+        addMessage(message, "user-message");
+        input.value = "";
+        setTimeout(() => addMessage("Processing...", "bot-message"), 1000);
+      }
+    }
+    
+    function addMessage(text, className) {
+      let chatBox = document.getElementById("chatMessages");
+      let messageDiv = document.createElement("div");
+      messageDiv.className = "message " + className;
+      messageDiv.textContent = text;
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+  
         </div>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+         document.addEventListener("DOMContentLoaded", function () {
             const tabs = document.querySelectorAll('.tab');
             const carousel = document.querySelector('.carousel');
             const carouselItems = document.querySelectorAll('.carousel-item');
@@ -436,7 +428,6 @@
             const cryptoGPTTab = document.getElementById('cryptoGPTTab');
             const techTab = document.getElementById('techTab');
             const techContainer = document.getElementById('techContainer');
-            const techItem = document.getElementById('techItem');
             const cryptoBotContainer = document.getElementById('cryptoBotContainer');
             const cryptoBotItem = document.getElementById('cryptoBotItem');
 
@@ -454,27 +445,27 @@
                     item.style.width = `${widthPercentage}%`;
                 });
 
-                // Ensure containers are visible based on the toggle switch and active tab
                 if (toggleSwitch.checked) {
-                    // By default, show the techContainer if no tab is active
+                    // Default: show Tech container unless CryptoGPT is active
                     techContainer.style.display = 'block';
                     cryptoBotContainer.style.display = 'none';
-                    
-                    // If either CryptoGPT or Tech tab is active, show the respective container
+
                     if (cryptoGPTTab.classList.contains('active')) {
                         techContainer.style.display = 'none';
                         cryptoBotContainer.style.display = 'block';
+                        cryptoBotItem.style.display = 'block';
                     } else if (techTab.classList.contains('active')) {
                         techContainer.style.display = 'block';
                         cryptoBotContainer.style.display = 'none';
+                        cryptoBotItem.style.display = 'none';
                     }
                 } else {
-                    // If toggle is off, hide both containers
                     techContainer.style.display = 'none';
                     cryptoBotContainer.style.display = 'none';
+                    cryptoBotItem.style.display = 'none';
                 }
 
-                // Ensure the carousel is updated based on the current active tab
+                // Update carousel position
                 const activeTab = document.querySelector('.tab.active');
                 const activeIndex = activeTab ? parseInt(activeTab.getAttribute('data-index')) : 0;
                 updateCarousel(activeIndex);
@@ -486,17 +477,13 @@
                         cryptoBotContainer.classList.add('active');
                         techContainer.classList.remove('active');
                         cryptoBotItem.classList.remove('hidden');
-                        techItem.classList.add('hidden');
                     } else if (activeTab === 'Tech') {
                         techContainer.classList.add('active');
                         cryptoBotContainer.classList.remove('active');
-                        techItem.classList.remove('hidden');
                         cryptoBotItem.classList.add('hidden');
                     }
                 } else {
-                    // Ensure both items are hidden if toggle is off
                     cryptoBotItem.classList.add('hidden');
-                    techItem.classList.add('hidden');
                 }
             }
 
@@ -505,6 +492,7 @@
                     toggleContent('CryptoGPT');
                     cryptoGPTTab.classList.add('active');
                     techTab.classList.remove('active');
+                    adjustCarouselWidth();
                 }
             });
 
@@ -513,27 +501,25 @@
                     toggleContent('Tech');
                     techTab.classList.add('active');
                     cryptoGPTTab.classList.remove('active');
+                    adjustCarouselWidth();
                 }
             });
 
-            // Initial state setup
+            // Initial state: show Tech by default
             techTab.classList.add('active');
             cryptoGPTTab.classList.remove('active');
-            toggleContent('Tech'); // Make sure Tech content is shown by default
+            toggleContent('Tech');
 
-            // Adjust carousel and content based on the toggle switch state
             toggleSwitch.addEventListener('change', function () {
                 adjustCarouselWidth();
                 if (!toggleSwitch.checked) {
                     techContainer.style.display = 'none';
                     cryptoBotContainer.style.display = 'none';
                 } else {
-                    // Ensure Tech content is visible by default if toggle is on
                     toggleContent('Tech');
                 }
             });
 
-            // Handle tab clicks to update the carousel
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
                     const index = parseInt(tab.getAttribute('data-index'));
@@ -541,7 +527,6 @@
                 });
             });
 
-            // Initial call to set carousel width and visibility
             adjustCarouselWidth();
         });
     </script>

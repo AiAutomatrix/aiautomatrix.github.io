@@ -164,13 +164,18 @@
             right: 0;
             top: 40px;
             width: 18.6%;
-            height: 95.6%; /* Adjusted to fit properly */
+            height: 95.6%; /* Ensures sufficient height */
             display: none;
-            overflow: hidden; /* Prevents overflow issues */
+            overflow: hidden;
+        }
+
+        /* When active, display as flex so inner webchat can flex */
+        #cryptoBotContainer.active {
+            display: flex;
         }
 
     
-        #techContainer.active, #cryptoBotContainer.active {
+        #techContainer.active {
             display: flex;
         }
     </style>
@@ -227,7 +232,7 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+         document.addEventListener("DOMContentLoaded", function () {
             const tabs = document.querySelectorAll('.tab');
             const carousel = document.querySelector('.carousel');
             const carouselItems = document.querySelectorAll('.carousel-item');
@@ -235,7 +240,6 @@
             const cryptoGPTTab = document.getElementById('cryptoGPTTab');
             const techTab = document.getElementById('techTab');
             const techContainer = document.getElementById('techContainer');
-            const techItem = document.getElementById('techItem');
             const cryptoBotContainer = document.getElementById('cryptoBotContainer');
             const cryptoBotItem = document.getElementById('cryptoBotItem');
 
@@ -253,27 +257,27 @@
                     item.style.width = `${widthPercentage}%`;
                 });
 
-                // Ensure containers are visible based on the toggle switch and active tab
                 if (toggleSwitch.checked) {
-                    // By default, show the techContainer if no tab is active
+                    // Default: show Tech container unless CryptoGPT is active
                     techContainer.style.display = 'block';
                     cryptoBotContainer.style.display = 'none';
-                    
-                    // If either CryptoGPT or Tech tab is active, show the respective container
+
                     if (cryptoGPTTab.classList.contains('active')) {
                         techContainer.style.display = 'none';
                         cryptoBotContainer.style.display = 'block';
+                        cryptoBotItem.style.display = 'block';
                     } else if (techTab.classList.contains('active')) {
                         techContainer.style.display = 'block';
                         cryptoBotContainer.style.display = 'none';
+                        cryptoBotItem.style.display = 'none';
                     }
                 } else {
-                    // If toggle is off, hide both containers
                     techContainer.style.display = 'none';
                     cryptoBotContainer.style.display = 'none';
+                    cryptoBotItem.style.display = 'none';
                 }
 
-                // Ensure the carousel is updated based on the current active tab
+                // Update carousel position
                 const activeTab = document.querySelector('.tab.active');
                 const activeIndex = activeTab ? parseInt(activeTab.getAttribute('data-index')) : 0;
                 updateCarousel(activeIndex);
@@ -285,17 +289,13 @@
                         cryptoBotContainer.classList.add('active');
                         techContainer.classList.remove('active');
                         cryptoBotItem.classList.remove('hidden');
-                        techItem.classList.add('hidden');
                     } else if (activeTab === 'Tech') {
                         techContainer.classList.add('active');
                         cryptoBotContainer.classList.remove('active');
-                        techItem.classList.remove('hidden');
                         cryptoBotItem.classList.add('hidden');
                     }
                 } else {
-                    // Ensure both items are hidden if toggle is off
                     cryptoBotItem.classList.add('hidden');
-                    techItem.classList.add('hidden');
                 }
             }
 
@@ -304,6 +304,7 @@
                     toggleContent('CryptoGPT');
                     cryptoGPTTab.classList.add('active');
                     techTab.classList.remove('active');
+                    adjustCarouselWidth();
                 }
             });
 
@@ -312,27 +313,25 @@
                     toggleContent('Tech');
                     techTab.classList.add('active');
                     cryptoGPTTab.classList.remove('active');
+                    adjustCarouselWidth();
                 }
             });
 
-            // Initial state setup
+            // Initial state: show Tech by default
             techTab.classList.add('active');
             cryptoGPTTab.classList.remove('active');
-            toggleContent('Tech'); // Make sure Tech content is shown by default
+            toggleContent('Tech');
 
-            // Adjust carousel and content based on the toggle switch state
             toggleSwitch.addEventListener('change', function () {
                 adjustCarouselWidth();
                 if (!toggleSwitch.checked) {
                     techContainer.style.display = 'none';
                     cryptoBotContainer.style.display = 'none';
                 } else {
-                    // Ensure Tech content is visible by default if toggle is on
                     toggleContent('Tech');
                 }
             });
 
-            // Handle tab clicks to update the carousel
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
                     const index = parseInt(tab.getAttribute('data-index'));
@@ -340,7 +339,6 @@
                 });
             });
 
-            // Initial call to set carousel width and visibility
             adjustCarouselWidth();
         });
     </script>
