@@ -343,7 +343,7 @@
       color: white;
       box-sizing: border-box;
     }
-    /* Header at the top */
+    /* Header */
     #cryptoBotItem .chat-header {
       background: #404979;
       padding: 15px;
@@ -351,7 +351,7 @@
       font-size: 18px;
       font-weight: bold;
     }
-    /* Chat messages area positioned between header and input */
+    /* Chat messages area (between header and input) */
     #cryptoBotItem .chat-messages {
       position: absolute;
       top: 60px;          /* Adjust if header height changes */
@@ -390,22 +390,21 @@
       cursor: pointer;
       border-radius: 5px;
     }
-    /* Message styling */
+    /* Message styling: bubbles adjust to content size */
     #cryptoBotItem .message {
+      display: inline-block;
       padding: 12px;
       margin: 8px;
       border-radius: 5px;
       max-width: 80%;
       line-height: 1.4;
+      word-wrap: break-word;
     }
-    /* Bot messages on the left, text left-aligned.
-       To center the bot's message block within its available space, you can add margin adjustments. */
+    /* Bot messages on the left, text left-aligned */
     #cryptoBotItem .bot-message {
       background: #3e4a6b;
       align-self: flex-start;
       text-align: left;
-      /* Uncomment the next line if you want the bot's messages to be centered in their container */
-      /* margin-left: auto; margin-right: auto; width: fit-content; */
     }
     /* User messages on the right, text right-aligned */
     #cryptoBotItem .user-message {
@@ -436,6 +435,14 @@
       // Auto-scroll to the bottom of the messages container
       chatBox.scrollTop = chatBox.scrollHeight;
     }
+  
+    // Listen for the Enter key on the input field
+    document.getElementById("userInput").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        sendMessage();
+      }
+    });
   </script>
   
         </div>
