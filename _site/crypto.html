@@ -323,7 +323,7 @@
 
         <!-- CryptoGPT Bot (overlaps techContainer when active) -->
         <div id="cryptoBotContainer" class="fixed-widget-container">
-            <!-- crypto/webchat.html (as a snippet) -->
+            <!-- crypto/webchat.html (snippet) -->
 <div id="cryptoBotItem" class="chat-container">
     <div class="chat-header">CryptoGPT WebChat</div>
     <div class="chat-messages" id="chatMessages"></div>
@@ -392,18 +392,26 @@
     }
     /* Message styling */
     #cryptoBotItem .message {
-      padding: 10px;
-      margin: 5px;
+      padding: 12px;
+      margin: 8px;
       border-radius: 5px;
       max-width: 80%;
+      line-height: 1.4;
     }
+    /* Bot messages on the left, text left-aligned.
+       To center the bot's message block within its available space, you can add margin adjustments. */
     #cryptoBotItem .bot-message {
       background: #3e4a6b;
       align-self: flex-start;
+      text-align: left;
+      /* Uncomment the next line if you want the bot's messages to be centered in their container */
+      /* margin-left: auto; margin-right: auto; width: fit-content; */
     }
+    /* User messages on the right, text right-aligned */
     #cryptoBotItem .user-message {
       background: #7681bc;
       align-self: flex-end;
+      text-align: right;
     }
   </style>
   
@@ -414,7 +422,7 @@
       if (message) {
         addMessage(message, "user-message");
         input.value = "";
-        // Simulate a bot response
+        // Simulate a bot response after a short delay
         setTimeout(() => addMessage("Processing...", "bot-message"), 1000);
       }
     }
