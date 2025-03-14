@@ -307,22 +307,111 @@
 
         <!-- CryptoGPT Bot (overlaps techContainer when active) -->
         <div id="cryptoBotContainer" class="fixed-widget-container">
-            <div class="mini-carousel-item hidden" id="cryptoBotItem">
-    <div id="cryptoBotContainer" class="fixed-widget-container">  
-        
-        <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
-        <script src="https://files.bpcontent.cloud/2024/10/22/20/20241022204608-KWP16HEH.js"></script>
-    
-        <script>
-            window.botpressWebChat.onEvent(
-                function () {
-                    window.botpressWebChat.sendEvent({ type: "show" });
-                },
-                ["LIFECYCLE.LOADED"]
-            );
-        </script>
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoGPT WebChat</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1e1e1e;
+            font-family: Arial, sans-serif;
+        }
+        .chat-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: #2a2d3a;
+            color: white;
+        }
+        .chat-header {
+            background: #404979;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .message {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+        .bot-message {
+            background: #3e4a6b;
+            align-self: flex-start;
+        }
+        .user-message {
+            background: #7681bc;
+            align-self: flex-end;
+        }
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            background: #323963;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+        .chat-input button {
+            margin-left: 10px;
+            padding: 10px;
+            background: #7681bc;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">CryptoGPT WebChat</div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
     </div>
-</div>
+    <script>
+        function sendMessage() {
+            let input = document.getElementById("userInput");
+            let message = input.value.trim();
+            if (message) {
+                addMessage(message, "user-message");
+                input.value = "";
+                setTimeout(() => addMessage("Processing...", "bot-message"), 1000);
+            }
+        }
+
+        function addMessage(text, className) {
+            let chatBox = document.getElementById("chatMessages");
+            let messageDiv = document.createElement("div");
+            messageDiv.className = "message " + className;
+            messageDiv.textContent = text;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
 
         </div>
     </div>
