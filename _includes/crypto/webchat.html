@@ -26,7 +26,7 @@
       font-size: 18px;
       font-weight: bold;
     }
-    /* Chat messages area (between header and input) */
+    /* Chat messages area positioned between header and input */
     #cryptoBotItem .chat-messages {
       position: absolute;
       top: 60px;          /* Adjust if header height changes */
@@ -36,6 +36,9 @@
       padding: 10px;
       overflow-y: auto;
       box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* Default: align messages to left */
     }
     /* Input area fixed at the bottom */
     #cryptoBotItem .chat-input {
@@ -65,27 +68,26 @@
       cursor: pointer;
       border-radius: 5px;
     }
-    /* Message styling: bubbles adjust to content size */
+    /* Message bubble styling */
     #cryptoBotItem .message {
-      display: inline-block;
-      padding: 12px;
-      margin: 8px;
-      border-radius: 5px;
+      width: auto;
       max-width: 80%;
+      padding: 12px;
+      margin: 8px 0; /* vertical spacing to force new lines */
+      border-radius: 5px;
       line-height: 1.4;
       word-wrap: break-word;
     }
-    /* Bot messages on the left, text left-aligned */
+    /* Bot messages: left-aligned */
     #cryptoBotItem .bot-message {
       background: #3e4a6b;
-      align-self: flex-start;
       text-align: left;
     }
-    /* User messages on the right, text right-aligned */
+    /* User messages: right-aligned */
     #cryptoBotItem .user-message {
       background: #7681bc;
-      align-self: flex-end;
       text-align: right;
+      align-self: flex-end;
     }
   </style>
   
