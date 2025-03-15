@@ -1,144 +1,148 @@
 <!-- crypto/webchat.html -->
 <div id="cryptoBotItem" class="chat-container">
-  <div class="chat-header">CryptoGPT WebChat</div>
-  <div class="chat-messages" id="chatMessages"></div>
-  <div class="chat-input">
-    <input type="text" id="userInput" placeholder="Type a message...">
-    <button onclick="sendMessage()">Send</button>
+    <div class="chat-header">CryptoGPT WebChat</div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Type a message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
   </div>
-</div>
-
-<style>
-  /* Scoped styles for the webchat only */
-  #cryptoBotItem {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: #2a2d3a;
-      color: white;
-      box-sizing: border-box;
-  }
-  /* Header */
-  #cryptoBotItem .chat-header {
-      background: #404979;
-      padding: 15px;
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-  }
-  /* Chat messages area positioned between header and input */
-  #cryptoBotItem .chat-messages {
-      position: absolute;
-      top: 60px;          /* Adjust if header height changes */
-      bottom: 70px;       /* Reserve space for the input */
-      left: 0;
-      right: 0;
-      padding: 10px;
-      overflow-y: auto;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start; /* Default: align messages to left */
-  }
-  /* Input area fixed at the bottom */
-  #cryptoBotItem .chat-input {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 60px;       /* Fixed height for the input area */
-      background: #323963;
-      display: flex;
-      padding: 10px;
-      box-sizing: border-box;
-  }
-  #cryptoBotItem .chat-input input {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      outline: none;
-  }
-  #cryptoBotItem .chat-input button {
-      margin-left: 10px;
-      padding: 10px;
-      background: #7681bc;
-      border: none;
-      color: white;
-      cursor: pointer;
-      border-radius: 5px;
-  }
-  /* Message bubble styling */
-  #cryptoBotItem .message {
-      width: auto;
-      max-width: 80%;
-      padding: 12px;
-      margin: 8px 0; /* vertical spacing to force new lines */
-      border-radius: 5px;
-      line-height: 1.4;
-      word-wrap: break-word;
-  }
-  /* Bot messages: left-aligned */
-  #cryptoBotItem .bot-message {
-      background: #3e4a6b;
-      text-align: left;
-  }
-  /* User messages: right-aligned */
-  #cryptoBotItem .user-message {
-      background: #7681bc;
-      text-align: right;
-      align-self: flex-end;
-  }
-</style>
-
-<script>
-  async function sendMessage() {
-      const input = document.getElementById("userInput");
-      const message = input.value.trim();
-      if (message) {
-          addMessage(message, "user-message");
-          input.value = "";
-
-          try {
-              // Send message to AWS Lambda
-              const response = await fetch('https://webhook.botpress.cloud/9e06e1d2-0e6b-4272-8112-203dc531f77a', {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({ text: message }) // Send the user's message to AWS Lambda
-              });
-
-              const data = await response.json();
-              if (response.ok && data.message) {
-                  // If the response is successful, display the bot response
-                  addMessage(data.message, "bot-message");
-              } else {
-                  // If there's no message, show an error
-                  addMessage("Sorry, I couldn't understand that.", "bot-message");
-              }
-          } catch (error) {
-              console.error("Error sending message:", error);
-              addMessage("There was an error processing your message.", "bot-message");
-          }
-      }
-  }
-
-  function addMessage(text, className) {
-      const chatBox = document.getElementById("chatMessages");
-      const messageDiv = document.createElement("div");
-      messageDiv.className = "message " + className;
-      messageDiv.textContent = text;
-      chatBox.appendChild(messageDiv);
-      // Auto-scroll to the bottom of the messages container
-      chatBox.scrollTop = chatBox.scrollHeight;
-  }
-
-  // Listen for the Enter key on the input field
-  document.getElementById("userInput").addEventListener("keydown", function(event) {
-      if (event.key === "Enter") {
-          event.preventDefault();
-          sendMessage();
-      }
-  });
-</script>
+  
+  <style>
+    /* Scoped styles for the webchat only */
+    #cryptoBotItem {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: #2a2d3a;
+        color: white;
+        box-sizing: border-box;
+    }
+    /* Header */
+    #cryptoBotItem .chat-header {
+        background: #404979;
+        padding: 15px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    /* Chat messages area positioned between header and input */
+    #cryptoBotItem .chat-messages {
+        position: absolute;
+        top: 60px;          /* Adjust if header height changes */
+        bottom: 70px;       /* Reserve space for the input */
+        left: 0;
+        right: 0;
+        padding: 10px;
+        overflow-y: auto;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Default: align messages to left */
+    }
+    /* Input area fixed at the bottom */
+    #cryptoBotItem .chat-input {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;       /* Fixed height for the input area */
+        background: #323963;
+        display: flex;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    #cryptoBotItem .chat-input input {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+    }
+    #cryptoBotItem .chat-input button {
+        margin-left: 10px;
+        padding: 10px;
+        background: #7681bc;
+        border: none;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    /* Message bubble styling */
+    #cryptoBotItem .message {
+        width: auto;
+        max-width: 80%;
+        padding: 12px;
+        margin: 8px 0; /* vertical spacing to force new lines */
+        border-radius: 5px;
+        line-height: 1.4;
+        word-wrap: break-word;
+    }
+    /* Bot messages: left-aligned */
+    #cryptoBotItem .bot-message {
+        background: #3e4a6b;
+        text-align: left;
+    }
+    /* User messages: right-aligned */
+    #cryptoBotItem .user-message {
+        background: #7681bc;
+        text-align: right;
+        align-self: flex-end;
+    }
+  </style>
+  
+  <script>
+    async function sendMessage() {
+        const input = document.getElementById("userInput");
+        const message = input.value.trim();
+        if (message) {
+            addMessage(message, "user-message");
+            input.value = "";
+  
+            try {
+                // Send message to AWS Lambda
+                const response = await fetch('https://webhook.botpress.cloud/9e06e1d2-0e6b-4272-8112-203dc531f77a', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        text: message,
+                        client_id: "a19faf7c-1de5-415a-aece-524d36c075e9"  // Include your Botpress client ID
+                    })
+                });
+  
+                const data = await response.json();
+                if (response.ok && data.message) {
+                    // If the response is successful, display the bot response
+                    addMessage(data.message, "bot-message");
+                } else {
+                    // If there's no message, show an error
+                    addMessage("Sorry, I couldn't understand that.", "bot-message");
+                }
+            } catch (error) {
+                console.error("Error sending message:", error);
+                addMessage("There was an error processing your message.", "bot-message");
+            }
+        }
+    }
+  
+    function addMessage(text, className) {
+        const chatBox = document.getElementById("chatMessages");
+        const messageDiv = document.createElement("div");
+        messageDiv.className = "message " + className;
+        messageDiv.textContent = text;
+        chatBox.appendChild(messageDiv);
+        // Auto-scroll to the bottom of the messages container
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  
+    // Listen for the Enter key on the input field
+    document.getElementById("userInput").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            sendMessage();
+        }
+    });
+  </script>
+  
