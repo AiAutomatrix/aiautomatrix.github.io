@@ -424,8 +424,6 @@
   </div>
 
   <script>
-    const CLIENT_ID = "a19faf7c-1de5-415a-aece-524d36c075e9"; // Your Botpress Client ID
-
     // Function to send message to Botpress via Webchat event
     function sendMessage() {
       const input = document.getElementById("userInput");
@@ -436,13 +434,10 @@
         addMessage(message, "user-message");
         input.value = "";  // Clear the input field
 
-        // Trigger Botpress event with user message
-        BPWebChat.sendEvent({
+        // Send the event to Botpress Webchat with user message
+        window.botpressWebChat.sendEvent({
           type: 'text',
-          text: message,
-          payload: {
-            client_id: CLIENT_ID
-          }
+          text: message
         });
       }
     }
@@ -473,9 +468,12 @@
     // Initialize the Botpress Webchat client
     window.botpressWebChat.init({
       botId: 'your-bot-id', // Use your bot ID here
-      clientId: CLIENT_ID, // Use your Botpress Client ID here
       hostUrl: 'https://your-botpress-url.com', // Replace with the URL of your Botpress instance
-      // Optional customizations can go here
+      showCloseButton: true,
+      onMessagePosted: function(event) {
+        // Automatically display bot messages here
+        addMessage(event.text, "bot-message");
+      }
     });
   </script>
 </body>
