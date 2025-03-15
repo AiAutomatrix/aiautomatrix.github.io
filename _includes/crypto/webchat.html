@@ -99,61 +99,26 @@
   </div>
 
   <script>
-    const BOTPRESS_WEBHOOK = "https://webhook.botpress.cloud/9e06e1d2-0e6b-4272-8112-203dc531f77a";
-    const CLIENT_ID = "a19faf7c-1de5-415a-aece-524d36c075e9";
+    const CLIENT_ID = "a19faf7c-1de5-415a-aece-524d36c075e9"; // Your Botpress Client ID
 
-    // Main function that sends the user message to Botpress and waits for a response.
-    async function sendMessage() {
+    // Function to send message to Botpress via Webchat event
+    function sendMessage() {
       const input = document.getElementById("userInput");
       const message = input.value.trim();
 
       if (message) {
-        console.log("User message:", message); // Logs user input to the console
+        console.log("User message:", message); // Log user message
         addMessage(message, "user-message");
         input.value = "";  // Clear the input field
 
-        try {
-          // Send the message to Botpress and wait for a response
-          const botResponse = await sendToBotpress(message);
-          console.log("Response from Botpress:", botResponse); // Logs Botpress response to the console
-
-          // Use Botpress response for the bot message. Customize as needed.
-          const botMessage = botResponse.message || "Response received!";
-          addMessage(botMessage, "bot-message");
-        } catch (error) {
-          console.error("Error sending to Botpress:", error); // Logs error to the console
-          addMessage("Error processing request", "bot-message");
-        }
-      }
-    }
-
-    // Function to send data to Botpress webhook
-    async function sendToBotpress(userMessage) {
-      const payload = {
-        client_id: CLIENT_ID,
-        text: userMessage
-      };
-
-      try {
-        const response = await fetch(BOTPRESS_WEBHOOK, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(payload)
+        // Trigger Botpress event with user message
+        BPWebChat.sendEvent({
+          type: 'text',
+          text: message,
+          payload: {
+            client_id: CLIENT_ID
+          }
         });
-
-        // Check if the response is OK
-        if (!response.ok) {
-          throw new Error(`Error: ${response.statusText}`);
-        }
-
-        // Parse and return the JSON response
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.error("Fetch error:", error);
-        throw error;
       }
     }
 
@@ -174,6 +139,18 @@
         event.preventDefault();
         sendMessage();
       }
+    });
+  </script>
+
+  <!-- Include the Botpress Webchat SDK -->
+  <script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
+  <script>
+    // Initialize the Botpress Webchat client
+    window.botpressWebChat.init({
+      botId: 'your-bot-id', // Use your bot ID here
+      clientId: CLIENT_ID, // Use your Botpress Client ID here
+      hostUrl: 'https://your-botpress-url.com', // Replace with the URL of your Botpress instance
+      // Optional customizations can go here
     });
   </script>
 </body>
