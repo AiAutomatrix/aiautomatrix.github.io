@@ -324,21 +324,19 @@
         <!-- CryptoGPT Bot (overlaps techContainer when active) -->
         <div id="cryptoBotContainer" class="fixed-widget-container">
             <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
   <title>CryptoGPT WebChat</title>
   <style>
     /* Scoped styles for the webchat only */
     #cryptoBotItem {
       position: relative;
       width: 100%;
-      height: 100vh;
+      height: 100%;
       background: #2a2d3a;
       color: white;
       box-sizing: border-box;
-      font-family: sans-serif;
     }
     /* Header */
     #cryptoBotItem .chat-header {
@@ -422,57 +420,67 @@
       <button onclick="sendMessage()">Send</button>
     </div>
   </div>
-
+  
   <script>
-    // Function to send message to Botpress via Webchat event
     function sendMessage() {
       const input = document.getElementById("userInput");
       const message = input.value.trim();
-
+      
       if (message) {
-        console.log("User message:", message); // Log user message
+        // Log user message to browser console
+        console.log("User message:", message);
+        // Display user message in chat
         addMessage(message, "user-message");
-        input.value = "";  // Clear the input field
-
-        // Send the event to Botpress Webchat with user message
-        window.botpressWebChat.sendEvent({
-          type: 'text',
-          text: message
-        });
+        // Send the user message to AWS Lambda
+        sendToAWS(message, "Processing...");
+        // Clear input field
+        input.value = "";
+        
+        // Simulate a bot response after a short delay
+        setTimeout(() => {
+          const botMessage = "Processing...";
+          console.log("Bot message:", botMessage);
+          addMessage(botMessage, "bot-message");
+          // Send the bot response to AWS Lambda
+          sendToAWS(message, botMessage);
+        }, 1000);
       }
     }
 
-    // Function to add a message to the chat interface
+    // Function to send data to your AWS Lambda function
+    function sendToAWS(userMessage, botMessage) {
+      const url = "https://6wl4d2ekjsvknq5l5xzvdanj7y0syewv.lambda-url.us-east-1.on.aws/";
+      
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userMessage: userMessage, botMessage: botMessage })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Response from AWS Lambda:", data);
+      })
+      .catch(error => {
+        console.error("Error sending to AWS Lambda:", error);
+      });
+    }
+    
+    // Function to add messages to the chat UI
     function addMessage(text, className) {
       const chatBox = document.getElementById("chatMessages");
       const messageDiv = document.createElement("div");
       messageDiv.className = "message " + className;
       messageDiv.textContent = text;
       chatBox.appendChild(messageDiv);
-      // Auto-scroll to the bottom of the messages container
+      // Auto-scroll to the bottom
       chatBox.scrollTop = chatBox.scrollHeight;
     }
-
+    
     // Listen for the Enter key on the input field
     document.getElementById("userInput").addEventListener("keydown", function(event) {
       if (event.key === "Enter") {
         event.preventDefault();
         sendMessage();
-      }
-    });
-  </script>
-
-  <!-- Include the Botpress Webchat SDK -->
-  <script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
-  <script>
-    // Initialize the Botpress Webchat client
-    window.botpressWebChat.init({
-      botId: 'your-bot-id', // Use your bot ID here
-      hostUrl: 'https://your-botpress-url.com', // Replace with the URL of your Botpress instance
-      showCloseButton: true,
-      onMessagePosted: function(event) {
-        // Automatically display bot messages here
-        addMessage(event.text, "bot-message");
       }
     });
   </script>
