@@ -323,174 +323,186 @@
 
         <!-- CryptoGPT Bot (overlaps techContainer when active) -->
         <div id="cryptoBotContainer" class="fixed-widget-container">
-            <div id="cryptoBotItem" class="chat-container">
-  <div class="chat-header">CryptoGPT WebChat</div>
-  <div class="chat-messages" id="chatMessages"></div>
-  <div class="chat-input">
-    <input type="text" id="userInput" placeholder="Type a message...">
-    <button onclick="sendMessage()">Send</button>
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CryptoGPT WebChat</title>
+  <style>
+    /* Scoped styles for the webchat only */
+    #cryptoBotItem {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: #2a2d3a;
+      color: white;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    /* Header */
+    #cryptoBotItem .chat-header {
+      background: #404979;
+      padding: 15px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    /* Chat messages area positioned between header and input */
+    #cryptoBotItem .chat-messages {
+      position: absolute;
+      top: 60px;
+      bottom: 70px;
+      left: 0;
+      right: 0;
+      padding: 10px;
+      overflow-y: auto;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    /* Input area fixed at the bottom */
+    #cryptoBotItem .chat-input {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #323963;
+      display: flex;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    #cryptoBotItem .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+    }
+    #cryptoBotItem .chat-input button {
+      margin-left: 10px;
+      padding: 10px;
+      background: #7681bc;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    /* Message bubble styling */
+    #cryptoBotItem .message {
+      width: auto;
+      max-width: 80%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 5px;
+      line-height: 1.4;
+      word-wrap: break-word;
+    }
+    /* Bot messages: left-aligned */
+    #cryptoBotItem .bot-message {
+      background: #3e4a6b;
+      text-align: left;
+    }
+    /* User messages: right-aligned */
+    #cryptoBotItem .user-message {
+      background: #7681bc;
+      text-align: right;
+      align-self: flex-end;
+    }
+  </style>
+</head>
+<body>
+  <div id="cryptoBotItem" class="chat-container">
+    <div class="chat-header">CryptoGPT WebChat</div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Type a message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
   </div>
-</div>
 
-<style>
-  /* Scoped styles for the webchat only */
-  #cryptoBotItem {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: #2a2d3a;
-    color: white;
-    box-sizing: border-box;
-  }
-  /* Header */
-  #cryptoBotItem .chat-header {
-    background: #404979;
-    padding: 15px;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  /* Chat messages area positioned between header and input */
-  #cryptoBotItem .chat-messages {
-    position: absolute;
-    top: 60px;
-    bottom: 70px;
-    left: 0;
-    right: 0;
-    padding: 10px;
-    overflow-y: auto;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  /* Input area fixed at the bottom */
-  #cryptoBotItem .chat-input {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background: #323963;
-    display: flex;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-  #cryptoBotItem .chat-input input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-  }
-  #cryptoBotItem .chat-input button {
-    margin-left: 10px;
-    padding: 10px;
-    background: #7681bc;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  /* Message bubble styling */
-  #cryptoBotItem .message {
-    width: auto;
-    max-width: 80%;
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 5px;
-    line-height: 1.4;
-    word-wrap: break-word;
-  }
-  /* Bot messages: left-aligned */
-  #cryptoBotItem .bot-message {
-    background: #3e4a6b;
-    text-align: left;
-  }
-  /* User messages: right-aligned */
-  #cryptoBotItem .user-message {
-    background: #7681bc;
-    text-align: right;
-    align-self: flex-end;
-  }
-</style>
+  <script>
+    const BOTPRESS_WEBHOOK = "https://webhook.botpress.cloud/9e06e1d2-0e6b-4272-8112-203dc531f77a";
+    const CLIENT_ID = "a19faf7c-1de5-415a-aece-524d36c075e9";
 
-<script>
-  function sendMessage() {
-    const input = document.getElementById("userInput");
-    const message = input.value.trim();
-    
-    if (message) {
-        // Log user message to the browser console
-        console.log("User message:", message);
+    // Main function that sends the user message to Botpress and waits for a response.
+    async function sendMessage() {
+      const input = document.getElementById("userInput");
+      const message = input.value.trim();
 
-        // Display user message in chat
+      if (message) {
+        console.log("User message:", message); // Logs user input to the console
         addMessage(message, "user-message");
+        input.value = "";  // Clear the input field
 
-        // Send the user message to the AWS API
-        sendToAWS(message, "Processing...");
+        try {
+          // Send the message to Botpress and wait for a response
+          const botResponse = await sendToBotpress(message);
+          console.log("Response from Botpress:", botResponse); // Logs Botpress response to the console
 
-        // Clear input field
-        input.value = "";
-
-        // Simulate a bot response after a short delay
-        setTimeout(() => {
-            const botMessage = "Processing..."; 
-
-            // Log bot response to the browser console
-            console.log("Bot message:", botMessage);
-            
-            // Display bot message in chat
-            addMessage(botMessage, "bot-message");
-
-            // Send the bot message to the AWS API
-            sendToAWS(message, botMessage);
-        }, 1000);
+          // Use Botpress response for the bot message. Customize as needed.
+          const botMessage = botResponse.message || "Response received!";
+          addMessage(botMessage, "bot-message");
+        } catch (error) {
+          console.error("Error sending to Botpress:", error); // Logs error to the console
+          addMessage("Error processing request", "bot-message");
+        }
+      }
     }
-  }
 
-  // Function to send data to AWS Lambda function
-  function sendToAWS(userMessage, botMessage) {
-    const url = "https://6extk575r5yuh5zhmvmqpihuam0ipktc.lambda-url.us-east-1.on.aws/";
+    // Function to send data to Botpress webhook
+    async function sendToBotpress(userMessage) {
+      const payload = {
+        client_id: CLIENT_ID,
+        text: userMessage
+      };
 
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            userMessage: userMessage,
-            botMessage: botMessage
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Response from AWS Lambda:", data);
-    })
-    .catch(error => {
-        console.error("Error sending to AWS Lambda:", error);
+      try {
+        const response = await fetch(BOTPRESS_WEBHOOK, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        // Check if the response is OK
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+
+        // Parse and return the JSON response
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error("Fetch error:", error);
+        throw error;
+      }
+    }
+
+    // Function to add a message to the chat interface
+    function addMessage(text, className) {
+      const chatBox = document.getElementById("chatMessages");
+      const messageDiv = document.createElement("div");
+      messageDiv.className = "message " + className;
+      messageDiv.textContent = text;
+      chatBox.appendChild(messageDiv);
+      // Auto-scroll to the bottom of the messages container
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Listen for the Enter key on the input field
+    document.getElementById("userInput").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        sendMessage();
+      }
     });
-  }
-  
-  function addMessage(text, className) {
-    const chatBox = document.getElementById("chatMessages");
-    const messageDiv = document.createElement("div");
-    messageDiv.className = "message " + className;
-    messageDiv.textContent = text;
-    chatBox.appendChild(messageDiv);
-    // Auto-scroll to the bottom of the messages container
-    chatBox.scrollTop = chatBox.scrollHeight;
-  }
-
-  // Listen for the Enter key on the input field
-  document.getElementById("userInput").addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      sendMessage();
-    }
-  });
-</script>
-
+  </script>
+</body>
+</html>
 
         </div>
     </div>
