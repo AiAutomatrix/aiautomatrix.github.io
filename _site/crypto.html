@@ -323,169 +323,165 @@
 
         <!-- CryptoGPT Bot (overlaps techContainer when active) -->
         <div id="cryptoBotContainer" class="fixed-widget-container">
-            <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>CryptoGPT WebChat</title>
-  <style>
-    /* Scoped styles for the webchat only */
-    #cryptoBotItem {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: #2a2d3a;
-      color: white;
-      box-sizing: border-box;
-    }
-    /* Header */
-    #cryptoBotItem .chat-header {
-      background: #404979;
-      padding: 15px;
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-    }
-    /* Chat messages area positioned between header and input */
-    #cryptoBotItem .chat-messages {
-      position: absolute;
-      top: 60px;
-      bottom: 70px;
-      left: 0;
-      right: 0;
-      padding: 10px;
-      overflow-y: auto;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    /* Input area fixed at the bottom */
-    #cryptoBotItem .chat-input {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      background: #323963;
-      display: flex;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-    #cryptoBotItem .chat-input input {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      outline: none;
-    }
-    #cryptoBotItem .chat-input button {
-      margin-left: 10px;
-      padding: 10px;
-      background: #7681bc;
-      border: none;
-      color: white;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    /* Message bubble styling */
-    #cryptoBotItem .message {
-      width: auto;
-      max-width: 80%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 5px;
-      line-height: 1.4;
-      word-wrap: break-word;
-    }
-    /* Bot messages: left-aligned */
-    #cryptoBotItem .bot-message {
-      background: #3e4a6b;
-      text-align: left;
-    }
-    /* User messages: right-aligned */
-    #cryptoBotItem .user-message {
-      background: #7681bc;
-      text-align: right;
-      align-self: flex-end;
-    }
-  </style>
-</head>
-<body>
-  <div id="cryptoBotItem" class="chat-container">
-    <div class="chat-header">CryptoGPT WebChat</div>
-    <div class="chat-messages" id="chatMessages"></div>
-    <div class="chat-input">
-      <input type="text" id="userInput" placeholder="Type a message...">
-      <button onclick="sendMessage()">Send</button>
-    </div>
+            <div id="cryptoBotItem" class="chat-container">
+  <div class="chat-header">CryptoGPT WebChat</div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-input">
+    <input type="text" id="userInput" placeholder="Type a message...">
+    <button onclick="sendMessage()">Send</button>
   </div>
-  
-  <script>
-    function sendMessage() {
+</div>
+
+<style>
+  /* Scoped styles for the webchat only */
+  #cryptoBotItem {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #2a2d3a;
+    color: white;
+    box-sizing: border-box;
+  }
+  /* Header */
+  #cryptoBotItem .chat-header {
+    background: #404979;
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  /* Chat messages area positioned between header and input */
+  #cryptoBotItem .chat-messages {
+    position: absolute;
+    top: 60px;
+    bottom: 70px;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  /* Input area fixed at the bottom */
+  #cryptoBotItem .chat-input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: #323963;
+    display: flex;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  #cryptoBotItem .chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+  }
+  #cryptoBotItem .chat-input button {
+    margin-left: 10px;
+    padding: 10px;
+    background: #7681bc;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  /* Message bubble styling */
+  #cryptoBotItem .message {
+    width: auto;
+    max-width: 80%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 5px;
+    line-height: 1.4;
+    word-wrap: break-word;
+  }
+  /* Bot messages: left-aligned */
+  #cryptoBotItem .bot-message {
+    background: #3e4a6b;
+    text-align: left;
+  }
+  /* User messages: right-aligned */
+  #cryptoBotItem .user-message {
+    background: #7681bc;
+    text-align: right;
+    align-self: flex-end;
+  }
+</style>
+
+<script>
+  function sendMessage() {
       const input = document.getElementById("userInput");
       const message = input.value.trim();
-      
-      if (message) {
-        // Log user message to browser console
-        console.log("User message:", message);
-        // Display user message in chat
-        addMessage(message, "user-message");
-        // Send the user message to AWS Lambda
-        sendToAWS(message, "Processing...");
-        // Clear input field
-        input.value = "";
-        
-        // Simulate a bot response after a short delay
-        setTimeout(() => {
-          const botMessage = "Processing...";
-          console.log("Bot message:", botMessage);
-          addMessage(botMessage, "bot-message");
-          // Send the bot response to AWS Lambda
-          sendToAWS(message, botMessage);
-        }, 1000);
-      }
-    }
 
-    // Function to send data to your AWS Lambda function
-    function sendToAWS(userMessage, botMessage) {
-      const url = "https://6wl4d2ekjsvknq5l5xzvdanj7y0syewv.lambda-url.us-east-1.on.aws/";
-      
+      if (message) {
+          // Log user message to the browser console
+          console.log("User message:", message);
+
+          // Display user message in chat
+          addMessage(message, "user-message");
+
+          // Send the user message to the AWS API
+          sendToAWS(message);
+
+          // Clear input field
+          input.value = "";
+
+          // Simulate a bot response after a short delay
+          setTimeout(() => {
+              const botMessage = "Processing..."; 
+              console.log("Bot message:", botMessage);
+              addMessage(botMessage, "bot-message");
+          }, 1000);
+      }
+  }
+
+  // Function to send data to AWS Lambda function
+  function sendToAWS(userMessage) {
+      const url = "https://6extk575r5yuh5zhmvmqpihuam0ipktc.lambda-url.us-east-1.on.aws/";
+
       fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userMessage: userMessage, botMessage: botMessage })
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              text: userMessage, // Send message as 'text' to match Lambda event structure
+          })
       })
       .then(response => response.json())
       .then(data => {
-        console.log("Response from AWS Lambda:", data);
+          console.log("Response from AWS Lambda:", data);
       })
       .catch(error => {
-        console.error("Error sending to AWS Lambda:", error);
+          console.error("Error sending to AWS Lambda:", error);
       });
-    }
-    
-    // Function to add messages to the chat UI
-    function addMessage(text, className) {
+  }
+
+  function addMessage(text, className) {
       const chatBox = document.getElementById("chatMessages");
       const messageDiv = document.createElement("div");
       messageDiv.className = "message " + className;
       messageDiv.textContent = text;
       chatBox.appendChild(messageDiv);
-      // Auto-scroll to the bottom
+      // Auto-scroll to the bottom of the messages container
       chatBox.scrollTop = chatBox.scrollHeight;
-    }
-    
-    // Listen for the Enter key on the input field
-    document.getElementById("userInput").addEventListener("keydown", function(event) {
+  }
+
+  // Listen for the Enter key on the input field
+  document.getElementById("userInput").addEventListener("keydown", function(event) {
       if (event.key === "Enter") {
-        event.preventDefault();
-        sendMessage();
+          event.preventDefault();
+          sendMessage();
       }
-    });
-  </script>
-</body>
-</html>
+  });
+</script>
 
         </div>
     </div>
