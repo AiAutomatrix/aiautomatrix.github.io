@@ -417,71 +417,80 @@
 
 <script>
   function sendMessage() {
-      const input = document.getElementById("userInput");
-      const message = input.value.trim();
+    const input = document.getElementById("userInput");
+    const message = input.value.trim();
+    
+    if (message) {
+        // Log user message to the browser console
+        console.log("User message:", message);
 
-      if (message) {
-          // Log user message to the browser console
-          console.log("User message:", message);
+        // Display user message in chat
+        addMessage(message, "user-message");
 
-          // Display user message in chat
-          addMessage(message, "user-message");
+        // Send the user message to the AWS API
+        sendToAWS(message, "Processing...");
 
-          // Send the user message to the AWS API
-          sendToAWS(message);
+        // Clear input field
+        input.value = "";
 
-          // Clear input field
-          input.value = "";
+        // Simulate a bot response after a short delay
+        setTimeout(() => {
+            const botMessage = "Processing..."; 
 
-          // Simulate a bot response after a short delay
-          setTimeout(() => {
-              const botMessage = "Processing..."; 
-              console.log("Bot message:", botMessage);
-              addMessage(botMessage, "bot-message");
-          }, 1000);
-      }
+            // Log bot response to the browser console
+            console.log("Bot message:", botMessage);
+            
+            // Display bot message in chat
+            addMessage(botMessage, "bot-message");
+
+            // Send the bot message to the AWS API
+            sendToAWS(message, botMessage);
+        }, 1000);
+    }
   }
 
   // Function to send data to AWS Lambda function
-  function sendToAWS(userMessage) {
-      const url = "https://6extk575r5yuh5zhmvmqpihuam0ipktc.lambda-url.us-east-1.on.aws/";
+  function sendToAWS(userMessage, botMessage) {
+    const url = "https://6extk575r5yuh5zhmvmqpihuam0ipktc.lambda-url.us-east-1.on.aws/";
 
-      fetch(url, {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-              text: userMessage, // Send message as 'text' to match Lambda event structure
-          })
-      })
-      .then(response => response.json())
-      .then(data => {
-          console.log("Response from AWS Lambda:", data);
-      })
-      .catch(error => {
-          console.error("Error sending to AWS Lambda:", error);
-      });
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            userMessage: userMessage,
+            botMessage: botMessage
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Response from AWS Lambda:", data);
+    })
+    .catch(error => {
+        console.error("Error sending to AWS Lambda:", error);
+    });
   }
-
+  
   function addMessage(text, className) {
-      const chatBox = document.getElementById("chatMessages");
-      const messageDiv = document.createElement("div");
-      messageDiv.className = "message " + className;
-      messageDiv.textContent = text;
-      chatBox.appendChild(messageDiv);
-      // Auto-scroll to the bottom of the messages container
-      chatBox.scrollTop = chatBox.scrollHeight;
+    const chatBox = document.getElementById("chatMessages");
+    const messageDiv = document.createElement("div");
+    messageDiv.className = "message " + className;
+    messageDiv.textContent = text;
+    chatBox.appendChild(messageDiv);
+    // Auto-scroll to the bottom of the messages container
+    chatBox.scrollTop = chatBox.scrollHeight;
   }
 
   // Listen for the Enter key on the input field
   document.getElementById("userInput").addEventListener("keydown", function(event) {
-      if (event.key === "Enter") {
-          event.preventDefault();
-          sendMessage();
-      }
+    if (event.key === "Enter") {
+      event.preventDefault();
+      sendMessage();
+    }
   });
 </script>
+
 
         </div>
     </div>
