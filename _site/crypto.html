@@ -431,26 +431,21 @@
         console.log("User message:", message);
         // Display user message in chat
         addMessage(message, "user-message");
-        // Send the user message to AWS Lambda
-        sendToAWS(message, "Processing...");
-        // Clear input field
-        input.value = "";
-        
         // Simulate a bot response after a short delay
         setTimeout(() => {
           const botMessage = "Processing...";
           console.log("Bot message:", botMessage);
           addMessage(botMessage, "bot-message");
-          // Send the bot response to AWS Lambda
-          sendToAWS(message, botMessage);
+          // Send the bot response to Botpress
+          sendToBotpress(message, botMessage);
         }, 1000);
       }
     }
 
-    // Function to send data to your AWS Lambda function
-    function sendToAWS(userMessage, botMessage) {
-      const url = "https://6wl4d2ekjsvknq5l5xzvdanj7y0syewv.lambda-url.us-east-1.on.aws/";
-      
+    // Function to send data to your Botpress bot
+    function sendToBotpress(userMessage, botMessage) {
+      const url = "https://aiutomatrix.github.io/crypto.html"; // Your Botpress endpoint URL
+
       fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -458,10 +453,10 @@
       })
       .then(response => response.json())
       .then(data => {
-        console.log("Response from AWS Lambda:", data);
+        console.log("Response from Botpress:", data);
       })
       .catch(error => {
-        console.error("Error sending to AWS Lambda:", error);
+        console.error("Error sending to Botpress:", error);
       });
     }
     
