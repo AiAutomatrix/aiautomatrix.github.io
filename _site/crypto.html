@@ -324,9 +324,10 @@
         <!-- CryptoGPT Bot (overlaps techContainer when active) -->
         <div id="cryptoBotContainer" class="fixed-widget-container">
             <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CryptoGPT WebChat</title>
   <style>
     /* Scoped styles for the webchat only */
@@ -420,46 +421,130 @@
       <button onclick="sendMessage()">Send</button>
     </div>
   </div>
-  
+
   <script>
+    // Replace these constants with your actual Botpress details:
+    const BOT_ID = "59250b3b-27d2-469a-9074-0113228860b6";
+    const USER_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIxMjM0NSIsImlhdCI6MTc0MjExNjc1NX0.Ik5BrnXe5jAiGHPwGZR7f7abyUzoM8p6VD7skKFd9Gg";
+    const USER_ID = "user12345";
+
+    let conversationId = null;
+
+    // Function to start a new conversation
+    function startConversation() {
+      const url = `https://chat.botpress.cloud/${BOT_ID}/conversations`;
+      return fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-user-key': USER_KEY
+        },
+        body: JSON.stringify({ user: { id: USER_ID } })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(data.conversation && data.conversation.id) {
+          conversationId = data.conversation.id;
+          addMessage("Conversation started: " + conversationId, "bot-message");
+          return conversationId;
+        } else {
+          throw new Error("Failed to create conversation");
+        }
+      });
+    }
+
+    // Function to send a message to Botpress
+    function sendMessageToBot(message) {
+      const url = `https://chat.botpress.cloud/${BOT_ID}/messages`;
+      return fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-user-key': USER_KEY
+        },
+        body: JSON.stringify({
+          conversationId: conversationId,
+          payload: { type: "text", text: message }
+        })
+      })
+      .then(response => response.json());
+    }
+
+    // Function to retrieve the bot response
+    function getBotResponse() {
+      const url = `https://chat.botpress.cloud/${BOT_ID}/conversations/${conversationId}/messages`;
+      return fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-user-key': USER_KEY
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.messages && data.messages.length > 0) {
+          // Assuming the last message is the bot's response
+          return data.messages[data.messages.length - 1].payload.text;
+        } else {
+          return null;
+        }
+      });
+    }
+
+    // Main function to handle sending message from webchat
     function sendMessage() {
       const input = document.getElementById("userInput");
       const message = input.value.trim();
       
-      if (message) {
-        // Log user message to browser console
-        console.log("User message:", message);
-        // Display user message in chat
-        addMessage(message, "user-message");
-        // Simulate a bot response after a short delay
-        setTimeout(() => {
-          const botMessage = "Processing...";
-          console.log("Bot message:", botMessage);
-          addMessage(botMessage, "bot-message");
-          // Send the bot response to Botpress
-          sendToBotpress(message, botMessage);
-        }, 1000);
+      if (!message) {
+        addMessage("Please enter a message", "bot-message");
+        return;
+      }
+      
+      // Display user message
+      addMessage(message, "user-message");
+      input.value = "";
+
+      // If conversation ID is not set, start a conversation first
+      if (!conversationId) {
+        addMessage("Initializing conversation...", "bot-message");
+        startConversation().then(() => {
+          addMessage("Processing next step...", "bot-message");
+          // Send the original message
+          sendMessageToBot(message)
+            .then(() => getBotResponse())
+            .then(botReply => {
+              if (botReply) {
+                addMessage(botReply, "bot-message");
+              } else {
+                addMessage("No response received from bot", "bot-message");
+              }
+            })
+            .catch(error => {
+              addMessage("Error sending message: " + error.message, "bot-message");
+            });
+        })
+        .catch(error => {
+          addMessage("Error starting conversation: " + error.message, "bot-message");
+        });
+      } else {
+        // Conversation exists; send message directly
+        addMessage("Processing next step...", "bot-message");
+        sendMessageToBot(message)
+          .then(() => getBotResponse())
+          .then(botReply => {
+            if (botReply) {
+              addMessage(botReply, "bot-message");
+            } else {
+              addMessage("No response received from bot", "bot-message");
+            }
+          })
+          .catch(error => {
+            addMessage("Error sending message: " + error.message, "bot-message");
+          });
       }
     }
 
-    // Function to send data to your Botpress bot
-    function sendToBotpress(userMessage, botMessage) {
-      const url = "https://aiutomatrix.github.io/crypto.html"; // Your Botpress endpoint URL
-
-      fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userMessage: userMessage, botMessage: botMessage })
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log("Response from Botpress:", data);
-      })
-      .catch(error => {
-        console.error("Error sending to Botpress:", error);
-      });
-    }
-    
     // Function to add messages to the chat UI
     function addMessage(text, className) {
       const chatBox = document.getElementById("chatMessages");
@@ -467,11 +552,10 @@
       messageDiv.className = "message " + className;
       messageDiv.textContent = text;
       chatBox.appendChild(messageDiv);
-      // Auto-scroll to the bottom
       chatBox.scrollTop = chatBox.scrollHeight;
     }
-    
-    // Listen for the Enter key on the input field
+
+    // Listen for Enter key on input field to trigger sendMessage
     document.getElementById("userInput").addEventListener("keydown", function(event) {
       if (event.key === "Enter") {
         event.preventDefault();
