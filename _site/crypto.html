@@ -572,19 +572,24 @@
     }
 
    // Listen for bot response from AWS
-    async function listenForBotResponse() {
-        const response = await fetch('https://aiautomatrix.github.io/crypto.html/receiveBotMessage', { // Corrected URL with https://
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
+      async function listenForBotResponse() {
+        try {
+            const response = await fetch('https://webhook.botpress.cloud/88fa925f-2a63-4cad-b6d0-77f64237c93a', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
-        const data = await response.json();
-        if (data && data.botMessage) {
-          receiveBotMessage(data.botMessage);
+            const data = await response.json();
+            if (data && data.botMessage) {
+                receiveBotMessage(data.botMessage);
+            }
+        } catch (error) {
+            console.error('Error receiving bot message:', error);
         }
     }
+
 
 
     document.getElementById("userInput").addEventListener("keydown", (event) => {
