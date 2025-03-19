@@ -413,6 +413,8 @@
       50% { opacity: 0.8; }
     }
   </style>
+  <!-- Include the official Botpress JavaScript client library from a CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@botpress/client@latest/dist/index.umd.min.js"></script>
 </head>
 <body>
   <div id="cryptoBotItem" class="chat-container">
@@ -425,100 +427,59 @@
   </div>
 
   <script>
-    // Replace these with your actual Botpress credentials
+    // --- Configuration Variables ---
     const BOT_ID = "bf0833f1-f736-40ac-8f09-1af6ea8002dc";
-    const USER_KEY = "YOUR_USER_KEY";
+    // Use your JWT token as the client token (manual authentication already applied)
+    const USER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJfMDFKUE5IUlBQWEc2QllDNDM2MTdZWDUxN0MiLCJpYXQiOjE3NDIzMzI1MTd9.jYXVSyr0b3Gyea8VKRPi03FV56cs22cFISaujb0yR3c";
     const USER_ID = "new_user_id";
 
+    // --- Global State ---
     let conversationId = null;
-    let eventSource = null;
-    let pendingMessage = null;
-    let reconnectAttempts = 0;
+    let sseSubscription = null; // Holds the SSE subscription object
 
-    // Utility: generate a UUID (using crypto.randomUUID if available)
-    function generateUUID() {
-      return crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-      });
-    }
+    // --- Initialize the Botpress Client ---
+    // The client is available globally as BotpressClient from the UMD build.
+    const client = new BotpressClient.Client({
+      botId: BOT_ID,
+      token: USER_TOKEN
+    });
 
-    // Start a new conversation using the first message as the initial event
-    async function startConversation(initialMessage) {
+    // --- Start a new conversation using the official client library ---
+    async function startConversation() {
       try {
-        // Create the conversation (but do not auto-send an event on load)
-        const response = await fetch(`https://chat.botpress.cloud/${BOT_ID}/conversations`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-user-key': USER_KEY
-          },
-          body: JSON.stringify({ user: { id: USER_ID } })
-        });
-        const data = await response.json();
-        if (!data.conversation || !data.conversation.id) {
-          throw new Error('Failed to create conversation');
-        }
-        conversationId = data.conversation.id;
+        // getOrCreateConversation ensures a unique conversation per user if using manual auth.
+        const conversation = await client.getOrCreateConversation({ user: { id: USER_ID } });
+        conversationId = conversation.id;
         addMessage("Conversation started: " + conversationId, "bot-message");
-        setupSSEConnection();
-
-        // Immediately send the user's first message as a custom event
-        if (initialMessage && initialMessage.trim().length > 0) {
-          const conversationEvent = {
-            id: generateUUID(),
-            createdAt: new Date().toISOString(),
-            conversationId: conversationId,
-            type: "text",
-            payload: { text: initialMessage },
-            tags: [],
-            userId: USER_ID,
-            direction: "incoming"
-          };
-          await fetch(`https://chat.botpress.cloud/${BOT_ID}/conversations/${conversationId}/events`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'x-user-key': USER_KEY
-            },
-            body: JSON.stringify({ event: conversationEvent })
-          });
-        }
+        setupSSEConnection(conversationId);
+        return conversationId;
       } catch (error) {
         showError("Error starting conversation: " + error.message);
         throw error;
       }
     }
 
-    // Set up the SSE connection to listen for Botpress messages
-    function setupSSEConnection() {
-      if (eventSource) eventSource.close();
-      const url = new URL(`https://chat.botpress.cloud/${BOT_ID}/conversations/${conversationId}/listen`);
-      url.searchParams.append('x-user-key', USER_KEY);
-      eventSource = new EventSource(url);
-      eventSource.onmessage = (event) => {
-        try {
-          const data = JSON.parse(event.data);
-          if (data.type === "message" && data.payload && data.payload.text && data.payload.text.trim().length > 0) {
-            receiveBotMessage(data.payload.text);
-          }
-        } catch (error) {
-          console.error('Error processing incoming message:', error);
+    // --- Setup SSE (real-time event listening) using the official client ---
+    function setupSSEConnection(convId) {
+      // The listenConversation method returns a subscription that emits events.
+      sseSubscription = client.listenConversation({ conversationId: convId });
+
+      // Listen for 'message' events from the bot.
+      sseSubscription.on('message', (event) => {
+        // Assuming event.payload.text contains the bot's reply.
+        if (event.type === "message") {
+          receiveBotMessage(event.payload.text);
         }
-      };
-      eventSource.onerror = (error) => {
-        console.error("SSE error:", error);
-        if (eventSource.readyState === EventSource.CLOSED) {
-          const delay = Math.min(3000 * (reconnectAttempts + 1), 30000);
-          setTimeout(() => {
-            reconnectAttempts++;
-            setupSSEConnection();
-          }, delay);
-        }
-      };
+      });
+
+      // Listen for errors on the SSE stream.
+      sseSubscription.on('error', (error) => {
+        console.error('SSE error:', error);
+        // Optionally implement reconnection logic here.
+      });
     }
 
-    // Send a user message. On first send, start the conversation.
+    // --- Send a message from the user using the client library ---
     async function sendMessage() {
       const input = document.getElementById("userInput");
       const message = input.value.trim();
@@ -530,30 +491,18 @@
       input.value = "";
       showTypingIndicator();
       try {
-        if (!conversationId) {
-          // Create the conversation using the first message as the initial event
-          await startConversation(message);
-        } else {
-          // Send subsequent messages via the /messages endpoint
-          await fetch(`https://chat.botpress.cloud/${BOT_ID}/messages`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'x-user-key': USER_KEY
-            },
-            body: JSON.stringify({
-              conversationId: conversationId,
-              userId: USER_ID,
-              payload: { type: "text", text: message }
-            })
-          });
-        }
+        if (!conversationId) await startConversation();
+        // Send the user's message via the official client.
+        await client.createMessage({
+          conversationId: conversationId,
+          payload: { type: "text", text: message }
+        });
       } catch (error) {
-        showError("Error sending message: " + error.message);
+        showError(error.message);
       }
     }
 
-    // Utility to add a message to the chat window
+    // --- Add a message to the chat UI ---
     function addMessage(content, className) {
       const chatBox = document.getElementById("chatMessages");
       const messageDiv = document.createElement("div");
@@ -564,14 +513,25 @@
       return messageDiv;
     }
 
-    // Show a typing indicator
+    // --- Show a typing indicator for the bot ---
+    let pendingMessage = null;
     function showTypingIndicator() {
       if (!pendingMessage) {
         pendingMessage = addMessage("...", "bot-message pending-message");
       }
     }
 
-    // Show error messages
+    // --- Display the bot's message in the chat UI ---
+    function receiveBotMessage(botMessage) {
+      // Remove the typing indicator if it exists.
+      if (pendingMessage) {
+        pendingMessage.remove();
+        pendingMessage = null;
+      }
+      addMessage(botMessage, "bot-message");
+    }
+
+    // --- Show error messages in the chat UI ---
     function showError(message) {
       if (pendingMessage) {
         pendingMessage.innerHTML = message;
@@ -582,20 +542,13 @@
       }
     }
 
-    // Display Botpress messages in the chat
-    function receiveBotMessage(botText) {
-      addMessage(botText, "bot-message");
-    }
-
-    // Listen for Enter key to send messages
+    // --- Event Listener for Enter key in input field ---
     document.getElementById("userInput").addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
         event.preventDefault();
         sendMessage();
       }
     });
-
-    // No auto-start on page load—conversation only starts when a message is sent.
   </script>
 </body>
 </html>
