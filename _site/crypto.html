@@ -330,7 +330,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CryptoGPT WebChat</title>
   <style>
-    /* Scoped styles for the webchat only */
+    /* Chat container and styles */
     #cryptoBotItem {
       position: relative;
       width: 100%;
@@ -339,7 +339,6 @@
       color: white;
       box-sizing: border-box;
     }
-    /* Header */
     #cryptoBotItem .chat-header {
       background: #404979;
       padding: 15px;
@@ -347,7 +346,6 @@
       font-size: 18px;
       font-weight: bold;
     }
-    /* Chat messages area positioned between header and input */
     #cryptoBotItem .chat-messages {
       position: absolute;
       top: 60px;
@@ -361,7 +359,6 @@
       flex-direction: column;
       align-items: flex-start;
     }
-    /* Input area fixed at the bottom */
     #cryptoBotItem .chat-input {
       position: absolute;
       bottom: 0;
@@ -389,7 +386,6 @@
       cursor: pointer;
       border-radius: 5px;
     }
-    /* Message bubble styling */
     #cryptoBotItem .message {
       width: auto;
       max-width: 80%;
@@ -399,16 +395,22 @@
       line-height: 1.4;
       word-wrap: break-word;
     }
-    /* Bot messages: left-aligned */
     #cryptoBotItem .bot-message {
       background: #3e4a6b;
       text-align: left;
     }
-    /* User messages: right-aligned */
     #cryptoBotItem .user-message {
       background: #7681bc;
       text-align: right;
       align-self: flex-end;
+    }
+    .pending-message {
+      opacity: 0.6;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 0.8; }
     }
   </style>
 </head>
@@ -423,140 +425,169 @@
   </div>
 
   <script>
-    // Replace these constants with your actual Botpress details:
-    const BOT_ID = "59250b3b-27d2-469a-9074-0113228860b6";
-    const USER_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIxMjM0NSIsImlhdCI6MTc0MjExNjc1NX0.Ik5BrnXe5jAiGHPwGZR7f7abyUzoM8p6VD7skKFd9Gg";
-    const USER_ID = "user12345";
+    const BOT_ID = "bf0833f1-f736-40ac-8f09-1af6ea8002dc";
+    const USER_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJfMDFKUE5IUlBQWEc2QllDNDM2MTdZWDUxN0MiLCJpYXQiOjE3NDIzMzI1MTd9.jYXVSyr0b3Gyea8VKRPi03FV56cs22cFISaujb0yR3c";
+    const USER_ID = "new_user_id";
+    const AWS_FUNCTION_URL = "https://6extk575r5yuh5zhmvmqpihuam0ipktc.lambda-url.us-east-1.on.aws/";
 
     let conversationId = null;
+    let eventSource = null;
+    let pendingMessage = null;
+    let reconnectAttempts = 0;
 
-    // Function to start a new conversation
-    function startConversation() {
-      const url = `https://chat.botpress.cloud/${BOT_ID}/conversations`;
-      return fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-user-key': USER_KEY
-        },
-        body: JSON.stringify({ user: { id: USER_ID } })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if(data.conversation && data.conversation.id) {
-          conversationId = data.conversation.id;
-          addMessage("Conversation started: " + conversationId, "bot-message");
-          return conversationId;
+    async function startConversation() {
+      try {
+        const response = await fetch(`https://chat.botpress.cloud/${BOT_ID}/conversations`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-user-key': USER_KEY
+          },
+          body: JSON.stringify({ user: { id: USER_ID } })
+        });
+        const data = await response.json();
+        if (!data.conversation?.id) throw new Error('Failed to create conversation');
+        
+        conversationId = data.conversation.id;
+        addMessage("Conversation started: " + conversationId, "bot-message");
+        setupSSEConnection();
+        return conversationId;
+      } catch (error) {
+        showError("Error starting conversation: " + error.message);
+        throw error;
+      }
+    }
+
+    function setupSSEConnection() {
+      if (eventSource) eventSource.close();
+      
+      const url = new URL(`https://chat.botpress.cloud/${BOT_ID}/conversations/${conversationId}/listen`);
+      url.searchParams.append('x-user-key', USER_KEY);
+      eventSource = new EventSource(url);
+      
+      eventSource.onmessage = (event) => {
+        try {
+          const { type, payload } = JSON.parse(event.data);
+          if (type === "message") {
+            forwardBotResponseToAWS(payload);
+          }
+        } catch (error) {
+          console.error('Message processing error:', error);
+        }
+      };
+
+      eventSource.onerror = (error) => {
+        console.error("SSE error:", error);
+        if (eventSource.readyState === EventSource.CLOSED) {
+          const delay = Math.min(3000 * (reconnectAttempts + 1), 30000);
+          setTimeout(() => {
+            reconnectAttempts++;
+            setupSSEConnection();
+          }, delay);
+        }
+      };
+    }
+
+    async function forwardBotResponseToAWS(botPayload) {
+      try {
+        const awsResponse = await fetch(AWS_FUNCTION_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            conversationId: conversationId,
+            botResponse: botPayload
+          })
+        });
+        const awsData = await awsResponse.json();
+        if (awsData && awsData.botMessage) {
+          addMessage(awsData.botMessage, "bot-message");
         } else {
-          throw new Error("Failed to create conversation");
+          addMessage("No final bot response received from AWS.", "bot-message");
         }
-      });
+      } catch (error) {
+        showError("Error forwarding bot response to AWS: " + error.message);
+      }
     }
 
-    // Function to send a message to Botpress
-    function sendMessageToBot(message) {
-      const url = `https://chat.botpress.cloud/${BOT_ID}/messages`;
-      return fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-user-key': USER_KEY
-        },
-        body: JSON.stringify({
-          conversationId: conversationId,
-          payload: { type: "text", text: message }
-        })
-      })
-      .then(response => response.json());
-    }
-
-    // Function to retrieve the bot response
-    function getBotResponse() {
-      const url = `https://chat.botpress.cloud/${BOT_ID}/conversations/${conversationId}/messages`;
-      return fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-user-key': USER_KEY
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.messages && data.messages.length > 0) {
-          // Assuming the last message is the bot's response
-          return data.messages[data.messages.length - 1].payload.text;
-        } else {
-          return null;
-        }
-      });
-    }
-
-    // Main function to handle sending message from webchat
-    function sendMessage() {
+    async function sendMessage() {
       const input = document.getElementById("userInput");
       const message = input.value.trim();
-      
       if (!message) {
-        addMessage("Please enter a message", "bot-message");
+        showError("Please enter a message");
         return;
       }
-      
-      // Display user message
       addMessage(message, "user-message");
       input.value = "";
-
-      // If conversation ID is not set, start a conversation first
-      if (!conversationId) {
-        addMessage("Initializing conversation...", "bot-message");
-        startConversation().then(() => {
-          addMessage("Processing next step...", "bot-message");
-          // Send the original message
-          sendMessageToBot(message)
-            .then(() => getBotResponse())
-            .then(botReply => {
-              if (botReply) {
-                addMessage(botReply, "bot-message");
-              } else {
-                addMessage("No response received from bot", "bot-message");
-              }
-            })
-            .catch(error => {
-              addMessage("Error sending message: " + error.message, "bot-message");
-            });
-        })
-        .catch(error => {
-          addMessage("Error starting conversation: " + error.message, "bot-message");
-        });
-      } else {
-        // Conversation exists; send message directly
+      showTypingIndicator();
+      try {
+        if (!conversationId) await startConversation();
         addMessage("Processing next step...", "bot-message");
-        sendMessageToBot(message)
-          .then(() => getBotResponse())
-          .then(botReply => {
-            if (botReply) {
-              addMessage(botReply, "bot-message");
-            } else {
-              addMessage("No response received from bot", "bot-message");
-            }
+        await fetch(`https://chat.botpress.cloud/${BOT_ID}/messages`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-user-key': USER_KEY
+          },
+          body: JSON.stringify({
+            conversationId: conversationId,
+            payload: { type: "text", text: message }
           })
-          .catch(error => {
-            addMessage("Error sending message: " + error.message, "bot-message");
-          });
+        });
+      } catch (error) {
+        showError(error.message);
       }
     }
 
-    // Function to add messages to the chat UI
-    function addMessage(text, className) {
+    function addMessage(content, className) {
       const chatBox = document.getElementById("chatMessages");
       const messageDiv = document.createElement("div");
-      messageDiv.className = "message " + className;
-      messageDiv.textContent = text;
+      messageDiv.className = `message ${className}`;
+      messageDiv.innerHTML = content;
       chatBox.appendChild(messageDiv);
       chatBox.scrollTop = chatBox.scrollHeight;
+      return messageDiv;
     }
 
-    // Listen for Enter key on input field to trigger sendMessage
-    document.getElementById("userInput").addEventListener("keydown", function(event) {
+    function showTypingIndicator() {
+      if (!pendingMessage) {
+        pendingMessage = addMessage("...", "bot-message pending-message");
+      }
+    }
+
+    function showError(message) {
+      if (pendingMessage) {
+        pendingMessage.innerHTML = message;
+        pendingMessage.classList.remove('pending-message');
+        pendingMessage = null;
+      } else {
+        addMessage(message, "bot-message");
+      }
+    }
+
+    // New function to handle AWS response and update webchat
+    function receiveBotMessage(awsMessage) {
+      addMessage(awsMessage, 'bot-message');
+    }
+
+   // Listen for bot response from AWS
+    async function listenForBotResponse() {
+        const response = await fetch('https://aiautomatrix.github.io/crypto.html/receiveBotMessage', { // Corrected URL with https://
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const data = await response.json();
+        if (data && data.botMessage) {
+          receiveBotMessage(data.botMessage);
+        }
+    }
+
+
+    document.getElementById("userInput").addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
         event.preventDefault();
         sendMessage();
