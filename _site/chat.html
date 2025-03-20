@@ -65,6 +65,15 @@
     });
   </script>
   <script src="https://files.bpcontent.cloud/2025/03/18/20/20250318201418-1WI5ZTT7.js"></script>
+
+  <script>
+    window.botpressWebChat.onEvent(
+        function () {
+            window.botpressWebChat.sendEvent({ type: "show" });
+        },
+        ["LIFECYCLE.LOADED"]
+    );
+</script>
 </body>
 </html>
 
