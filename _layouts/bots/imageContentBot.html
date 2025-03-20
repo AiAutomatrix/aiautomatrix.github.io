@@ -3,87 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom AI Chatbots by Aiautomatrix</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-
-        .container {
-            display: flex;
-            max-width: 1200px;
-            width: 100%;
-            background-color: #ffffff;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .info-container {
-            flex: 1;
-            padding: 20px;
-            border-right: 1px solid #dddddd;
-        }
-
-        .chatbot-container {
-            flex: 1;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-
-        .info-container h1 {
-            font-size: 24px;
-            color: #2e7d32; /* Medium Green */
-            margin-bottom: 10px;
-        }
-
-        .info-container p {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #555555;
-        }
-
-        .info-container a {
-            color: #2e7d32;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .info-container a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <title>Botpress Webchat</title>
 </head>
-<body></body>
-    <div class="container">
-        <div class="info-container">
-            <h1>Custom AI Chatbots by Aiautomatrix</h1>
-            <p>
-                This chatbot was made by Garret Friesen, the Founder of Aiautomatrix. Our AI chatbots are designed to be highly customizable and can be tailored to meet your specific needs.
-            </p>
-            <p>
-                Interested in having a custom chatbot for your business or project? Visit our website to learn more about how our bots can help you achieve your goals.
-            </p>
-            <p>
-                <a href="https://aiautomatrix.github.io">Click here to explore more</a>
-            </p>
-        </div>
-        <div class="chatbot-container">
-            <!-- Chatbot Embed Code -->
-            <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
-            <script src="https://mediafiles.botpress.cloud/e924a7d7-4a19-427e-89cd-3e9fe771fd6d/webchat/config.js" defer></script>
-            <script>
-                window.botpressWebChat.onEvent(function () {
-                    window.botpressWebChat.sendEvent({ type: "show" });
-                }, ["LIFECYCLE.LOADED"]);
-            </script>
-        </div>
-    </div>
+<body>
+    <!-- Botpress Webchat Embed Code -->
+    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/03/18/20/20250318201418-1WI5ZTT7.js"></script>
+
+
 </body>
 </html>

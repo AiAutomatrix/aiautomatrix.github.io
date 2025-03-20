@@ -163,17 +163,18 @@
             position: absolute;
             right: 0;
             top: 40px;
+           
             width: 18.6%;
             height: 95.6%; /* Ensures sufficient height */
             display: none;
             overflow: hidden;
         }
 
+
         /* When active, display as flex so inner webchat can flex */
         #cryptoBotContainer.active {
             display: flex;
         }
-
     
         #techContainer.active {
             display: flex;
@@ -326,233 +327,24 @@
             <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CryptoGPT WebChat</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Botpress Webchat</title>
   <style>
-    /* Chat container and styles */
-    #cryptoBotItem {
-      position: relative;
+    /* Style the iframe to fit within your layout as desired */
+    #botpressIframe {
       width: 100%;
-      height: 100%;
-      background: #2a2d3a;
-      color: white;
-      box-sizing: border-box;
-    }
-    #cryptoBotItem .chat-header {
-      background: #404979;
-      padding: 15px;
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-    }
-    #cryptoBotItem .chat-messages {
-      position: absolute;
-      top: 60px;
-      bottom: 70px;
-      left: 0;
-      right: 0;
-      padding: 10px;
-      overflow-y: auto;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    #cryptoBotItem .chat-input {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      background: #323963;
-      display: flex;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-    #cryptoBotItem .chat-input input {
-      flex: 1;
-      padding: 10px;
+      height: 600px; /* Adjust height as needed */
       border: none;
-      border-radius: 5px;
-      outline: none;
-    }
-    #cryptoBotItem .chat-input button {
-      margin-left: 10px;
-      padding: 10px;
-      background: #7681bc;
-      border: none;
-      color: white;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    #cryptoBotItem .message {
-      width: auto;
-      max-width: 80%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 5px;
-      line-height: 1.4;
-      word-wrap: break-word;
-    }
-    #cryptoBotItem .bot-message {
-      background: #3e4a6b;
-      text-align: left;
-    }
-    #cryptoBotItem .user-message {
-      background: #7681bc;
-      text-align: right;
-      align-self: flex-end;
-    }
-    .pending-message {
-      opacity: 0.6;
-      animation: pulse 1.5s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 0.8; }
     }
   </style>
-  <!-- Include the official Botpress JavaScript client library from a CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@botpress/client@latest/dist/index.umd.min.js"></script>
 </head>
 <body>
-  <div id="cryptoBotItem" class="chat-container">
-    <div class="chat-header">CryptoGPT WebChat</div>
-    <div class="chat-messages" id="chatMessages"></div>
-    <div class="chat-input">
-      <input type="text" id="userInput" placeholder="Type a message..." />
-      <button onclick="sendMessage()">Send</button>
-    </div>
-  </div>
-
-  <script>
-    // --- Configuration Variables ---
-    const BOT_ID = "bf0833f1-f736-40ac-8f09-1af6ea8002dc";
-    // Use your JWT token as the client token (manual authentication already applied)
-    const USER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJfMDFKUE5IUlBQWEc2QllDNDM2MTdZWDUxN0MiLCJpYXQiOjE3NDIzMzI1MTd9.jYXVSyr0b3Gyea8VKRPi03FV56cs22cFISaujb0yR3c";
-    const USER_ID = "new_user_id";
-
-    // --- Global State ---
-    let conversationId = null;
-    let sseSubscription = null; // Holds the SSE subscription object
-
-    // --- Initialize the Botpress Client ---
-    // The client is available globally as BotpressClient from the UMD build.
-    const client = new BotpressClient.Client({
-      botId: BOT_ID,
-      token: USER_TOKEN
-    });
-
-    // --- Start a new conversation using the official client library ---
-    async function startConversation() {
-      try {
-        // getOrCreateConversation ensures a unique conversation per user if using manual auth.
-        const conversation = await client.getOrCreateConversation({ user: { id: USER_ID } });
-        conversationId = conversation.id;
-        addMessage("Conversation started: " + conversationId, "bot-message");
-        setupSSEConnection(conversationId);
-        return conversationId;
-      } catch (error) {
-        showError("Error starting conversation: " + error.message);
-        throw error;
-      }
-    }
-
-    // --- Setup SSE (real-time event listening) using the official client ---
-    function setupSSEConnection(convId) {
-      // The listenConversation method returns a subscription that emits events.
-      sseSubscription = client.listenConversation({ conversationId: convId });
-
-      // Listen for 'message' events from the bot.
-      sseSubscription.on('message', (event) => {
-        // Assuming event.payload.text contains the bot's reply.
-        if (event.type === "message") {
-          receiveBotMessage(event.payload.text);
-        }
-      });
-
-      // Listen for errors on the SSE stream.
-      sseSubscription.on('error', (error) => {
-        console.error('SSE error:', error);
-        // Optionally implement reconnection logic here.
-      });
-    }
-
-    // --- Send a message from the user using the client library ---
-    async function sendMessage() {
-      const input = document.getElementById("userInput");
-      const message = input.value.trim();
-      if (!message) {
-        showError("Please enter a message");
-        return;
-      }
-      addMessage(message, "user-message");
-      input.value = "";
-      showTypingIndicator();
-      try {
-        if (!conversationId) await startConversation();
-        // Send the user's message via the official client.
-        await client.createMessage({
-          conversationId: conversationId,
-          payload: { type: "text", text: message }
-        });
-      } catch (error) {
-        showError(error.message);
-      }
-    }
-
-    // --- Add a message to the chat UI ---
-    function addMessage(content, className) {
-      const chatBox = document.getElementById("chatMessages");
-      const messageDiv = document.createElement("div");
-      messageDiv.className = `message ${className}`;
-      messageDiv.innerHTML = content;
-      chatBox.appendChild(messageDiv);
-      chatBox.scrollTop = chatBox.scrollHeight;
-      return messageDiv;
-    }
-
-    // --- Show a typing indicator for the bot ---
-    let pendingMessage = null;
-    function showTypingIndicator() {
-      if (!pendingMessage) {
-        pendingMessage = addMessage("...", "bot-message pending-message");
-      }
-    }
-
-    // --- Display the bot's message in the chat UI ---
-    function receiveBotMessage(botMessage) {
-      // Remove the typing indicator if it exists.
-      if (pendingMessage) {
-        pendingMessage.remove();
-        pendingMessage = null;
-      }
-      addMessage(botMessage, "bot-message");
-    }
-
-    // --- Show error messages in the chat UI ---
-    function showError(message) {
-      if (pendingMessage) {
-        pendingMessage.innerHTML = message;
-        pendingMessage.classList.remove('pending-message');
-        pendingMessage = null;
-      } else {
-        addMessage(message, "bot-message");
-      }
-    }
-
-    // --- Event Listener for Enter key in input field ---
-    document.getElementById("userInput").addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        sendMessage();
-      }
-    });
-  </script>
+  <!-- The iframe loads the Botpress widget, isolating its custom CSS -->
+  <iframe id="botpressIframe" src="/crypto/botpress-widget.html" style="width:100%; height:600px; border:none;"></iframe>
 </body>
 </html>
-
+ 
         </div>
     </div>
 
@@ -590,16 +382,13 @@
                     if (cryptoGPTTab.classList.contains('active')) {
                         techContainer.style.display = 'none';
                         cryptoBotContainer.style.display = 'block';
-                        cryptoBotItem.style.display = 'block';
                     } else if (techTab.classList.contains('active')) {
                         techContainer.style.display = 'block';
                         cryptoBotContainer.style.display = 'none';
-                        cryptoBotItem.style.display = 'none';
                     }
                 } else {
                     techContainer.style.display = 'none';
                     cryptoBotContainer.style.display = 'none';
-                    cryptoBotItem.style.display = 'none';
                 }
 
                 // Update carousel position
@@ -613,14 +402,12 @@
                     if (activeTab === 'CryptoGPT') {
                         cryptoBotContainer.classList.add('active');
                         techContainer.classList.remove('active');
-                        cryptoBotItem.classList.remove('hidden');
                     } else if (activeTab === 'Tech') {
                         techContainer.classList.add('active');
                         cryptoBotContainer.classList.remove('active');
-                        cryptoBotItem.classList.add('hidden');
                     }
                 } else {
-                    cryptoBotItem.classList.add('hidden');
+                    cryptoBotContainer.classList.remove('active');
                 }
             }
 

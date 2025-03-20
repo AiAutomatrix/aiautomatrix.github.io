@@ -163,17 +163,18 @@
             position: absolute;
             right: 0;
             top: 40px;
+           
             width: 18.6%;
             height: 95.6%; /* Ensures sufficient height */
             display: none;
             overflow: hidden;
         }
 
+
         /* When active, display as flex so inner webchat can flex */
         #cryptoBotContainer.active {
             display: flex;
         }
-
     
         #techContainer.active {
             display: flex;
@@ -227,7 +228,7 @@
 
         <!-- CryptoGPT Bot (overlaps techContainer when active) -->
         <div id="cryptoBotContainer" class="fixed-widget-container">
-            {% include crypto/webchat2.html %}
+            {% include crypto/webchat.html %} 
         </div>
     </div>
 
@@ -265,16 +266,13 @@
                     if (cryptoGPTTab.classList.contains('active')) {
                         techContainer.style.display = 'none';
                         cryptoBotContainer.style.display = 'block';
-                        cryptoBotItem.style.display = 'block';
                     } else if (techTab.classList.contains('active')) {
                         techContainer.style.display = 'block';
                         cryptoBotContainer.style.display = 'none';
-                        cryptoBotItem.style.display = 'none';
                     }
                 } else {
                     techContainer.style.display = 'none';
                     cryptoBotContainer.style.display = 'none';
-                    cryptoBotItem.style.display = 'none';
                 }
 
                 // Update carousel position
@@ -288,14 +286,12 @@
                     if (activeTab === 'CryptoGPT') {
                         cryptoBotContainer.classList.add('active');
                         techContainer.classList.remove('active');
-                        cryptoBotItem.classList.remove('hidden');
                     } else if (activeTab === 'Tech') {
                         techContainer.classList.add('active');
                         cryptoBotContainer.classList.remove('active');
-                        cryptoBotItem.classList.add('hidden');
                     }
                 } else {
-                    cryptoBotItem.classList.add('hidden');
+                    cryptoBotContainer.classList.remove('active');
                 }
             }
 
