@@ -1,0 +1,118 @@
+<!-- layouts/codeBlockLayout.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerShell Code Block</title>
+    
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/vs2015.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/powershell.min.js"></script>
+
+    <style>
+        :root {
+            --neon-green: #00ff00;
+            --background-dark: rgba(0, 0, 0, 0.97);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('/assets/img/nebula.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+
+        .code-wrapper {
+            position: relative;
+            max-width: 100vw;
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            background: var(--background-dark);
+            backdrop-filter: blur(5px);
+        }
+
+        .copy-button {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--neon-green);
+            color: #000;
+            border: 2px solid var(--neon-green);
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .copy-button:hover {
+            background: #000;
+            color: var(--neon-green);
+            transform: scale(1.05);
+        }
+
+        .hljs {
+            background: transparent !important;
+            padding: 2rem !important;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* PowerShell-specific syntax highlighting */
+        .hljs-function { color: #4ec9b0; }
+        .hljs-keyword { color: #569cd6; }
+        .hljs-variable { color: #9cdcfe; }
+        .hljs-string { color: #ce9178; }
+        .hljs-comment { color: #6a9955; }
+    </style>
+</head>
+
+<body>
+    <button class="copy-button" onclick="copyCode()">
+        ⎘ Copy Script
+    </button>
+    
+    <div class="code-wrapper">
+        {% include codeBlock.html %}
+    </div>
+
+    <script>
+        // Initialize syntax highlighting
+        hljs.highlightAll();
+
+        // Modern clipboard handling
+        async function copyCode() {
+            try {
+                const code = document.querySelector('.hljs').innerText;
+                await navigator.clipboard.writeText(code);
+                
+                // Visual feedback
+                const btn = document.querySelector('.copy-button');
+                btn.textContent = '✓ Copied!';
+                setTimeout(() => {
+                    btn.textContent = '⎘ Copy Script';
+                }, 2000);
+                
+            } catch (err) {
+                alert('Error copying code: ' + err.message);
+            }
+        }
+
+        // Add line numbers
+        document.addEventListener('DOMContentLoaded', () => {
+            const code = document.querySelector('.hljs');
+            const lines = code.innerHTML.split('\n');
+            code.innerHTML = lines.map((line, i) => 
+                `<span class="line-number" aria-hidden="true">${i + 1}</span>${line}`
+            ).join('\n');
+        });
+    </script>
+</body>
+</html>
