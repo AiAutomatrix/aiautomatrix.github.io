@@ -189,6 +189,7 @@
         <div class="tab" data-index="1">Screener</div>
         <div class="tab" data-index="2">Heatmap</div>
         <div class="tab" data-index="3">Pinescript</div>
+        <div class="tab" data-index="4">Editor</div>
 
         <!-- Toggle Switch for Tech Section -->
         <div class="toggle-container">
@@ -224,6 +225,12 @@
                 <!-- Heatmap Widget -->
                 <div id="Container" class="container">
                     {% include pine.html %}
+                </div>
+            </div>
+            <div class="carousel-item">
+                <!-- Heatmap Widget -->
+                <div id="editor-container">
+                    {% include codeBlockLayout.html %}
                 </div>
             </div>
         </div>
