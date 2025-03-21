@@ -420,31 +420,28 @@
           display: flex;
           flex-direction: column;
           padding: 1rem;
-          overflow: auto;
+          overflow: hidden;
           box-sizing: border-box;
-          -ms-overflow-style: none;
-          scrollbar-width: none;
         }
-        .editor-main::-webkit-scrollbar {
-          display: none;
-        }
-        textarea, pre {
+        /* Use flex on the textarea and pre so they take up the remaining space without overflowing */
+        .editor-main textarea,
+        .editor-main pre {
+          flex: 1;
           width: 100%;
-          height: calc(100% - 2rem); /* Adjust height for 1rem padding on top and bottom */
           margin: 0;
+          box-sizing: border-box;
           font-family: Consolas, monospace;
           font-size: 14px;
           line-height: 1.5;
-          box-sizing: border-box;
           background-color: #012456 !important;
           color: #ffffff !important;
           padding: 10px !important;
           overflow: auto !important;
-          -ms-overflow-style: none;
-          scrollbar-width: none;
           resize: none;
         }
-        textarea::-webkit-scrollbar, pre::-webkit-scrollbar {
+        /* Hide scrollbars */
+        .editor-main textarea::-webkit-scrollbar,
+        .editor-main pre::-webkit-scrollbar {
           display: none;
         }
         .hljs {
