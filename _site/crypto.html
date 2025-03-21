@@ -396,6 +396,8 @@
             opacity: 0.9;
             background: transparent !important;
             z-index: 2;
+            width: 100%;
+            height: 100%;
         }
 
         #codeDisplay {
@@ -426,114 +428,85 @@
         <button class="editor-button" onclick="toggleEdit()">Edit</button>
     </div>
 
+    <!-- Wrapper for iframe -->
     <div class="editor-container scroll-sync">
-        <textarea id="liveEditor" spellcheck="false"></textarea>
-        <pre id="codeDisplay"><code class="language-powershell" id="codeBlock"></code></pre>
+        <iframe id="editorIframe" style="width: 100%; height: 100vh; border: none;" srcdoc="
+            <!DOCTYPE html>
+            <html lang='en'>
+            <head>
+                <meta charset='UTF-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>Live PowerShell Editor</title>
+                <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/vs2015.min.css'>
+                <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+                <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/powershell.min.js'></script>
+                <style>
+                    #liveEditor { color: #ffffff !important; opacity: 0.9; background: transparent !important; width: 100%; height: 100%; }
+                    #codeDisplay { position: relative; z-index: 1; padding: 2rem !important; }
+                    .editor-container { padding-top: 4rem !important; }
+                    .scroll-sync { position: relative; overflow: auto; }
+                    .scroll-sync > * { overflow: hidden !important; }
+                </style>
+            </head>
+            <body>
+                <div class='button-group'>
+                    <button class='editor-button' onclick='copyCode()'>Copy</button>
+                    <button class='editor-button' onclick='toggleEdit()'>Edit</button>
+                </div>
+                <div class='editor-container scroll-sync'>
+                    <textarea id='liveEditor' spellcheck='false'></textarea>
+                    <pre id='codeDisplay'><code class='language-powershell' id='codeBlock'></code></pre>
+                </div>
+                <script>
+                    const editor = document.getElementById('liveEditor');
+                    const codeBlock = document.getElementById('codeBlock');
+                    const container = document.querySelector('.scroll-sync');
+
+                    editor.value = localStorage.getItem('savedCode') || '';
+                    codeBlock.textContent = editor.value;
+                    hljs.highlightAll();
+
+                    function syncContent() {
+                        codeBlock.textContent = editor.value;
+                        hljs.highlightElement(codeBlock);
+                        localStorage.setItem('savedCode', editor.value);
+                        codeBlock.scrollTop = editor.scrollTop;
+                        codeBlock.scrollLeft = editor.scrollLeft;
+                    }
+
+                    editor.addEventListener('input', syncContent);
+                    editor.addEventListener('scroll', () => {
+                        codeBlock.scrollTop = editor.scrollTop;
+                        codeBlock.scrollLeft = editor.scrollLeft;
+                    });
+
+                    function toggleEdit() {
+                        editor.style.zIndex = editor.style.zIndex === '2' ? '-1' : '2';
+                        editor.focus();
+                    }
+
+                    async function copyCode() {
+                        try {
+                            await navigator.clipboard.writeText(editor.value);
+                            const btn = document.querySelector('[onclick=\'copyCode()\']');
+                            btn.textContent = 'Copied!';
+                            setTimeout(() => btn.textContent = 'Copy', 1500);
+                        } catch (err) {
+                            alert('Copy error: ' + err.message);
+                        }
+                    }
+
+                    editor.style.height = codeBlock.offsetHeight + 'px';
+                    editor.style.width = codeBlock.offsetWidth + 'px';
+                </script>
+            </body>
+            </html>
+        "></iframe>
     </div>
 
-    <script>
-        // Initialize editor
-        const editor = document.getElementById('liveEditor');
-        const codeBlock = document.getElementById('codeBlock');
-        const container = document.querySelector('.scroll-sync');
-
-        // Load code
-        editor.value = localStorage.getItem('savedCode') || `<!-- includes/codeBlock.html -->
-<pre><code class="language-powershell">
-    # PowerShell Deployment Script
-    # Version: 2.3.1
-    # ---------------------------
-    
-    function Deploy-Application {
-        param(
-            [string]$Environment = "prod",
-            [int]$Version = 23
-        )
-    
-        Write-Host "🚀 Starting deployment to $Environment environment..."
-        
-        try {
-            # Validate environment
-            if ($Environment -notin @('dev', 'stage', 'prod')) {
-                Throw "Invalid environment: $Environment"
-            }
-    
-            # Check dependencies
-            $requiredModules = @('Azure', 'AWS.Tools.Common')
-            foreach ($module in $requiredModules) {
-                if (-not (Get-Module -ListAvailable -Name $module)) {
-                    Install-Module -Name $module -Force -Scope CurrentUser
-                }
-            }
-    
-            # Deployment process
-            switch ($Environment) {
-                'dev' {
-                    Update-DevCluster -Version $Version -Verbose
-                }
-                'prod' {
-                    Start-ProductionRollout -Version $Version -CanaryPercentage 10
-                }
-                default {
-                    Deploy-Standard -Env $Environment
-                }
-            }
-    
-            Write-Host "✅ Deployment completed successfully!" -ForegroundColor Green
-        }
-        catch {
-            Write-Error "❌ Deployment failed: $_"
-            Exit 1
-        }
-    }
-    
-    Deploy-Application @args
-    </code></pre>`;
-        codeBlock.textContent = editor.value;
-        hljs.highlightAll();
-
-        // Improved sync function
-        function syncContent() {
-            codeBlock.textContent = editor.value;
-            hljs.highlightElement(codeBlock);
-            localStorage.setItem('savedCode', editor.value);
-            
-            // Sync scroll positions
-            codeBlock.scrollTop = editor.scrollTop;
-            codeBlock.scrollLeft = editor.scrollLeft;
-        }
-
-        // Event listeners
-        editor.addEventListener('input', syncContent);
-        editor.addEventListener('scroll', () => {
-            codeBlock.scrollTop = editor.scrollTop;
-            codeBlock.scrollLeft = editor.scrollLeft;
-        });
-
-        // Toggle edit mode
-        function toggleEdit() {
-            editor.style.zIndex = editor.style.zIndex === '2' ? '-1' : '2';
-            editor.focus();
-        }
-
-        // Copy function
-        async function copyCode() {
-            try {
-                await navigator.clipboard.writeText(editor.value);
-                const btn = document.querySelector('[onclick="copyCode()"]');
-                btn.textContent = 'Copied!';
-                setTimeout(() => btn.textContent = 'Copy', 1500);
-            } catch (err) {
-                alert('Copy error: ' + err.message);
-            }
-        }
-
-        // Initial setup
-        editor.style.height = codeBlock.offsetHeight + 'px';
-        editor.style.width = codeBlock.offsetWidth + 'px';
-    </script>
 </body>
 </html>
+
                 </div>
             </div>
         </div>
