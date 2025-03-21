@@ -223,7 +223,7 @@
             <div class="carousel-item">
                 <!-- Heatmap Widget -->
                 <div id="Container" class="container">
-                    {% include pineWidget.html %}
+                    {% include pine.html %}
                 </div>
             </div>
         </div>
@@ -250,6 +250,11 @@
             const techContainer = document.getElementById('techContainer');
             const cryptoBotContainer = document.getElementById('cryptoBotContainer');
             const cryptoBotItem = document.getElementById('cryptoBotItem');
+            document.addEventListener("DOMContentLoaded", function () {
+                document.querySelector(".tab[data-index='3']").addEventListener("click", function () {
+                window.open("pine.html", "_blank");
+                });
+            });
 
             function updateCarousel(index) {
                 const itemWidth = carouselItems[0].offsetWidth;

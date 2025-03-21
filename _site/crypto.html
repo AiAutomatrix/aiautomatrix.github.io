@@ -307,19 +307,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Open TradingView Pine</title>
-  <script>
-    window.onload = function() {
-      // Try to open TradingView Pine in a new tab
-      var newTab = window.open("https://www.tradingview.com/pine/", "_blank");
-      // If pop-up is blocked, display a message with a clickable link
-      if (!newTab) {
-        document.getElementById("message").innerText = "Popup was blocked. Please click the link below to open TradingView Pine.";
-      } else {
-        document.getElementById("message").innerText = "TradingView Pine site has been opened in a new tab.";
-      }
-    };
-  </script>
+  <title>TradingView Pine Script</title>
   <style>
     body, html {
       margin: 0;
@@ -340,8 +328,8 @@
 </head>
 <body>
   <div class="container">
-    <p id="message">Loading...</p>
-    <p>If the site did not open automatically, please click <a href="https://www.tradingview.com/pine/" target="_blank" style="color: #4fc3f7;">here</a>.</p>
+    <p>Click the link below to open TradingView Pine Script:</p>
+    <p><a href="https://www.tradingview.com/pine/" target="_blank" style="color: #4fc3f7;">Open TradingView Pine</a></p>
   </div>
 </body>
 </html>
@@ -409,6 +397,11 @@
             const techContainer = document.getElementById('techContainer');
             const cryptoBotContainer = document.getElementById('cryptoBotContainer');
             const cryptoBotItem = document.getElementById('cryptoBotItem');
+            document.addEventListener("DOMContentLoaded", function () {
+                document.querySelector(".tab[data-index='3']").addEventListener("click", function () {
+                window.open("pine.html", "_blank");
+                });
+            });
 
             function updateCarousel(index) {
                 const itemWidth = carouselItems[0].offsetWidth;
