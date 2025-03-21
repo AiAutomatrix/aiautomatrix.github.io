@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PowerShell Code Block</title>
+    <title>Live PowerShell Editor</title>
     
     <!-- Syntax Highlighting -->
     <link rel="stylesheet" 
@@ -14,36 +14,53 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/powershell.min.js"></script>
 
     <style>
-        :root {
-            --neon-green: #00ff00;
-            --background-dark: rgba(0, 0, 0, 0.97);
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: url('/assets/img/nebula.jpeg') no-repeat center center fixed;
-            background-size: cover;
-            min-height: 100vh;
-            font-family: 'Consolas', 'Courier New', monospace;
-        }
-
-        .code-wrapper {
+        /* Add this new CSS */
+        .editor-container {
             position: relative;
             max-width: 100vw;
             min-height: 100vh;
             padding: 4rem 2rem;
-            background: var(--background-dark);
+            background: rgba(0, 0, 0, 0.97);
             backdrop-filter: blur(5px);
         }
 
-        .copy-button {
+        #liveEditor {
+            width: 100%;
+            height: 90vh;
+            background: transparent;
+            border: none;
+            resize: none;
+            color: transparent;
+            caret-color: white;
+            padding: 2rem;
+            font-family: 'Consolas', monospace;
+            font-size: 15px;
+            line-height: 1.6;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        #codeDisplay {
+            position: relative;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .button-group {
             position: fixed;
             top: 1.5rem;
             right: 1.5rem;
-            background: var(--neon-green);
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .editor-button {
+            background: #00ff00;
             color: #000;
-            border: 2px solid var(--neon-green);
+            border: 2px solid #00ff00;
             padding: 0.75rem 1.5rem;
             cursor: pointer;
             border-radius: 4px;
@@ -52,67 +69,70 @@
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
         }
 
-        .copy-button:hover {
+        .editor-button:hover {
             background: #000;
-            color: var(--neon-green);
+            color: #00ff00;
             transform: scale(1.05);
         }
-
-        .hljs {
-            background: transparent !important;
-            padding: 2rem !important;
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        /* PowerShell-specific syntax highlighting */
-        .hljs-function { color: #4ec9b0; }
-        .hljs-keyword { color: #569cd6; }
-        .hljs-variable { color: #9cdcfe; }
-        .hljs-string { color: #ce9178; }
-        .hljs-comment { color: #6a9955; }
     </style>
 </head>
 
 <body>
-    <button class="copy-button" onclick="copyCode()">
-        ⎘ Copy Script
-    </button>
-    
-    <div class="code-wrapper">
-        {% include codeBlock.html %}
+    <div class="button-group">
+        <button class="editor-button" onclick="copyCode()">⎘ Copy</button>
+        <button class="editor-button" onclick="toggleEdit()">✎ Edit</button>
+    </div>
+
+    <div class="editor-container">
+        <!-- Hidden textarea for editing -->
+        <textarea id="liveEditor" spellcheck="false"></textarea>
+        
+        <!-- Highlighted code display -->
+        <pre id="codeDisplay"><code class="language-powershell" id="codeBlock"></code></pre>
     </div>
 
     <script>
+        // Initialize with your default code
+        const initialCode = `{% include codeBlock.html %}`;
+        
+        // Initialize editor
+        const editor = document.getElementById('liveEditor');
+        const codeBlock = document.getElementById('codeBlock');
+        
+        // Load saved code or initial code
+        editor.value = localStorage.getItem('savedCode') || initialCode;
+        codeBlock.textContent = editor.value;
+        
         // Initialize syntax highlighting
         hljs.highlightAll();
 
-        // Modern clipboard handling
+        // Sync editor with highlighted code
+        editor.addEventListener('input', () => {
+            codeBlock.textContent = editor.value;
+            hljs.highlightAll();
+            localStorage.setItem('savedCode', editor.value);
+        });
+
+        // Copy function
         async function copyCode() {
             try {
-                const code = document.querySelector('.hljs').innerText;
-                await navigator.clipboard.writeText(code);
-                
-                // Visual feedback
-                const btn = document.querySelector('.copy-button');
+                await navigator.clipboard.writeText(editor.value);
+                const btn = document.querySelector('[onclick="copyCode()"]');
                 btn.textContent = '✓ Copied!';
-                setTimeout(() => {
-                    btn.textContent = '⎘ Copy Script';
-                }, 2000);
-                
+                setTimeout(() => btn.textContent = '⎘ Copy', 2000);
             } catch (err) {
-                alert('Error copying code: ' + err.message);
+                alert('Error copying: ' + err.message);
             }
         }
 
-        // Add line numbers
-        document.addEventListener('DOMContentLoaded', () => {
-            const code = document.querySelector('.hljs');
-            const lines = code.innerHTML.split('\n');
-            code.innerHTML = lines.map((line, i) => 
-                `<span class="line-number" aria-hidden="true">${i + 1}</span>${line}`
-            ).join('\n');
-        });
+        // Toggle edit mode
+        function toggleEdit() {
+            editor.style.color = editor.style.color === 'transparent' ? '#fff' : 'transparent';
+            editor.style.pointerEvents = editor.style.pointerEvents === 'none' ? 'auto' : 'none';
+        }
+
+        // Initial setup
+        editor.style.height = codeBlock.offsetHeight + 'px';
     </script>
 </body>
 </html>
