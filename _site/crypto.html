@@ -350,9 +350,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/powershell.min.js"></script>
   <style>
-    .editor-container {
+    .container {
       width: 100%;
-      height: 100vh;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .editor-container {
+      width: 80%; /* Adjust width as necessary */
+      height: 80vh; /* Adjust height to fit the carousel */
       overflow: hidden;
       background-color: #012456;
     }
@@ -364,161 +372,166 @@
   </style>
 </head>
 <body>
-  <div id="editor-container" class="editor-container">
-    <iframe id="editorIframe" srcdoc='
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Live PowerShell Editor</title>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/vs2015.min.css">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/powershell.min.js"></script>
-      <style>
-        :root {
-          --button-color: #3a4a5a;
-          --button-accent: #5a6a7a;
-        }
-        body, html {
-          margin: 0;
-          padding: 0;
-          height: 100%;
-          background-color: #012456;
-          color: #ffffff;
-          font-family: Consolas, monospace;
-          display: flex;
-          flex-direction: column;
-        }
-        .button-group {
-          display: flex;
-          justify-content: center;
-          gap: 1rem;
-          padding: 1rem;
-          position: sticky;
-          top: 0;
-          background-color: #012456;
-          z-index: 1000;
-        }
-        .editor-button {
-          background: var(--button-color);
-          color: #fff;
-          border: 1px solid var(--button-accent);
-          padding: 4px 12px;
-          cursor: pointer;
-          border-radius: 3px;
-          font-family: "Segoe UI", sans-serif;
-          font-size: 13px;
-          transition: all 0.2s ease;
-        }
-        .editor-button:hover {
-          background: var(--button-accent);
-          box-shadow: 0 0 8px rgba(90, 106, 122, 0.4);
-        }
-        .editor-main {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          padding: 1rem;
-          overflow: hidden;
-          box-sizing: border-box;
-        }
-        /* Use flex on the textarea and pre so they take up the remaining space without overflowing */
-        .editor-main textarea,
-        .editor-main pre {
-          flex: 1;
-          width: 100%;
-          margin: 0;
-          box-sizing: border-box;
-          font-family: Consolas, monospace;
-          font-size: 14px;
-          line-height: 1.5;
-          background-color: #012456 !important;
-          color: #ffffff !important;
-          padding: 10px !important;
-          overflow: auto !important;
-          resize: none;
-        }
-        /* Hide scrollbars */
-        .editor-main textarea::-webkit-scrollbar,
-        .editor-main pre::-webkit-scrollbar {
-          display: none;
-        }
-        .hljs {
-          background: #012456 !important;
-          color: #ffffff !important;
-        }
-        .hljs-keyword { color: #a8c1f0; }
-        .hljs-string { color: #d69d85; }
-        .hljs-built_in { color: #4ec9b0; }
-        .hljs-variable { color: #9cdcfe; }
-        .hljs-comment { color: #57a64a; }
-        .hljs-function { color: #dcdcaa; }
-      </style>
-    </head>
-    <body>
-      <div class="button-group">
-        <button class="editor-button" onclick="copyCode()">Copy</button>
-        <button class="editor-button" onclick="toggleEdit()">Edit</button>
-      </div>
-      <div class="editor-main">
-        <textarea id="liveEditor" spellcheck="false" style="display: none;"></textarea>
-        <pre id="codeDisplay"><code class="language-powershell" id="codeBlock"></code></pre>
-      </div>
-      <script>
-        let isEditing = false;
-        const editor = document.getElementById("liveEditor");
-        const codeDisplay = document.getElementById("codeDisplay");
-        const codeBlock = document.getElementById("codeBlock");
-        
-        editor.value = localStorage.getItem("savedCode") || "";
-        codeBlock.textContent = editor.value;
-        hljs.highlightAll();
-  
-        function syncContent() {
+  <div id="codeContainer" class="codeContainer">
+    <div id="editor-container" class="editor-container">
+      <iframe id="editorIframe" srcdoc='
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Live PowerShell Editor</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/vs2015.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/powershell.min.js"></script>
+        <style>
+          :root {
+            --button-color: #3a4a5a;
+            --button-accent: #5a6a7a;
+          }
+          body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #012456;
+            color: #ffffff;
+            font-family: Consolas, monospace;
+            display: flex;
+            flex-direction: column;
+          }
+          .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            background-color: #012456;
+            z-index: 1000;
+          }
+          .editor-button {
+            background: var(--button-color);
+            color: #fff;
+            border: 1px solid var(--button-accent);
+            padding: 4px 12px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-family: "Segoe UI", sans-serif;
+            font-size: 13px;
+            transition: all 0.2s ease;
+          }
+          .editor-button:hover {
+            background: var(--button-accent);
+            box-shadow: 0 0 8px rgba(90, 106, 122, 0.4);
+          }
+          .editor-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            overflow: auto;
+            box-sizing: border-box;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+          .editor-main::-webkit-scrollbar {
+            display: none;
+          }
+          textarea, pre {
+            width: 100%;
+            height: calc(100% - 2rem); /* Adjust height for 1rem padding on top and bottom */
+            margin: 0;
+            font-family: Consolas, monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            box-sizing: border-box;
+            background-color: #012456 !important;
+            color: #ffffff !important;
+            padding: 10px !important;
+            overflow: auto !important;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            resize: none;
+          }
+          textarea::-webkit-scrollbar, pre::-webkit-scrollbar {
+            display: none;
+          }
+          .hljs {
+            background: #012456 !important;
+            color: #ffffff !important;
+          }
+          .hljs-keyword { color: #a8c1f0; }
+          .hljs-string { color: #d69d85; }
+          .hljs-built_in { color: #4ec9b0; }
+          .hljs-variable { color: #9cdcfe; }
+          .hljs-comment { color: #57a64a; }
+          .hljs-function { color: #dcdcaa; }
+        </style>
+      </head>
+      <body>
+        <div class="button-group">
+          <button class="editor-button" onclick="copyCode()">Copy</button>
+          <button class="editor-button" onclick="toggleEdit()">Edit</button>
+        </div>
+        <div class="editor-main">
+          <textarea id="liveEditor" spellcheck="false" style="display: none;"></textarea>
+          <pre id="codeDisplay"><code class="language-powershell" id="codeBlock"></code></pre>
+        </div>
+        <script>
+          let isEditing = false;
+          const editor = document.getElementById("liveEditor");
+          const codeDisplay = document.getElementById("codeDisplay");
+          const codeBlock = document.getElementById("codeBlock");
+          
+          editor.value = localStorage.getItem("savedCode") || "";
           codeBlock.textContent = editor.value;
-          hljs.highlightElement(codeBlock);
-          localStorage.setItem("savedCode", editor.value);
-          codeDisplay.scrollTop = editor.scrollTop;
-          codeDisplay.scrollLeft = editor.scrollLeft;
-        }
-  
-        editor.addEventListener("input", syncContent);
-        editor.addEventListener("scroll", () => {
-          codeDisplay.scrollTop = editor.scrollTop;
-          codeDisplay.scrollLeft = editor.scrollLeft;
-        });
-  
-        function toggleEdit() {
-          if (!isEditing) {
-            editor.style.display = "block";
-            codeDisplay.style.display = "none";
-            editor.focus();
-            isEditing = true;
-          } else {
-            editor.style.display = "none";
-            codeDisplay.style.display = "block";
+          hljs.highlightAll();
+    
+          function syncContent() {
             codeBlock.textContent = editor.value;
             hljs.highlightElement(codeBlock);
-            isEditing = false;
+            localStorage.setItem("savedCode", editor.value);
+            codeDisplay.scrollTop = editor.scrollTop;
+            codeDisplay.scrollLeft = editor.scrollLeft;
           }
-        }
-  
-        async function copyCode() {
-          try {
-            await navigator.clipboard.writeText(editor.value);
-            const btn = document.querySelector(".editor-button");
-            btn.textContent = "Copied!";
-            setTimeout(() => { btn.textContent = "Copy"; }, 1500);
-          } catch (err) {
-            alert("Copy error: " + err.message);
+    
+          editor.addEventListener("input", syncContent);
+          editor.addEventListener("scroll", () => {
+            codeDisplay.scrollTop = editor.scrollTop;
+            codeDisplay.scrollLeft = editor.scrollLeft;
+          });
+    
+          function toggleEdit() {
+            if (!isEditing) {
+              editor.style.display = "block";
+              codeDisplay.style.display = "none";
+              editor.focus();
+              isEditing = true;
+            } else {
+              editor.style.display = "none";
+              codeDisplay.style.display = "block";
+              codeBlock.textContent = editor.value;
+              hljs.highlightElement(codeBlock);
+              isEditing = false;
+            }
           }
-        }
-      </script>
-    </body>
-    </html>
-    '>
-    </iframe>
+    
+          async function copyCode() {
+            try {
+              await navigator.clipboard.writeText(editor.value);
+              const btn = document.querySelector(".editor-button");
+              btn.textContent = "Copied!";
+              setTimeout(() => { btn.textContent = "Copy"; }, 1500);
+            } catch (err) {
+              alert("Copy error: " + err.message);
+            }
+          }
+        </script>
+      </body>
+      </html>
+      '>
+      </iframe>
+    </div>
   </div>
 </body>
 </html>
