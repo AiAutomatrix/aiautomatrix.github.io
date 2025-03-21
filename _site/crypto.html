@@ -340,170 +340,182 @@
             <div class="carousel-item">
                 <!-- Heatmap Widget -->
                 <div id="editor-container">
-                    <!-- layouts/codeBlockLayout.html -->
-<!DOCTYPE html>
+                    <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live PowerShell Editor</title>
-    
-    <!-- Syntax Highlighting -->
-    <link rel="stylesheet" 
-          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/vs2015.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/powershell.min.js"></script>
-
-    <style>
-        :root {
-            --button-color: #2b3a4a;  /* Dark grey-blue */
-            --button-accent: #4a5a6a; /* Blue-purple */
-            --neon-green: #00ff00;
-        }
-
-        /* Updated Button Styles */
-        .button-group {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live PowerShell Editor</title>
+  <!-- Syntax Highlighting -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/vs2015.min.css"
+  />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/powershell.min.js"></script>
+  <style>
+    /* Container for the iframe; full-width & full viewport height */
+    .editor-container {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #1e1e1e;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- The iframe now spans the full width -->
+  <div class="editor-container">
+    <iframe
+      id="editorIframe"
+      srcdoc="
+      <!DOCTYPE html>
+      <html lang='en'>
+      <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Live PowerShell Editor</title>
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/vs2015.min.css'>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/powershell.min.js'></script>
+        <style>
+          :root {
+            --button-color: #2b3a4a;
+            --button-accent: #4a5a6a;
+          }
+          /* Ensure the iframe uses the full viewport */
+          body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #111;
             display: flex;
-            gap: 0.5rem;
+            flex-direction: column;
+          }
+          /* Sticky header for buttons */
+          .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            background-color: #111;
             z-index: 1000;
-        }
-
-        .editor-button {
+          }
+          .editor-button {
             background: var(--button-color);
-            color: #fff !important;
+            color: #fff;
             border: 1px solid var(--button-accent);
             padding: 0.5rem 1rem;
             cursor: pointer;
             border-radius: 3px;
             font-size: 0.9rem;
             transition: all 0.2s ease;
-            min-width: 80px;
-        }
-
-        .editor-button:hover {
+          }
+          .editor-button:hover {
             background: var(--button-accent);
-            transform: none;
             box-shadow: 0 0 8px rgba(74, 90, 106, 0.4);
-        }
-
-        /* Improved Editor Layout */
-        #liveEditor {
-            color: #ffffff !important;
-            opacity: 0.9;
-            background: transparent !important;
-            z-index: 2;
+          }
+          /* Main editor area takes the remaining space */
+          .editor-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            overflow: auto;
+          }
+          /* Editor and code display styling */
+          textarea, pre {
             width: 100%;
             height: 100%;
-        }
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            box-sizing: border-box;
+          }
+          pre {
+            padding: 1rem;
+          }
+        </style>
+      </head>
+      <body>
+        <div class='button-group'>
+          <button class='editor-button' onclick='copyCode()'>Copy</button>
+          <button class='editor-button' onclick='toggleEdit()'>Edit</button>
+        </div>
+        <div class='editor-main'>
+          <!-- Initially hide the textarea (editor) -->
+          <textarea id='liveEditor' spellcheck='false' style='display: none;'></textarea>
+          <!-- Code display area is visible by default -->
+          <pre id='codeDisplay'><code class='language-powershell' id='codeBlock'></code></pre>
+        </div>
+        <script>
+          // Set initial editing mode to false (i.e., showing code display)
+          let isEditing = false;
+          const editor = document.getElementById('liveEditor');
+          const codeDisplay = document.getElementById('codeDisplay');
+          const codeBlock = document.getElementById('codeBlock');
 
-        #codeDisplay {
-            position: relative;
-            z-index: 1;
-            padding: 2rem !important;
-        }
+          // Load any saved code or default text
+          editor.value = localStorage.getItem('savedCode') || '';
+          codeBlock.textContent = editor.value;
+          hljs.highlightAll();
 
-        .editor-container {
-            padding-top: 4rem !important;
-        }
+          function syncContent() {
+            codeBlock.textContent = editor.value;
+            hljs.highlightElement(codeBlock);
+            localStorage.setItem('savedCode', editor.value);
+            codeDisplay.scrollTop = editor.scrollTop;
+            codeDisplay.scrollLeft = editor.scrollLeft;
+          }
 
-        /* Sync scrollbars */
-        .scroll-sync {
-            position: relative;
-            overflow: auto;
-        }
+          editor.addEventListener('input', syncContent);
+          editor.addEventListener('scroll', () => {
+            codeDisplay.scrollTop = editor.scrollTop;
+            codeDisplay.scrollLeft = editor.scrollLeft;
+          });
 
-        .scroll-sync > * {
-            overflow: hidden !important;
-        }
-    </style>
-</head>
+          function toggleEdit() {
+            if (!isEditing) {
+              // Switch to editing mode: hide code display, show editor
+              editor.style.display = 'block';
+              codeDisplay.style.display = 'none';
+              // Focus the editor and set its value
+              editor.focus();
+              isEditing = true;
+            } else {
+              // Switch back to view mode: hide editor, show code display
+              editor.style.display = 'none';
+              codeDisplay.style.display = 'block';
+              // Update code display with latest code from the editor
+              codeBlock.textContent = editor.value;
+              hljs.highlightElement(codeBlock);
+              isEditing = false;
+            }
+          }
 
-<body>
-    <div class="button-group">
-        <button class="editor-button" onclick="copyCode()">Copy</button>
-        <button class="editor-button" onclick="toggleEdit()">Edit</button>
-    </div>
-
-    <!-- Wrapper for iframe -->
-    <div class="editor-container scroll-sync">
-        <iframe id="editorIframe" style="width: 100%; height: 100vh; border: none;" srcdoc="
-            <!DOCTYPE html>
-            <html lang='en'>
-            <head>
-                <meta charset='UTF-8'>
-                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                <title>Live PowerShell Editor</title>
-                <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/vs2015.min.css'>
-                <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js'></script>
-                <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/powershell.min.js'></script>
-                <style>
-                    #liveEditor { color: #ffffff !important; opacity: 0.9; background: transparent !important; width: 100%; height: 100%; }
-                    #codeDisplay { position: relative; z-index: 1; padding: 2rem !important; }
-                    .editor-container { padding-top: 4rem !important; }
-                    .scroll-sync { position: relative; overflow: auto; }
-                    .scroll-sync > * { overflow: hidden !important; }
-                </style>
-            </head>
-            <body>
-                <div class='button-group'>
-                    <button class='editor-button' onclick='copyCode()'>Copy</button>
-                    <button class='editor-button' onclick='toggleEdit()'>Edit</button>
-                </div>
-                <div class='editor-container scroll-sync'>
-                    <textarea id='liveEditor' spellcheck='false'></textarea>
-                    <pre id='codeDisplay'><code class='language-powershell' id='codeBlock'></code></pre>
-                </div>
-                <script>
-                    const editor = document.getElementById('liveEditor');
-                    const codeBlock = document.getElementById('codeBlock');
-                    const container = document.querySelector('.scroll-sync');
-
-                    editor.value = localStorage.getItem('savedCode') || '';
-                    codeBlock.textContent = editor.value;
-                    hljs.highlightAll();
-
-                    function syncContent() {
-                        codeBlock.textContent = editor.value;
-                        hljs.highlightElement(codeBlock);
-                        localStorage.setItem('savedCode', editor.value);
-                        codeBlock.scrollTop = editor.scrollTop;
-                        codeBlock.scrollLeft = editor.scrollLeft;
-                    }
-
-                    editor.addEventListener('input', syncContent);
-                    editor.addEventListener('scroll', () => {
-                        codeBlock.scrollTop = editor.scrollTop;
-                        codeBlock.scrollLeft = editor.scrollLeft;
-                    });
-
-                    function toggleEdit() {
-                        editor.style.zIndex = editor.style.zIndex === '2' ? '-1' : '2';
-                        editor.focus();
-                    }
-
-                    async function copyCode() {
-                        try {
-                            await navigator.clipboard.writeText(editor.value);
-                            const btn = document.querySelector('[onclick=\'copyCode()\']');
-                            btn.textContent = 'Copied!';
-                            setTimeout(() => btn.textContent = 'Copy', 1500);
-                        } catch (err) {
-                            alert('Copy error: ' + err.message);
-                        }
-                    }
-
-                    editor.style.height = codeBlock.offsetHeight + 'px';
-                    editor.style.width = codeBlock.offsetWidth + 'px';
-                </script>
-            </body>
-            </html>
-        "></iframe>
-    </div>
-
+          async function copyCode() {
+            try {
+              await navigator.clipboard.writeText(editor.value);
+              const btn = document.querySelector('.editor-button');
+              btn.textContent = 'Copied!';
+              setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+            } catch (err) {
+              alert('Copy error: ' + err.message);
+            }
+          }
+        </script>
+      </body>
+      </html>
+    "
+    ></iframe>
+  </div>
 </body>
 </html>
 
