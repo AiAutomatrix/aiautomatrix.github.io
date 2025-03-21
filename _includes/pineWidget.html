@@ -6,10 +6,14 @@
   <title>Open TradingView Pine</title>
   <script>
     window.onload = function() {
-      // Open TradingView Pine in a new tab
-      window.open("https://www.tradingview.com/pine/", "_blank");
-      // Optional: Inform the user that the site has been opened
-      document.getElementById("message").innerText = "TradingView Pine site has been opened in a new tab.";
+      // Try to open TradingView Pine in a new tab
+      var newTab = window.open("https://www.tradingview.com/pine/", "_blank");
+      // If pop-up is blocked, display a message with a clickable link
+      if (!newTab) {
+        document.getElementById("message").innerText = "Popup was blocked. Please click the link below to open TradingView Pine.";
+      } else {
+        document.getElementById("message").innerText = "TradingView Pine site has been opened in a new tab.";
+      }
     };
   </script>
   <style>
@@ -32,7 +36,7 @@
 </head>
 <body>
   <div class="container">
-    <p id="message"></p>
+    <p id="message">Loading...</p>
     <p>If the site did not open automatically, please click <a href="https://www.tradingview.com/pine/" target="_blank" style="color: #4fc3f7;">here</a>.</p>
   </div>
 </body>
