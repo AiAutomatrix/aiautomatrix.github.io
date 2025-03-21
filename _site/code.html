@@ -14,86 +14,89 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/powershell.min.js"></script>
 
     <style>
-        /* Add this new CSS */
-        .editor-container {
-            position: relative;
-            max-width: 100vw;
-            min-height: 100vh;
-            padding: 4rem 2rem;
-            background: rgba(0, 0, 0, 0.97);
-            backdrop-filter: blur(5px);
+        :root {
+            --button-color: #2b3a4a;  /* Dark grey-blue */
+            --button-accent: #4a5a6a; /* Blue-purple */
+            --neon-green: #00ff00;
         }
 
-        #liveEditor {
-            width: 100%;
-            height: 90vh;
-            background: transparent;
-            border: none;
-            resize: none;
-            color: transparent;
-            caret-color: white;
-            padding: 2rem;
-            font-family: 'Consolas', monospace;
-            font-size: 15px;
-            line-height: 1.6;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
-
-        #codeDisplay {
-            position: relative;
-            z-index: 0;
-            pointer-events: none;
-        }
-
+        /* Updated Button Styles */
         .button-group {
             position: fixed;
-            top: 1.5rem;
-            right: 1.5rem;
+            top: 1rem;
+            right: 1rem;
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             z-index: 1000;
         }
 
         .editor-button {
-            background: #00ff00;
-            color: #000;
-            border: 2px solid #00ff00;
-            padding: 0.75rem 1.5rem;
+            background: var(--button-color);
+            color: #fff !important;
+            border: 1px solid var(--button-accent);
+            padding: 0.5rem 1rem;
             cursor: pointer;
-            border-radius: 4px;
-            font-weight: 600;
+            border-radius: 3px;
+            font-size: 0.9rem;
             transition: all 0.2s ease;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            min-width: 80px;
         }
 
         .editor-button:hover {
-            background: #000;
-            color: #00ff00;
-            transform: scale(1.05);
+            background: var(--button-accent);
+            transform: none;
+            box-shadow: 0 0 8px rgba(74, 90, 106, 0.4);
+        }
+
+        /* Improved Editor Layout */
+        #liveEditor {
+            color: #ffffff !important;
+            opacity: 0.9;
+            background: transparent !important;
+            z-index: 2;
+        }
+
+        #codeDisplay {
+            position: relative;
+            z-index: 1;
+            padding: 2rem !important;
+        }
+
+        .editor-container {
+            padding-top: 4rem !important;
+        }
+
+        /* Sync scrollbars */
+        .scroll-sync {
+            position: relative;
+            overflow: auto;
+        }
+
+        .scroll-sync > * {
+            overflow: hidden !important;
         }
     </style>
 </head>
 
 <body>
     <div class="button-group">
-        <button class="editor-button" onclick="copyCode()">⎘ Copy</button>
-        <button class="editor-button" onclick="toggleEdit()">✎ Edit</button>
+        <button class="editor-button" onclick="copyCode()">Copy</button>
+        <button class="editor-button" onclick="toggleEdit()">Edit</button>
     </div>
 
-    <div class="editor-container">
-        <!-- Hidden textarea for editing -->
+    <div class="editor-container scroll-sync">
         <textarea id="liveEditor" spellcheck="false"></textarea>
-        
-        <!-- Highlighted code display -->
         <pre id="codeDisplay"><code class="language-powershell" id="codeBlock"></code></pre>
     </div>
 
     <script>
-        // Initialize with your default code
-        const initialCode = `<!-- includes/codeBlock.html -->
+        // Initialize editor
+        const editor = document.getElementById('liveEditor');
+        const codeBlock = document.getElementById('codeBlock');
+        const container = document.querySelector('.scroll-sync');
+
+        // Load code
+        editor.value = localStorage.getItem('savedCode') || `<!-- includes/codeBlock.html -->
 <pre><code class="language-powershell">
     # PowerShell Deployment Script
     # Version: 2.3.1
@@ -144,45 +147,48 @@
     
     Deploy-Application @args
     </code></pre>`;
-        
-        // Initialize editor
-        const editor = document.getElementById('liveEditor');
-        const codeBlock = document.getElementById('codeBlock');
-        
-        // Load saved code or initial code
-        editor.value = localStorage.getItem('savedCode') || initialCode;
         codeBlock.textContent = editor.value;
-        
-        // Initialize syntax highlighting
         hljs.highlightAll();
 
-        // Sync editor with highlighted code
-        editor.addEventListener('input', () => {
+        // Improved sync function
+        function syncContent() {
             codeBlock.textContent = editor.value;
-            hljs.highlightAll();
+            hljs.highlightElement(codeBlock);
             localStorage.setItem('savedCode', editor.value);
+            
+            // Sync scroll positions
+            codeBlock.scrollTop = editor.scrollTop;
+            codeBlock.scrollLeft = editor.scrollLeft;
+        }
+
+        // Event listeners
+        editor.addEventListener('input', syncContent);
+        editor.addEventListener('scroll', () => {
+            codeBlock.scrollTop = editor.scrollTop;
+            codeBlock.scrollLeft = editor.scrollLeft;
         });
+
+        // Toggle edit mode
+        function toggleEdit() {
+            editor.style.zIndex = editor.style.zIndex === '2' ? '-1' : '2';
+            editor.focus();
+        }
 
         // Copy function
         async function copyCode() {
             try {
                 await navigator.clipboard.writeText(editor.value);
                 const btn = document.querySelector('[onclick="copyCode()"]');
-                btn.textContent = '✓ Copied!';
-                setTimeout(() => btn.textContent = '⎘ Copy', 2000);
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy', 1500);
             } catch (err) {
-                alert('Error copying: ' + err.message);
+                alert('Copy error: ' + err.message);
             }
-        }
-
-        // Toggle edit mode
-        function toggleEdit() {
-            editor.style.color = editor.style.color === 'transparent' ? '#fff' : 'transparent';
-            editor.style.pointerEvents = editor.style.pointerEvents === 'none' ? 'auto' : 'none';
         }
 
         // Initial setup
         editor.style.height = codeBlock.offsetHeight + 'px';
+        editor.style.width = codeBlock.offsetWidth + 'px';
     </script>
 </body>
 </html>
