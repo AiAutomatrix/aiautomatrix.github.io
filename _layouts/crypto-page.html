@@ -188,6 +188,7 @@
         <div class="tab active" data-index="0">Chart</div>
         <div class="tab" data-index="1">Screener</div>
         <div class="tab" data-index="2">Heatmap</div>
+        <div class="tab" data-index="3">Pinescript</div>
 
         <!-- Toggle Switch for Tech Section -->
         <div class="toggle-container">
@@ -217,6 +218,12 @@
                 <!-- Heatmap Widget -->
                 <div id="heatmapContainer" class="heatmap-container">
                     {% include crypto/widget/heatmap.html %}
+                </div>
+            </div>
+            <div class="carousel-item">
+                <!-- Heatmap Widget -->
+                <div id="Container" class="container">
+                    {% include pineWidget.html %}
                 </div>
             </div>
         </div>
