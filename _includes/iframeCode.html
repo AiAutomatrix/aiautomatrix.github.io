@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Live PowerShell Editor</title>
-  <style>
-    /* Ensure the HTML and body elements take up the full height */
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden; /* Prevent scrolling */
-    }
-
-    /* Make the iframe cover the entire screen */
-    #codeIframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live PowerShell Editor</title>
+    <style>
+        /* Add these CSS fixes */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        /* Make the iframe cover the entire screen */
+        #codeIframe {
+            width: 100%;
+            height: 100vh;  /* Use viewport height units */
+            border: none;
+            display: block;
+        }
+    </style>
 </head>
 <body>
-  <!-- The iframe will now take up the full screen -->
-  <iframe id="codeIframe" src="code.html"></iframe>
+    <iframe id="codeIframe" src="code.html" sandbox="allow-scripts allow-same-origin"></iframe>
 </body>
 </html>
