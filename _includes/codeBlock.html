@@ -3,49 +3,4 @@
     # PowerShell Deployment Script
     # Version: 2.3.1
     # ---------------------------
-    
-    function Deploy-Application {
-        param(
-            [string]$Environment = "prod",
-            [int]$Version = 23
-        )
-    
-        Write-Host "🚀 Starting deployment to $Environment environment..."
-        
-        try {
-            # Validate environment
-            if ($Environment -notin @('dev', 'stage', 'prod')) {
-                Throw "Invalid environment: $Environment"
-            }
-    
-            # Check dependencies
-            $requiredModules = @('Azure', 'AWS.Tools.Common')
-            foreach ($module in $requiredModules) {
-                if (-not (Get-Module -ListAvailable -Name $module)) {
-                    Install-Module -Name $module -Force -Scope CurrentUser
-                }
-            }
-    
-            # Deployment process
-            switch ($Environment) {
-                'dev' {
-                    Update-DevCluster -Version $Version -Verbose
-                }
-                'prod' {
-                    Start-ProductionRollout -Version $Version -CanaryPercentage 10
-                }
-                default {
-                    Deploy-Standard -Env $Environment
-                }
-            }
-    
-            Write-Host "✅ Deployment completed successfully!" -ForegroundColor Green
-        }
-        catch {
-            Write-Error "❌ Deployment failed: $_"
-            Exit 1
-        }
-    }
-    
-    Deploy-Application @args
     </code></pre>
