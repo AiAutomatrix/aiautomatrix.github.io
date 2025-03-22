@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,16 +20,17 @@
 <body>
   <div id="cryptoBotContainer"></div>
   
-  <!-- Load Botpress webchat script -->
+  <!-- Load Botpress webchat script (new version) -->
   <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2025/03/22/21/20250322210922-0INB5GSH.js"></script>
+
   <script>
     window.botpressWebChat.init({
       container: '#cryptoBotContainer',
       host: 'https://cdn.botpress.cloud',
-      botId: 'YOUR_BOT_ID'  // Replace with your actual Bot ID
+      botId: '4be4f96d-3a35-409b-b036-9698bb0226d5'  // Replace with your actual Bot ID
     });
   </script>
-  <script src="https://files.bpcontent.cloud/2025/03/18/20/20250318201418-1WI5ZTT7.js"></script>
 
   <script>
     window.botpressWebChat.onEvent(
@@ -39,6 +39,6 @@
         },
         ["LIFECYCLE.LOADED"]
     );
-</script>
+  </script>
 </body>
 </html>
