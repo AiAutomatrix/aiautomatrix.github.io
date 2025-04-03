@@ -41,373 +41,108 @@
   <div class="tradingview-widget-container__widget"></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
   {
-      "symbols": [
-          {"proName": "BITSTAMP:BTCUSD", "title": "Bitcoin"},
-          {"proName": "BITSTAMP:ETHUSD", "title": "Ethereum"},
-          {"description": "PEPE", "proName": "KUCOIN:PEPEUSDT"},
-          {"description": "PEPE2", "proName": "KUCOIN:PEPE2USDT"},
-          {"description": "MOG", "proName": "BITGET:MOGUSDT"},
-          {"description": "BOB", "proName": "KUCOIN:BOBUSDT"},
-          {"description": "BRETT", "proName": "BITGET:BRETTUSDT"},
-          {"description": "DOGE", "proName": "KUCOIN:DOGEUSDT"},
-          {"description": "SHIB", "proName": "KUCOIN:SHIBUSDT"},
-          {"description": "FLOKI", "proName": "KUCOIN:FLOKIUSDT"},
-          {"description": "TURBO", "proName": "BITGET:TURBOUSDT"}
-      ],
-      "showSymbolLogo": true,
-      "isTransparent": false,
-      "displayMode": "adaptive",
-      "colorTheme": "dark",
-      "locale": "en"
+    "symbols": [
+      {"proName": "BITSTAMP:BTCUSD", "title": "Bitcoin"},
+      {"proName": "BITSTAMP:ETHUSD", "title": "Ethereum"},
+      {"description": "PEPE", "proName": "KUCOIN:PEPEUSDT"},
+      {"description": "PEPE2", "proName": "KUCOIN:PEPE2USDT"},
+      {"description": "MOG", "proName": "BITGET:MOGUSDT"},
+      {"description": "BOB", "proName": "KUCOIN:BOBUSDT"},
+      {"description": "BRETT", "proName": "BITGET:BRETTUSDT"},
+      {"description": "DOGE", "proName": "KUCOIN:DOGEUSDT"},
+      {"description": "SHIB", "proName": "KUCOIN:SHIBUSDT"},
+      {"description": "FLOKI", "proName": "KUCOIN:FLOKIUSDT"},
+      {"description": "TURBO", "proName": "BITGET:TURBOUSDT"}
+    ],
+    "showSymbolLogo": true,
+    "isTransparent": false,
+    "displayMode": "adaptive",
+    "colorTheme": "dark",
+    "locale": "en"
   }
   </script>
 </div>
 
 <div id="particles-js">
-<video autoplay muted loop playsinline id="headerVideo">
-  <source src="/assets/mp4/header.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>    
-
-<div class="header">
-  <h1>
-    <span class="site-title">Ai Automatrix</span>
-    <span class="site-description">Custom AI Bot Marketplace</span>
-  </h1>
+  <video autoplay muted loop playsinline id="headerVideo">
+    <source src="/assets/mp4/header.mp4" type="video/mp4">
+    Your browser emulator does not support the video tag.
+  </video> 
   
-  <div class="top-text-section">
-    Custom AI | Bots | Integrations | Automation
+  <div class="header">
+    <h1>
+      <span class="site-title">Ai Automatrix</span>
+      <span class="site-description">Custom AI Bot Marketplace</span>
+    </h1>
+    
+    <div class="top-text-section">
+      Custom AI | Integrations | Automation
+    </div>
+    
+    <div class="header-icons">
+      <a aria-label="Send email" href="#"><i class="icon fa fa-envelope"></i></a>
+      <a aria-label="My Instagram" target="_blank" href="#"><i class="icon fa fa-instagram" aria-hidden="true"></i></a>
+      <a aria-label="My Facebook" target="_blank" href="#"><i class="icon fa fa-facebook" aria-hidden="true"></i></a>
+      <a aria-label="My Github" target="_blank" href="#"><i class="icon fa fa-github-alt" aria-hidden="true"></i></a>
+    </div>
+    
+    <div class="header-links">
+      <a class="link" href="#about" data-scroll></a>
+      <a class="link" href="/projects.html"></a>
+      <a class="link" href="/carbot.html">Vehicle Value</a>
+      <a class="link" href="/crypto.html"></a>
+      <a class="link" href="/crypto.html">CryptoGPT</a>
+    </div>
   </div>
-
-  <div class="header-icons">
-    <a aria-label="Send email" href="#"><i class="icon fa fa-envelope"></i></a>
-    <a aria-label="My Instagram" target="_blank" href="#"><i class="icon fa fa-instagram" aria-hidden="true"></i></a>
-    <a aria-label="My Facebook" target="_blank" href="#"><i class="icon fa fa-facebook" aria-hidden="true"></i></a>
-    <a aria-label="My Github" target="_blank" href="#"><i class="icon fa fa-github-alt" aria-hidden="true"></i></a>
-  </div>
-
-  <div class="header-links">
-    <a class="link" href="#about" data-scroll>About Me</a>
-    <a class="link" href="/projects.html"></a>
-    <a class="link" href="/crypto.html">CryptoGPT</a>
-  </div>
-
-  <nav>
-    <ul></ul>
-  </nav>
-</div>
-
-<a class="down" href="#about" data-scroll><i class="icon fa fa-chevron-down" aria-hidden="true"></i></a>
 </div>
 
 <style>
-.top-text-section {
-  text-align: center;
-  font-size: 0.85em; 
-  margin: 10px 0;
-  font-weight: normal;
-}
+  .top-text-section {
+    text-align: center;
+    font-size: 0.85em; 
+    margin: 10px 0;
+    font-weight: normal;
+  }
 
-#headerVideo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.1;
-  z-index: -2;
-  pointer-events: none;
-}
+  #headerVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.1;
+    z-index: -2;
+    pointer-events: none;
+  }
 
-/* Transparent overlay on top of video */
-#particles-js::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(46, 55, 91, 0.366);  /* Adjust transparency here */
-  pointer-events: none; /* Ensure the overlay does not interfere with interactions */
-  z-index: 0; /* Ensure the overlay is above the video but below content */
-}
+  /* Transparent overlay on top of video */
+  #particles-js::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(81, 146, 187, 0.367);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* New styles for sticky footer compatibility */
+  #particles-js {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 </style>
-
-    
-    <section id="about">
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-    <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="facebook-domain-verification" content="322dii8h2vmxr6ndgbh67biq0lde1b" />
-  <meta name="google-site-verification" content="cwrUjb5cLEe0UtKVAJcmuAjxKL70S_pg_SnJGw0WM4s" />
-
-  <title>Ai Automatrix</title>
-  <meta name="description" content="A Hub for connecting Ai & automation solutions into your Business.">
-
-  <link rel="stylesheet" href="/assets/css/main.css">
-</head>
-
-    <style>
-        .widget-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-        .widget-container > div {
-            margin: 0 10px;
-        }
-        .tech i {
-            transition: transform 0.3s ease-in-out;
-        }
-        .tech i:hover {
-            transform: scale(1.2);
-        }
-        /* Styling for the table update */
-        .table-section {
-            margin-top: 40px;
-            text-align: center;
-            animation: fadeIn 2s ease-in-out;
-        }
-        .table-section h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        .dynamic-table {
-            width: 100%;
-            max-width: 900px;
-            margin: auto;
-            border-collapse: collapse;
-            border: 1px solid #ddd;
-            font-size: 1.2rem;
-            background: #f9f9f9;
-        }
-        .dynamic-table th, .dynamic-table td {
-            border: 1px solid #ddd;
-            padding: 10px;
-        }
-        .dynamic-table th {
-            background-color: #007bff;
-            color: white;
-        }
-        /* Emoji icons for stages */
-        .emoji {
-            font-size: 1.5rem;
-            margin-right: 10px;
-        }
-        /* Animation effect */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-    </style>
-</head>
-<body>
-    <div class="center-container">
-        <div class="user-details">
-            <h1>My Expertise</h1>
-            <p>Empowering businesses through AI, automation, and seamless integrations. With expertise in cutting-edge tools like Botpress, AWS, and OpenAI, I craft innovative solutions that drive growth and efficiency.</p>
-
-            <p>At AI Automatrix, we specialize in developing and deploying custom ChatGPT4o bots tailored to your unique needs. Our bots come equipped with diverse capabilities, thanks to our expertise in creating custom plugins, web integrations, and automation solutions. Each bot is designed to interact seamlessly with you and your environment, leveraging the latest cutting-edge technology from OpenAI and the Botpress LLMz Engine. Our passionate team at AI Automatrix is dedicated to delivering personalized software solutions that push the boundaries of what's possible in AI.</p>
-        </div>
-        
-        
-
-        <!-- Container for widgets (Design, Code, Tools sections) -->
-        <div class="widget-container">
-            <div class="user">
-                <!-- Design Section -->
-                <div class="tech">
-                    <h2>Design</h2>
-                    <i class="devicon-html5-plain-wordmark colored"></i>
-                    <i class="devicon-css3-plain-wordmark colored"></i>
-                    <i class="devicon-bootstrap-plain-wordmark colored"></i>
-                    <p>Transform your audience’s experience with engaging and intuitive designs. From static HTML/CSS to modern interfaces, our designs breathe life into your brand. Elevate your brand's presence with visuals that inspire and captivate.</p>
-                </div>
-
-                <!-- Code Section -->
-                <div class="tech">
-                    <h2>Code</h2>
-                    <i class="devicon-javascript-plain colored"></i>
-                    <i class="devicon-nodejs-plain-wordmark colored"></i>
-                    <i class="devicon-botpress-plain"></i>
-                    <i class="devicon-openai-plain-wordmark"></i>
-                    <i class="devicon-kucoin-plain-wordmark"></i>
-                    <p>From dynamic front-end interfaces to scalable backend solutions, our coding expertise in JavaScript, Node.js, and cutting-edge tools like Botpress and OpenAI ensures robust performance and seamless functionality.</p>
-                </div>
-
-                <!-- Tools Section -->
-                <div class="tech">
-                    <h2>Tools</h2>
-                    <i class="devicon-git-plain-wordmark"></i>
-                    <i class="devicon-aws-plain-wordmark"></i>
-                    <i class="devicon-openai-plain-wordmark"></i>
-                    <i class="devicon-kucoin-plain-wordmark"></i>
-                    <p>Our toolset includes Git for version control, AWS for cloud deployment, Botpress for automation, and Kucoin for cryptocurrency integrations. Experience seamless workflows with the latest technologies at your fingertips.</p>
-                </div>
-            </div>
-        </div>
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Bot Development & Integration Flow</title>
-    
-    <!-- Compiled CSS from the SCSS file -->
-    <style>
-        .dynamic-table {
-            width: 100%;
-            max-width: 900px;
-            margin: auto;
-            border-collapse: collapse;
-            border: 1px solid #ddd;
-            font-size: 1.2rem;
-            background: #f9f9f9;
-            transition: transform 0.5s ease-in-out; /* Smooth transition for sliding effect */
-        }
-        .dynamic-table th, .dynamic-table td {
-            border: 1px solid #ddd;
-            padding: 10px;
-        }
-        .dynamic-table th {
-            background-color: #007bff;
-            color: white;
-        }
-        .table-section {
-            margin-top: 40px;
-            text-align: center;
-            animation: fadeIn 2s ease-in-out;
-        }
-        .table-section h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        .emoji {
-            font-size: 1.5rem;
-            margin-right: 10px;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Responsive styles for the table */
-        @media (max-width: 768px) {
-            .dynamic-table {
-                font-size: 0.9rem;
-            }
-            .dynamic-table th, .dynamic-table td {
-                padding: 5px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Table Section -->
-    <div class="table-section">
-        <h2>AI Bot Development & Integration Flow</h2>
-        <div class="dynamic-table-wrapper">
-            <table class="dynamic-table">
-                <thead>
-                    <tr>
-                        <th>Stage</th>
-                        <th>Description</th>
-                        <th>Tools/Technologies</th>
-                        <th>Outcome</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="emoji">💼</span>Client Purchase</td>
-                        <td>Client selects and buys a custom AI bot from Aiautomatrix's website.</td>
-                        <td>Website form, Botpress Knowledgebase API</td>
-                        <td>Client details and project requirements are captured automatically.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="emoji">⚙️</span>Automated Setup</td>
-                        <td>Botpress uses the client details to automatically configure the bot's knowledgebase and setup environment.</td>
-                        <td>Botpress LLMz Engine, AWS Lambda</td>
-                        <td>A customized bot is developed with the client’s specific data and requirements.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="emoji">📚</span>Knowledgebase Setup</td>
-                        <td>Using client input (docs, images, etc.), the bot’s knowledgebase is built to reflect the company’s services.</td>
-                        <td>Botpress Knowledgebase API, OpenAI's ChatGPT4o</td>
-                        <td>A domain-specific bot ready for deployment.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="emoji">🔗</span>Bot Integration</td>
-                        <td>API code snippets are shared with the client to integrate the bot into their platform.</td>
-                        <td>API integrations, Webhook code snippets</td>
-                        <td>Client can easily integrate the bot into their system.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="emoji">🛠️</span>Custom Project Development</td>
-                        <td>Client hires our team to build out a custom AI or automation solution.</td>
-                        <td>OpenAI's ChatGPT4o, Botpress LLMz Engine, AWS Lambda, Webhooks</td>
-                        <td>Fully customized AI solution delivered.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="emoji">🔄</span>Ongoing Updates & Support</td>
-                        <td>Aiautomatrix team provides ongoing updates and support for the deployed bots.</td>
-                        <td>Botpress Knowledgebase API, AWS Lambda, Botpress Studio</td>
-                        <td>The bot evolves with the client’s business needs.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- Compiled JS from the table-carousel.js file -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const table = document.querySelector('.dynamic-table');
-            const tableWrapper = document.querySelector('.dynamic-table-wrapper');
-            const totalColumns = table.querySelectorAll('thead th').length;
-            const columnsToShow = 3; // Number of columns to display
-            const totalWidth = 100 / (totalColumns - 1); // Percentage width per column
-            let currentIndex = 0;
-            let isMobile = window.matchMedia("(max-width: 500px)").matches;
-
-            function updateTable() {
-                const offset = -currentIndex * totalWidth;
-                table.style.transform = `translateX(${offset}%)`;
-            }
-
-            function slideColumns() {
-                if (isMobile) {
-                    currentIndex = (currentIndex + 1) % (totalColumns - columnsToShow + 1);
-                    updateTable();
-                }
-            }
-
-            function checkScreenSize() {
-                isMobile = window.matchMedia("(max-width: 500px)").matches;
-                if (!isMobile) {
-                    // Reset the table if not on mobile
-                    table.style.transform = 'translateX(0%)';
-                }
-            }
-
-            window.addEventListener('resize', checkScreenSize);
-            setInterval(slideColumns, 5000); // Slide every 5 seconds
-        });
-    </script>
-</body>
-</html>
-
-
-    </div>
-</body>
-</html>
-
-    </section>
 
     <footer class="footer">
     <p>&copy; Ai Automatrix</p>

@@ -1,0 +1,3 @@
+<section id="about">
+        {% include about.html %}
+    </section>
