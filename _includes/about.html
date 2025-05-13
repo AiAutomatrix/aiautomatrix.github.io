@@ -1,109 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% include head.html %}
-    <style>
-        .widget-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-        .widget-container > div {
-            margin: 0 10px;
-        }
-        .tech i {
-            transition: transform 0.3s ease-in-out;
-        }
-        .tech i:hover {
-            transform: scale(1.2);
-        }
-        /* Styling for the table update */
-        .table-section {
-            margin-top: 40px;
-            text-align: center;
-            animation: fadeIn 2s ease-in-out;
-        }
-        .table-section h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        .dynamic-table {
-            width: 100%;
-            max-width: 900px;
-            margin: auto;
-            border-collapse: collapse;
-            border: 1px solid #ddd;
-            font-size: 1.2rem;
-            background: #f9f9f9;
-        }
-        .dynamic-table th, .dynamic-table td {
-            border: 1px solid #ddd;
-            padding: 10px;
-        }
-        .dynamic-table th {
-            background-color: #007bff;
-            color: white;
-        }
-        /* Emoji icons for stages */
-        .emoji {
-            font-size: 1.5rem;
-            margin-right: 10px;
-        }
-        /* Animation effect */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-    </style>
-</head>
-<body>
-    <div class="center-container">
-        <div class="user-details">
-            <h1>My Expertise</h1>
-            <p>Empowering businesses through AI, automation, and seamless integrations. With expertise in cutting-edge tools like Botpress, AWS, and OpenAI, I craft innovative solutions that drive growth and efficiency.</p>
+    <div class="user-details">
+        <h1>My Expertise</h1>
+        <p>Empowering businesses through AI, automation, and seamless integrations. With expertise in cutting-edge tools like Botpress, AWS, and OpenAI, I craft innovative solutions that drive growth and efficiency.</p>
 
-            <p>{{site.user_description}}</p>
-        </div>
-        
-        {{ content }}
+        <p>{{site.user_description}}</p>
+    </div>
 
-        <!-- Container for widgets (Design, Code, Tools sections) -->
-        <div class="widget-container">
-            <div class="user">
-                <!-- Design Section -->
-                <div class="tech">
-                    <h2>Design</h2>
-                    <i class="devicon-html5-plain-wordmark colored"></i>
-                    <i class="devicon-css3-plain-wordmark colored"></i>
-                    <i class="devicon-bootstrap-plain-wordmark colored"></i>
-                    <p>Transform your audience’s experience with engaging and intuitive designs. From static HTML/CSS to modern interfaces, our designs breathe life into your brand. Elevate your brand's presence with visuals that inspire and captivate.</p>
-                </div>
+    {{ content }}
 
-                <!-- Code Section -->
-                <div class="tech">
-                    <h2>Code</h2>
-                    <i class="devicon-javascript-plain colored"></i>
-                    <i class="devicon-nodejs-plain-wordmark colored"></i>
-                    <i class="devicon-botpress-plain"></i>
-                    <i class="devicon-openai-plain-wordmark"></i>
-                    <i class="devicon-kucoin-plain-wordmark"></i>
-                    <p>From dynamic front-end interfaces to scalable backend solutions, our coding expertise in JavaScript, Node.js, and cutting-edge tools like Botpress and OpenAI ensures robust performance and seamless functionality.</p>
-                </div>
+    <!-- Container for widgets (Design, Code, Tools sections) -->
+    <div class="widget-container">
+        <div class="user">
+            <!-- Design Section -->
+            <div class="tech">
+                <h2>Design</h2>
+                <i class="devicon-html5-plain-wordmark colored"></i>
+                <i class="devicon-css3-plain-wordmark colored"></i>
+                <i class="devicon-bootstrap-plain-wordmark colored"></i>
+                <p>Transform your audience’s experience with engaging and intuitive designs. From static HTML/CSS to modern interfaces, our designs breathe life into your brand. Elevate your brand's presence with visuals that inspire and captivate.</p>
+            </div>
 
-                <!-- Tools Section -->
-                <div class="tech">
-                    <h2>Tools</h2>
-                    <i class="devicon-git-plain-wordmark"></i>
-                    <i class="devicon-aws-plain-wordmark"></i>
-                    <i class="devicon-openai-plain-wordmark"></i>
-                    <i class="devicon-kucoin-plain-wordmark"></i>
-                    <p>Our toolset includes Git for version control, AWS for cloud deployment, Botpress for automation, and Kucoin for cryptocurrency integrations. Experience seamless workflows with the latest technologies at your fingertips.</p>
-                </div>
+            <!-- Code Section -->
+            <div class="tech">
+                <h2>Code</h2>
+                <i class="devicon-javascript-plain colored"></i>
+                <i class="devicon-nodejs-plain-wordmark colored"></i>
+                <i class="devicon-botpress-plain"></i>
+                <i class="devicon-openai-plain-wordmark"></i>
+                <i class="devicon-kucoin-plain-wordmark"></i>
+                <p>From dynamic front-end interfaces to scalable backend solutions, our coding expertise in JavaScript, Node.js, and cutting-edge tools like Botpress and OpenAI ensures robust performance and seamless functionality.</p>
+            </div>
+
+            <!-- Tools Section -->
+            <div class="tech">
+                <h2>Tools</h2>
+                <i class="devicon-git-plain-wordmark"></i>
+                <i class="devicon-aws-plain-wordmark"></i>
+                <i class="devicon-openai-plain-wordmark"></i>
+                <i class="devicon-kucoin-plain-wordmark"></i>
+                <p>Our toolset includes Git for version control, AWS for cloud deployment, Botpress for automation, and Kucoin for cryptocurrency integrations. Experience seamless workflows with the latest technologies at your fingertips.</p>
             </div>
         </div>
-        
-
     </div>
-</body>
-</html>

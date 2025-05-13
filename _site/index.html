@@ -33,124 +33,527 @@
             position: relative;
             z-index: 2;
         }
+        /* Basic styling for main content area */
+        main {
+            padding: 20px; /* Add some padding */
+            /* Add styles for Replit-like layout, e.g., flexbox or grid */
+        }
+        /* Centering text and content inside the sections */
+        section {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 40px;
+        }
+        .cta-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .cta-button:hover {
+            background-color: #45a049;
+        }
+        /* Pricing Table Styling */
+        .pricing-table {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .pricing-tier {
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            padding: 20px;
+            width: 250px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .pricing-tier h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .pricing-tier ul {
+            text-align: left;
+            padding-left: 20px;
+        }
+        .pricing-tier ul li {
+            margin-bottom: 10px;
+        }
+        .pricing-tier .price-range {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c9f45;
+            margin-top: 20px;
+        }
+        .retainer-section {
+            background-color: #f8f8f8;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .retainer-plan {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .retainer-plan h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .retainer-plan ul {
+            text-align: left;
+            padding-left: 20px;
+        }
+        .retainer-plan ul li {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
-    <!-- TradingView Widget: Ticker Tape -->
-<div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
-  <script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script src="/assets/js/sweet-scroll.min.js"></script>
-<script src="/assets/js/main.js"></script>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-  {
-    "symbols": [
-      {"proName": "BITSTAMP:BTCUSD", "title": "Bitcoin"},
-      {"proName": "BITSTAMP:ETHUSD", "title": "Ethereum"},
-      {"description": "PEPE", "proName": "KUCOIN:PEPEUSDT"},
-      {"description": "PEPE2", "proName": "KUCOIN:PEPE2USDT"},
-      {"description": "MOG", "proName": "BITGET:MOGUSDT"},
-      {"description": "BOB", "proName": "KUCOIN:BOBUSDT"},
-      {"description": "BRETT", "proName": "BITGET:BRETTUSDT"},
-      {"description": "DOGE", "proName": "KUCOIN:DOGEUSDT"},
-      {"description": "SHIB", "proName": "KUCOIN:SHIBUSDT"},
-      {"description": "FLOKI", "proName": "KUCOIN:FLOKIUSDT"},
-      {"description": "TURBO", "proName": "BITGET:TURBOUSDT"}
-    ],
-    "showSymbolLogo": true,
-    "isTransparent": false,
-    "displayMode": "adaptive",
-    "colorTheme": "dark",
-    "locale": "en"
-  }
-  </script>
-</div>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Site</title>
+  <!-- Include Particles.js -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-<div id="particles-js">
-  <video autoplay muted loop playsinline id="headerVideo">
-    <source src="/assets/mp4/header.mp4" type="video/mp4">
-    Your browser emulator does not support the video tag.
-  </video> 
-  
-  <div class="header">
-    <h1>
-      <span class="site-title">Ai Automatrix</span>
-      <span class="site-description">Playground</span>
-    </h1>
-    
-    <div class="top-text-section">
-      Custom AI | Integrations | Automation
+  <!-- Navigation Menu (Crypto-Style) -->
+  <header>
+    <div class="nav-container">
+      <ul class="nav-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/projects.html">Projects</a></li>
+        <li><a href="/carbot.html">Vehicle-GPT</a></li>
+        <li><a href="/parlay.html">Sport-GPT</a></li>
+        <li><a href="/crypto.html">Crypto-GPT</a></li>
+      </ul>
     </div>
-    
-    <div class="header-icons">
-      <a aria-label="Send email" href="#"><i class="icon fa fa-envelope"></i></a>
-      <a aria-label="My Instagram" target="https://www.instagram.com/bigtimetreat?igsh=MXVqcGhqdWVlOHJ0dA==" href="#"><i class="icon fa fa-instagram" aria-hidden="true"></i></a>
-      <a aria-label="My Facebook" target="_blank" href="#"><i class="icon fa fa-facebook" aria-hidden="true"></i></a>
-      <a aria-label="My Github" target="_blank" href="#"><i class="icon fa fa-github-alt" aria-hidden="true"></i></a>
-    </div>
-    
-    <div class="header-links">
-      <a class="link" href="#about" data-scroll></a>
-      <a class="link" href="/projects.html"></a>
-      <a class="link" href="/carbot.html">Vehicle-GPT</a>
-      <a class="link" href="/parlay.html">Sport-GPT</a>
-      <a class="link" href="/crypto.html">Crypto-GPT</a>
+  </header>
+
+  <!-- TradingView Widget: Ticker Tape -->
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+        "symbols": [
+          {"proName": "BITSTAMP:BTCUSD", "title": "Bitcoin"},
+          {"proName": "BITSTAMP:ETHUSD", "title": "Ethereum"},
+          {"description": "PEPE", "proName": "KUCOIN:PEPEUSDT"},
+          {"description": "PEPE2", "proName": "KUCOIN:PEPE2USDT"},
+          {"description": "MOG", "proName": "BITGET:MOGUSDT"},
+          {"description": "BOB", "proName": "KUCOIN:BOBUSDT"},
+          {"description": "BRETT", "proName": "BITGET:BRETTUSDT"},
+          {"description": "DOGE", "proName": "KUCOIN:DOGEUSDT"},
+          {"description": "SHIB", "proName": "KUCOIN:SHIBUSDT"},
+          {"description": "FLOKI", "proName": "KUCOIN:FLOKIUSDT"},
+          {"description": "TURBO", "proName": "BITGET:TURBOUSDT"}
+        ],
+        "showSymbolLogo": true,
+        "isTransparent": false,
+        "displayMode": "adaptive",
+        "colorTheme": "dark",
+        "locale": "en"
+      }
+    </script>
+  </div>
+
+  <!-- Video Background and Header -->
+  <div id="particles-js">
+    <video autoplay muted loop playsinline id="headerVideo">
+      <source src="/assets/mp4/header.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <div class="header">
+      <h1>
+        <span class="site-title">Ai Automatrix</span>
+        <span class="site-description">Playground</span>
+      </h1>
+
+      <div class="top-text-section">
+        Custom AI | Integrations | Automation
+      </div>
+
+      <div class="header-icons">
+        <a aria-label="Send email" href="#"><i class="icon fa fa-envelope"></i></a>
+        <a aria-label="My Instagram" href="https://www.instagram.com/bigtimetreat" target="_blank"><i class="icon fa fa-instagram" aria-hidden="true"></i></a>
+        <a aria-label="My Facebook" href="#" target="_blank"><i class="icon fa fa-facebook" aria-hidden="true"></i></a>
+        <a aria-label="My Github" href="#" target="_blank"><i class="icon fa fa-github-alt" aria-hidden="true"></i></a>
+      </div>
     </div>
   </div>
-</div>
 
-<style>
-  .top-text-section {
-    text-align: center;
-    font-size: 0.85em; 
-    margin: 10px 0;
-    font-weight: normal;
-  }
+  <style>
+    /* Navigation Bar */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #333;
+      z-index: 10;
+    }
 
-  #headerVideo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.1;
-    z-index: -2;
-    pointer-events: none;
-  }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 20px;
+    }
 
-  /* Transparent overlay on top of video */
-  #particles-js::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(81, 146, 187, 0.367);
-    pointer-events: none;
-    z-index: 0;
-  }
+    .nav-menu {
+      display: flex;
+      justify-content: center;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
 
-  /* New styles for sticky footer compatibility */
-  #particles-js {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .header {
-    flex: 1;
-    display: flex;
-    margin-top: -110px;
-    flex-direction: column;
-    justify-content: center;
-  }
-</style>
+    .nav-menu li {
+      margin: 0 15px;
+    }
 
-   
+    .nav-menu a {
+      color: #00f7ff;
+      background: transparent;
+      padding: 10px 15px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 247, 255, 0.3);
+      box-shadow: 0 0 12px rgba(0, 247, 255, 0.4);
+    }
 
-    <!-- Botpress Webchat Integration -->
+    .nav-menu a:hover {
+      background: rgba(0, 247, 255, 0.1);
+      color: #00f7ff;
+      box-shadow: 0 0 18px #00f7ff, inset 0 0 8px #00f7ff;
+    }
+
+    /* TradingView Widget */
+    .tradingview-widget-container {
+      margin-top: 0;
+      padding-top: 0;
+      z-index: 20;
+    }
+
+    /* Video Background */
+    #headerVideo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.15;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    /* Transparent overlay on top of video */
+    #particles-js::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(81, 146, 187, 0.367);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Header Section */
+    #particles-js {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      z-index: 1;
+      margin-top: 0;
+    }
+
+    .top-text-section {
+      text-align: center;
+      font-size: 1em;
+      margin: 10px 0;
+      font-weight: normal;
+    }
+
+    .header-icons {
+      margin-top: 15px;
+    }
+
+    .header-icons a {
+      margin: 0 10px;
+      color: #fff;
+      font-size: 20px;
+      transition: color 0.3s ease;
+    }
+
+    .header-icons a:hover {
+      color: #00bfff;
+    }
+  </style>
+
+  <!-- Particles.js Initialization -->
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: {
+          value: 100,
+          density: {
+            enable: true,
+            value_area: 800
+          }
+        },
+        color: {
+          value: "#00f7ff"
+        },
+        shape: {
+          type: "circle",
+          stroke: {
+            width: 0,
+            color: "#fff"
+          }
+        },
+        opacity: {
+          value: 0.5,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 0.5,
+            opacity_min: 0.1,
+            sync: false
+          }
+        },
+        size: {
+          value: 5,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 1,
+            size_min: 0.1,
+            sync: false
+          }
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#00f7ff",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 3,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false,
+          attract: {
+            enable: false,
+            rotateX: 600,
+            rotateY: 1200
+          }
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: {
+            enable: true,
+            mode: "repulse"
+          },
+          onclick: {
+            enable: true,
+            mode: "push"
+          }
+        },
+        modes: {
+          grab: {
+            distance: 400,
+            line_linked: {
+              opacity: 1
+            }
+          },
+          repulse: {
+            distance: 100,
+            duration: 0.4
+          },
+          push: {
+            particles_nb: 4
+          }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+
+</body>
+</html>
+
+        <div class="user-details">
+        <h1>My Expertise</h1>
+        <p>Empowering businesses through AI, automation, and seamless integrations. With expertise in cutting-edge tools like Botpress, AWS, and OpenAI, I craft innovative solutions that drive growth and efficiency.</p>
+
+        <p>At AI Automatrix, we specialize in developing and deploying custom ChatGPT4o bots tailored to your unique needs. Our bots come equipped with diverse capabilities, thanks to our expertise in creating custom plugins, web integrations, and automation solutions. Each bot is designed to interact seamlessly with you and your environment, leveraging the latest cutting-edge technology from OpenAI and the Botpress LLMz Engine. Our passionate team at AI Automatrix is dedicated to delivering personalized software solutions that push the boundaries of what's possible in AI.</p>
+    </div>
+
+    
+
+    <!-- Container for widgets (Design, Code, Tools sections) -->
+    <div class="widget-container">
+        <div class="user">
+            <!-- Design Section -->
+            <div class="tech">
+                <h2>Design</h2>
+                <i class="devicon-html5-plain-wordmark colored"></i>
+                <i class="devicon-css3-plain-wordmark colored"></i>
+                <i class="devicon-bootstrap-plain-wordmark colored"></i>
+                <p>Transform your audience’s experience with engaging and intuitive designs. From static HTML/CSS to modern interfaces, our designs breathe life into your brand. Elevate your brand's presence with visuals that inspire and captivate.</p>
+            </div>
+
+            <!-- Code Section -->
+            <div class="tech">
+                <h2>Code</h2>
+                <i class="devicon-javascript-plain colored"></i>
+                <i class="devicon-nodejs-plain-wordmark colored"></i>
+                <i class="devicon-botpress-plain"></i>
+                <i class="devicon-openai-plain-wordmark"></i>
+                <i class="devicon-kucoin-plain-wordmark"></i>
+                <p>From dynamic front-end interfaces to scalable backend solutions, our coding expertise in JavaScript, Node.js, and cutting-edge tools like Botpress and OpenAI ensures robust performance and seamless functionality.</p>
+            </div>
+
+            <!-- Tools Section -->
+            <div class="tech">
+                <h2>Tools</h2>
+                <i class="devicon-git-plain-wordmark"></i>
+                <i class="devicon-aws-plain-wordmark"></i>
+                <i class="devicon-openai-plain-wordmark"></i>
+                <i class="devicon-kucoin-plain-wordmark"></i>
+                <p>Our toolset includes Git for version control, AWS for cloud deployment, Botpress for automation, and Kucoin for cryptocurrency integrations. Experience seamless workflows with the latest technologies at your fingertips.</p>
+            </div>
+        </div>
+    </div>
+
+<main>
+        
+
+        <!-- What You Get Section -->
+        <section id="what-you-get" class="what-you-get-section terminal-panel">
+            <h2>What You Get</h2>
+            <p>Our comprehensive package includes:</p>
+            <ul style="list-style-type: none; padding: 0;">
+                <li>A modern, Replit-style business website.</li>
+                <li>Custom AI chatbot integration for customer support.</li>
+                <li>Basic SEO optimization.</li>
+                <li>Assistance with initial marketing campaign setup.</li>
+            </ul>
+            <p>Get everything you need to launch your online presence and enhance customer interaction.</p>
+        </section>
+
+        <!-- Pricing Table Section -->
+        <section id="pricing" class="pricing-section terminal-panel">
+            <h2>💸 Base Website + AI Chatbot Package Pricing</h2>
+            <div class="pricing-table">
+                <div class="pricing-tier">
+                    <h3>Starter</h3>
+                    <ul>
+                        <li>One-page or 3-section website</li>
+                        <li>Mobile-friendly</li>
+                        <li>AI chatbot for FAQs or lead capture</li>
+                    </ul>
+                    <p class="price-range">$300–$600 one-time</p>
+                </div>
+                <div class="pricing-tier">
+                    <h3>Pro</h3>
+                    <ul>
+                        <li>Multi-page site</li>
+                        <li>Chatbot with form memory</li>
+                        <li>Custom branding, Google Maps</li>
+                        <li>Contact form</li>
+                    </ul>
+                    <p class="price-range">$600–$1,200 one-time</p>
+                </div>
+                <div class="pricing-tier">
+                    <h3>Premium</h3>
+                    <ul>
+                        <li>Full small biz site</li>
+                        <li>AI tool (scheduler, price quote estimator, etc.)</li>
+                        <li>SEO basics, analytics</li>
+                    </ul>
+                    <p class="price-range">$1,200–$2,500 one-time</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Retainer Section -->
+        <section class="retainer-section">
+            <h2>🔁 Monthly Retainer Ideas (Recurring Revenue)</h2>
+            <div class="retainer-plan">
+                <h4>Basic Website Updates</h4>
+                <ul>
+                    <li>Text/image changes, minor tweaks</li>
+                </ul>
+                <p class="price-range">$50–$150/month</p>
+            </div>
+            <div class="retainer-plan">
+                <h4>AI Assistant Tuning</h4>
+                <ul>
+                    <li>Update chatbot replies, improve flows, add FAQs</li>
+                </ul>
+                <p class="price-range">$100–$300/month</p>
+            </div>
+            <div class="retainer-plan">
+                <h4>SEO Optimization & Monitoring</h4>
+                <ul>
+                    <li>Monthly keyword report, local SEO tweaks, backlinks check</li>
+                </ul>
+                <p class="price-range">$200–$500/month</p>
+            </div>
+            <div class="retainer-plan">
+                <h4>Campaign Management (Add-on)</h4>
+                <ul>
+                    <li>Google Ads setup, email blasts, or seasonal campaign landing pages</li>
+                </ul>
+                <p class="price-range">$300–$1,000/month</p>
+            </div>
+
+        </section>
+
+        <!-- Pro Tips Section -->
+        <section class="pro-tips-section">
+            <h2>🚀 Pro Tips</h2>
+            <ul>
+                <li>Offer free chatbot audits: Show how AI could help their biz.</li>
+                <li>Use urgency: "I'm only onboarding 3 new businesses this month."</li>
+                <li>Create demo videos: 60 seconds showing a Replit site with a chatbot solving a real problem (booking, answering, quoting, etc.)</li>
+            </ul>
+        </section>
+
+</main>
+
+<footer class="footer">
+    <p>&copy; Ai Automatrix</p>
+    <p>Build wealth with Ai-Automatrix and <span class="love">❤</span> by <a href="https://github.com/nrandecker">Garret Friesen</a></p>
+</footer>
 
 </body>
 </html>
