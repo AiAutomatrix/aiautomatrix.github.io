@@ -91,6 +91,68 @@
         }
 
     </style>
+    <style>
+        /* New styles for pricing cards */
+        .pricing-cards-container {
+            display: flex;
+            justify-content: center; /* Changed to center to center the group of cards */
+            /* Removed flex-wrap: wrap; to keep cards in one row */
+            gap: 20px; /* Space between cards */
+            margin: 20px auto; /* Added auto margins to center the container itself */
+            max-width: 900px; /* Adjusted max-width to match the section for better centering */
+        }
+
+        .pricing-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            flex: 1; /* Allow cards to grow and shrink equally */
+            /* Removed min-width and max-width to allow flex to control sizing */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Distribute space vertically */
+        }
+
+        .pricing-card h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .pricing-card ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: left; /* Align list items to the left within the card */
+            margin-bottom: 20px;
+            flex-grow: 1; /* Allow the list to take up available space */
+        }
+
+        .pricing-card ul li {
+            margin-bottom: 10px;
+        }
+
+        .pricing-card .price-range {
+            font-size: 1.2em;
+            color: #007bff; /* Example color */
+            margin-bottom: 20px;
+        }
+
+        .purchase-button {
+            background-color: #007bff; /* Example button color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .purchase-button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+    </style>
 </head>
 <body>
     {% include header.html %}
@@ -114,8 +176,8 @@
         <!-- Pricing Table Section -->
         <section id="pricing" class="pricing-section terminal-panel">
             <h2>💸 Base Website + AI Chatbot Package Pricing</h2>
-            <div class="pricing-table">
-                <div class="pricing-tier">
+            <div class="pricing-cards-container">
+                <div class="pricing-card">
                     <h3>Starter</h3>
                     <ul>
                         <li>One-page or 3-section website</li>
@@ -123,8 +185,9 @@
                         <li>AI chatbot for FAQs or lead capture</li>
                     </ul>
                     <p class="price-range">$800–$1,000 one-time</p>
+                    <button class="purchase-button">Purchase</button>
                 </div>
-                <div class="pricing-tier">
+                <div class="pricing-card">
                     <h3>Pro</h3>
                     <ul>
                         <li>Multi-page site</li>
@@ -133,8 +196,9 @@
                         <li>Contact form</li>
                     </ul>
                     <p class="price-range">$1,600–$2,200 one-time</p>
+                    <button class="purchase-button">Purchase</button>
                 </div>
-                <div class="pricing-tier">
+                <div class="pricing-card">
                     <h3>Premium</h3>
                     <ul>
                         <li>Full small biz site</li>
@@ -142,6 +206,7 @@
                         <li>SEO basics, analytics</li>
                     </ul>
                     <p class="price-range">$3,000–$5,500 one-time</p>
+                    <button class="purchase-button">Purchase</button>
                 </div>
             </div>
         </section>
