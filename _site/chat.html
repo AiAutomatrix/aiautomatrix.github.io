@@ -62,7 +62,11 @@
     botpress.open();
   });
 </script>
-
+<script>
+  window.botpressWebChat.onEvent(function () {
+    window.botpressWebChat.sendEvent({ type: "show" });
+  }, ["LIFECYCLE.LOADED"]);
+</script>
 
   
   
