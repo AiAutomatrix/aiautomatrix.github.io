@@ -57,7 +57,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.857); /* Adjust the alpha value for transparency */
+            background: rgba(255, 255, 255, 0.928); /* Adjust the alpha value for transparency */
             pointer-events: none; /* Ensure the overlay does not interfere with any interactions */
             z-index: 1; /* Ensure the overlay is above the background but below any other content */
         }
@@ -70,94 +70,384 @@
     </style>
 </head>
 <body>
-    <div id="particles-js">
-  <video autoplay muted loop playsinline id="headerVideo">
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Site</title>
+    <!-- Include Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
 
-    <source src="/assets/mp4/header.mp4" type="video/mp4">
-    
-    Your browser does not support the video tag.
-    
-    </video>    
-    <div class="header">
-      <h1>
-        <span class="site-title">Ai Automatrix</span>
-        <span class="site-description">Available Custom ChatGPT4o Bot Demo's</span>
-      </h1>
-      <!-- Adding the top text section below the Botpress marketplace line -->
-      <div class="top-text-section">
-        Creative | Content | Business | Tools
-      </div>
-  
-      <div class="header-icons">
-        <a aria-label="Send email" href="#"><i class="icon fa fa-envelope"></i></a>
-        <a aria-label="My Instagram" target="_blank" href="#"><i class="icon fa fa-instagram" aria-hidden="true"></i></a>
-        <a aria-label="My Facebook" target="_blank" href="#"><i class="icon fa fa-facebook" aria-hidden="true"></i></a>
-        <a aria-label="My Github" target="_blank" href="#"><i class="icon fa fa-github-alt" aria-hidden="true"></i></a>
-      </div>
-      <div class="header-links">
-        <a class="link" href="/">Home</a>
-        <a class="link" href="/crypto.html">Crypto</a>
-      </div>
-      <nav>
-        <ul>
-        </ul>
-      </nav>
-    </div>
-    <a class="down" href="#projects" data-scroll><i class="icon fa fa-chevron-down" aria-hidden="true"></i></a>
-  </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Delay the scroll by 2 seconds (2000 milliseconds)
-      setTimeout(function() {
-        const projectsSection = document.querySelector('#projects');
-        if (projectsSection) {
-          // Smooth scroll with a 1000ms (1 second) duration
-          projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+<body>
+    <!-- TradingView Widget: Ticker Tape (now above menu) -->
+    <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+        {
+            "symbols": [
+                {"proName": "BITSTAMP:BTCUSD", "title": "Bitcoin"},
+                {"proName": "BITSTAMP:ETHUSD", "title": "Ethereum"},
+                {"description": "PEPE", "proName": "KUCOIN:PEPEUSDT"},
+                {"description": "PEPE2", "proName": "KUCOIN:PEPE2USDT"},
+                {"description": "MOG", "proName": "BITGET:MOGUSDT"},
+                {"description": "BOB", "proName": "KUCOIN:BOBUSDT"},
+                {"description": "BRETT", "proName": "BITGET:BRETTUSDT"},
+                {"description": "DOGE", "proName": "KUCOIN:DOGEUSDT"},
+                {"description": "SHIB", "proName": "KUCOIN:SHIBUSDT"},
+                {"description": "FLOKI", "proName": "KUCOIN:FLOKIUSDT"},
+                {"description": "TURBO", "proName": "BITGET:TURBOUSDT"}
+            ],
+            "showSymbolLogo": true,
+            "isTransparent": false,
+            "displayMode": "adaptive",
+            "colorTheme": "dark",
+            "locale": "en"
         }
-      }, 300); // Adjust the delay as needed (2000ms = 2 seconds)
-    });
-  </script>
-  
-  
-  
-  <style>
-    /* Custom CSS for the top text section */
-    .top-text-section {
-      text-align: center;
-      font-size: 0.85em; /* Adjust the font size as needed */
-      margin: 10px 0; /* Adjust the margin as needed */
-      font-weight: normal; /* Adjust the font weight as needed */
-    }
+        </script>
+    </div>
 
-    #headerVideo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.1;
-    z-index: -2;
-    pointer-events: none;
-  }
+    <!-- Navigation Menu -->
+    <header>
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <!-- Home icon on the far left -->
+                <li class="home-icon"><a href="/"><i class="fas fa-home"></i></a></li>
+                
+                <!-- Centered menu items -->
+                <div class="menu-center">
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/projects.html">Projects</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Demos <i class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="/carbot.html">Vehicle-GPT</a>
+                            <a href="/parlay.html">Sport-GPT</a>
+                            <a href="/crypto.html">Crypto-GPT</a>
+                        </div>
+                    </li>
+                </div>
+                
+                <!-- Empty spacer to balance home icon -->
+                <li class="spacer"></li>
+            </ul>
+        </div>
+    </header>
 
-  /* Transparent overlay on top of video */
-  #particles-js::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(46, 55, 91, 0.366); /* Adjust transparency here */
-    pointer-events: none; /* Ensure the overlay does not interfere with interactions */
-    z-index: 1; /* Ensure the overlay is above the video but below content */
-  }
-  
+    <!-- Rest of your content remains unchanged -->
+    <!-- Video Background and Header -->
+    <div id="particles-js">
+        <video autoplay muted loop playsinline id="headerVideo">
+            <source src="/assets/mp4/header.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+        <div class="header">
+            <h1>
+                <span class="site-title">Ai Automatrix</span>
+                <span class="site-description">Projects</span>
+            </h1>
+            <div class="top-text-section">
+                Custom AI | Integrations | Automation
+            </div>
+            <div class="header-icons">
+                <a aria-label="Send email" href="#"><i class="fas fa-envelope"></i></a>
+                <a aria-label="My Instagram" href="https://www.instagram.com/bigtimetreat" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                <a aria-label="My Facebook" href="#" target="_blank"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                <a aria-label="My Github" href="#" target="_blank"><i class="fab fa-github" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
 
-  </style>
-  
+    <style>
+        /* TradingView Widget */
+        .tradingview-widget-container {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            z-index: 20;
+            background-color: #1a1a1a;
+        }
+
+        /* Navigation Bar */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: #a285e6;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 10px 0;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        /* Home icon on the far left */
+        .home-icon {
+            margin-right: auto;
+            padding-left: 20px;
+        }
+
+        /* Centered menu items */
+        .menu-center {
+            display: flex;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            gap: 10px;
+        }
+
+        /* Spacer to balance the home icon */
+        .spacer {
+            flex: 1;
+        }
+
+        .nav-menu li {
+            margin: 0;
+        }
+
+        .home-icon a {
+            font-size: 1.2em;
+            padding: 10px 15px;
+            color: white;
+        }
+
+        .nav-menu a {
+            color: white;
+            background-color: #a285e6;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover {
+            background-color: #4b0687;
+            color: white;
+            box-shadow: none;
+        }
+
+        /* Dropdown styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #a285e6;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dropdown-content a {
+            color: #d1c4e9;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(106, 13, 173, 0.8);
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(106, 13, 173, 0.6);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Video Background */
+        #headerVideo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Transparent overlay on top of video */
+        #particles-js::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(81, 146, 187, 0.367);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Header Section */
+        #particles-js {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            z-index: 1;
+            margin-top: 0;
+        }
+
+        .top-text-section {
+            text-align: center;
+            font-size: 1em;
+            margin: 10px 0;
+            font-weight: normal;
+        }
+
+        .header-icons {
+            margin-top: 15px;
+        }
+
+        .header-icons a {
+            margin: 0 10px;
+            color: #fff;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .header-icons a:hover {
+            color: #d1c4e9;
+        }
+    </style>
+
+    <!-- Particles.js Initialization -->
+    <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: {
+                    value: 100,
+                    density: {
+                        enable: true,
+                        value_area: 800,
+                    },
+                },
+                color: {
+                    value: "#00f7ff",
+                },
+                shape: {
+                    type: "circle",
+                    stroke: {
+                        width: 0,
+                        color: "#fff",
+                    },
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 0.5,
+                        opacity_min: 0.1,
+                        sync: false,
+                    },
+                },
+                size: {
+                    value: 5,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        size_min: 0.1,
+                        sync: false,
+                    },
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#00f7ff",
+                    opacity: 0.4,
+                    width: 1,
+                },
+                move: {
+                    enable: true,
+                    speed: 3,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200,
+                    },
+                },
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "repulse",
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push",
+                    },
+                },
+                modes: {
+                    grab: {
+                        distance: 400,
+                        line_linked: {
+                            opacity: 1,
+                        },
+                    },
+                    repulse: {
+                        distance: 100,
+                        duration: 0.4,
+                    },
+                    push: {
+                        particles_nb: 4,
+                    },
+                },
+            },
+            retina_detect: true,
+        });
+    </script>
+</body>
+</html>
     </section>
     <section id="projects">
         <!DOCTYPE html>

@@ -180,14 +180,14 @@
     <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Your Site</title>
 <!-- Include Particles.js -->
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <!-- Include Font Awesome for icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
@@ -248,7 +248,7 @@
 <!-- Video Background and Header -->
 <div id="particles-js">
   <video autoplay muted loop playsinline id="headerVideo">
-    <source src="/assets/mp4/header.mp4" type="video/mp4">
+    <source src="/assets/mp4/header.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
   <div class="header">
@@ -261,9 +261,15 @@
     </div>
     <div class="header-icons">
       <a aria-label="Send email" href="#"><i class="fas fa-envelope"></i></a>
-      <a aria-label="My Instagram" href="https://www.instagram.com/bigtimetreat" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-      <a aria-label="My Facebook" href="#" target="_blank"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-      <a aria-label="My Github" href="#" target="_blank"><i class="fab fa-github" aria-hidden="true"></i></a>
+      <a aria-label="My Instagram" href="https://www.instagram.com/bigtimetreat" target="_blank"
+        ><i class="fab fa-instagram" aria-hidden="true"></i
+      ></a>
+      <a aria-label="My Facebook" href="#" target="_blank"
+        ><i class="fab fa-facebook" aria-hidden="true"></i
+      ></a>
+      <a aria-label="My Github" href="#" target="_blank"
+        ><i class="fab fa-github" aria-hidden="true"></i
+      ></a>
     </div>
   </div>
 </div>
@@ -282,9 +288,9 @@
 header {
   position: sticky;
   top: 0;
-  background-color: #f0f0f0; /* Changed to a shade of white */
+  background-color: #a285e6; /* changed to purple */
   z-index: 10;
-  border-bottom: 1px solid rgba(0, 247, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-container {
@@ -328,11 +334,12 @@ header {
 .home-icon a {
   font-size: 1.2em;
   padding: 10px 15px;
+  color: white;
 }
 
 .nav-menu a {
   color: white;
-  background-color: #007bff;
+  background-color: #a285e6; /* purple button background */
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -346,7 +353,7 @@ header {
 }
 
 .nav-menu a:hover {
-  background-color: #0056b3;
+  background-color: #4b0687; /* darker purple on hover */
   color: white;
   box-shadow: none;
 }
@@ -359,17 +366,17 @@ header {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #222;
+  background-color: #a285e6; /* darker purple dropdown background */
   min-width: 130px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
   z-index: 1;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(0, 247, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .dropdown-content a {
-  color: #00f7ff;
+  color: #d1c4e9;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
@@ -377,12 +384,12 @@ header {
   border: none;
   box-shadow: none;
   border-radius: 0;
-  border-bottom: 1px solid rgba(0, 247, 255, 0.1);
-  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(106, 13, 173, 0.8);
 }
 
 .dropdown-content a:hover {
-  background-color: rgba(0, 247, 255, 0.1);
+  background-color: rgba(106, 13, 173, 0.6);
 }
 
 .dropdown:hover .dropdown-content {
@@ -404,7 +411,7 @@ header {
 
 /* Transparent overlay on top of video */
 #particles-js::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -451,7 +458,7 @@ header {
 }
 
 .header-icons a:hover {
-  color: #00bfff;
+  color: #d1c4e9;
 }
 </style>
 
@@ -463,18 +470,18 @@ particlesJS("particles-js", {
       value: 100,
       density: {
         enable: true,
-        value_area: 800
-      }
+        value_area: 800,
+      },
     },
     color: {
-      value: "#00f7ff"
+      value: "#00f7ff",
     },
     shape: {
       type: "circle",
       stroke: {
         width: 0,
-        color: "#fff"
-      }
+        color: "#fff",
+      },
     },
     opacity: {
       value: 0.5,
@@ -483,8 +490,8 @@ particlesJS("particles-js", {
         enable: true,
         speed: 0.5,
         opacity_min: 0.1,
-        sync: false
-      }
+        sync: false,
+      },
     },
     size: {
       value: 5,
@@ -493,15 +500,15 @@ particlesJS("particles-js", {
         enable: true,
         speed: 1,
         size_min: 0.1,
-        sync: false
-      }
+        sync: false,
+      },
     },
     line_linked: {
       enable: true,
       distance: 150,
       color: "#00f7ff",
       opacity: 0.4,
-      width: 1
+      width: 1,
     },
     move: {
       enable: true,
@@ -514,43 +521,44 @@ particlesJS("particles-js", {
       attract: {
         enable: false,
         rotateX: 600,
-        rotateY: 1200
-      }
-    }
+        rotateY: 1200,
+      },
+    },
   },
   interactivity: {
     detect_on: "canvas",
     events: {
       onhover: {
         enable: true,
-        mode: "repulse"
+        mode: "repulse",
       },
       onclick: {
         enable: true,
-        mode: "push"
-      }
+        mode: "push",
+      },
     },
     modes: {
       grab: {
         distance: 400,
         line_linked: {
-          opacity: 1
-        }
+          opacity: 1,
+        },
       },
       repulse: {
         distance: 100,
-        duration: 0.4
+        duration: 0.4,
       },
       push: {
-        particles_nb: 4
-      }
-    }
+        particles_nb: 4,
+      },
+    },
   },
-  retina_detect: true
+  retina_detect: true,
 });
 </script>
 </body>
 </html>
+
         <div class="user-details">
         <h1>My Expertise</h1>
         <p>Empowering businesses through AI, automation, and seamless integrations. With expertise in cutting-edge tools like Botpress, AWS, and OpenAI, I craft innovative solutions that drive growth and efficiency.</p>
