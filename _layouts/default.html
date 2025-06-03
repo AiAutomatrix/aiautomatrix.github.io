@@ -152,6 +152,16 @@
         .purchase-button:hover {
             background-color: #0056b3; /* Darker shade on hover */
         }
+
+        /* Styling for nested lists in Services Portfolio */
+        .services-portfolio-section ul ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .services-portfolio-section ul ul li {
+            margin-bottom: 3px;
+        }
     </style>
 </head>
 <body>
@@ -260,7 +270,717 @@
         </section>
 
 </main>
+<!-- Target Industries & Use Cases Section -->
+        <section id="target-industries" class="target-industries-section terminal-panel">
+            <h2>Target Industries & Use Cases</h2>
+            <p>Below are industry-specific playbooks outlining our AI, Website, and SEO offerings for each sector, along with example use cases and high-level ROI estimates.</p>
 
+            <!-- Retail Section -->
+            <section>
+                <h3>1. Retail (Brick-and-Mortar & E-Commerce)</h3>
+                <h4>1.1 Industry Playbook</h4>
+                <p>Key Challenges:</p>
+                <ul>
+                    <li>Inventory overstock/understock</li>
+                    <li>Customer churn & loyalty</li>
+                    <li>Declining foot traffic (post-pandemic)</li>
+                    <li>Competition from major online players</li>
+                </ul>
+                <p>Recommended Solutions:</p>
+                <ol>
+                    <li>Predictive Analytics for Inventory Forecasting
+                        <ul>
+                            <li>Use historical POS data to predict demand per SKU, per store location.</li>
+                            <li>Integrate with existing ERP/Inventory System for automated reorder triggers.</li>
+                        </ul>
+                    </li>
+                    <li>Recommendation Engine
+                        <ul>
+                            <li>Personalized product recommendations on e-commerce site and in-store kiosks.</li>
+                            <li>Leverage browsing behavior + purchase history.</li>
+                        </ul>
+                    </li>
+                    <li>NLP Chatbot for Customer Support
+                        <ul>
+                            <li>Automate responses to common queries (store hours, return policy).</li>
+                            <li>Route complex questions to human agents.</li>
+                        </ul>
+                    </li>
+                    <li>Website UX Optimization & SEO
+                        <ul>
+                            <li>Site redesign focused on conversion (one-click checkout, simplified navigation).</li>
+                            <li>Technical SEO (structured data for products, breadcrumbs, site speed improvements).</li>
+                            <li>On-page SEO for product category pages (e.g., “women’s sneakers,” “organic skincare”).</li>
+                        </ul>
+                    </li>
+                </ol>
+                <h4>1.2 Example Use Cases & ROI</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Use Case</th>
+                            <th>Description</th>
+                            <th>Estimated ROI (12 Months)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Inventory Forecasting</td>
+                            <td>Reduction of stockouts by 30%, decrease in overstock by 20%.</td>
+                            <td>$200K-$300K savings for a $1M annual COGS retailer (20% less dead inventory).</td>
+                        </tr>
+                        <tr>
+                            <td>Personalized E-commerce Recommendations</td>
+                            <td>Increase average order value (AOV) by 15%–20%; uplift in conversion rate by 10%.</td>
+                            <td>Additional $50K revenue for a $250K online store.</td>
+                        </tr>
+                        <tr>
+                            <td>Local SEO Optimization</td>
+                            <td>Improve “near me” search rankings, foot traffic increases by 25%.</td>
+                            <td>$80K incremental sales for a store with $400K annual revenue.</td>
+                        </tr>
+                        <tr>
+                            <td>Chatbot for Customer Support</td>
+                            <td>40% reduction in support ticket volume; 30% faster response times.</td>
+                            <td>Saves $30K/year in support staffing for a midsize retailer.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Finance Section -->
+            <section>
+                <h3>2. Finance (Banking, Lending, Wealth Management)</h3>
+                <h4>2.1 Industry Playbook</h4>
+                <p>Key Challenges:</p>
+                <ul>
+                    <li>Risk assessment & fraud detection</li>
+                    <li>Personalized financial advice at scale</li>
+                    <li>Regulatory compliance (KYC/AML)</li>
+                    <li>Legacy website systems (slow, not mobile-friendly)</li>
+                </ul>
+                <p>Recommended Solutions:</p>
+                <ol>
+                    <li>Fraud Detection Model (Computer Vision + Analytics)
+                        <ul>
+                            <li>Real-time transaction monitoring to flag anomalous patterns.</li>
+                            <li>Integrate with core banking APIs for instant alerts.</li>
+                        </ul>
+                    </li>
+                    <li>Predictive Credit Scoring
+                        <ul>
+                            <li>Use alternative data (social, utility payments) for credit-scoring clients without traditional credit history.</li>
+                            <li>Provide dynamic risk scores to loan officers via dashboard.</li>
+                        </ul>
+                    </li>
+                    <li>NLP-Powered Virtual Financial Advisor
+                        <ul>
+                            <li>Chatbot to answer account-related questions, schedule appointments, and cross-sell investment products.</li>
+                            <li>Seamless handoff to human advisor when needed.</li>
+                        </ul>
+                    </li>
+                    <li>Website Revamp & Technical SEO
+                        <ul>
+                            <li>Migrate from legacy CMS to headless CMS + React frontend for faster load times.</li>
+                            <li>Implement SSL everywhere, set up advanced schema markup (financial services).</li>
+                            <li>On-page SEO: optimize for “best personal loans,” “small business lending.”</li>
+                        </ul>
+                    </li>
+                </ol>
+                <h4>2.2 Example Use Cases & ROI</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Use Case</th>
+                            <th>Description</th>
+                            <th>Estimated ROI (12 Months)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fraud Detection Model</td>
+                            <td>Reduce fraud losses by 25%; decrease manual review workload by 40%.</td>
+                            <td>$500K savings for a bank with $50M transaction volume.</td>
+                        </tr>
+                        <tr>
+                            <td>Predictive Credit Scoring</td>
+                            <td>Approve 15% more loans among thin-file applicants; reduce default rate by 5%.</td>
+                            <td>$1.2M additional interest revenue for a $10M loan book.</td>
+                        </tr>
+                        <tr>
+                            <td>Virtual Financial Advisor</td>
+                            <td>20% increase in cross-sell success (credit cards, investment products); 15% higher NPS.</td>
+                            <td>$300K additional revenue for mid-size advisory firm.</td>
+                        </tr>
+                        <tr>
+                            <td>Website + SEO Overhaul</td>
+                            <td>40% increase in organic traffic; 25% more lead form submissions.</td>
+                            <td>$250K revenue uplift for a wealth management firm with $2M annual revenue.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Healthcare & Wellness Section -->
+            <section>
+                <h3>3. Healthcare & Wellness</h3>
+                <h4>3.1 Industry Playbook</h4>
+                <p>Key Challenges:</p>
+                <ul>
+                    <li>Patient no-show rates; appointment no-shows cost clinics $150K/year on average.</li>
+                    <li>Communication overload (multiple channels: calls, texts, emails).</li>
+                    <li>HIPAA/PHIPA compliance for patient data.</li>
+                    <li>Need for tele-health integration (video visits, e-prescriptions).</li>
+                </ul>
+                <p>Recommended Solutions:</p>
+                <ol>
+                    <li>Predictive No-Show Model
+                        <ul>
+                            <li>Use appointment history, demographics, and weather data to predict no-shows.</li>
+                            <li>Automate reminder workflows (SMS/Email) for high-risk patients.</li>
+                        </ul>
+                    </li>
+                    <li>NLP Chatbot for Patient Intake & FAQ
+                        <ul>
+                            <li>Pre-visit triage: collect symptoms, direct patients to appropriate care paths.</li>
+                            <li>Answer common FAQs (insurance coverage, office hours, COVID protocols).</li>
+                        </ul>
+                    </li>
+                    <li>Secure Tele-Health Portal
+                        <ul>
+                            <li>Custom web app with end-to-end encryption (WebRTC).</li>
+                            <li>Integrate with EHR systems (Epic, Cerner) via secure APIs.</li>
+                        </ul>
+                    </li>
+                    <li>Website Redesign & SEO
+                        <ul>
+                            <li>Emphasize trust signals (doctor bios, certifications, patient testimonials).</li>
+                            <li>Technical SEO for “telehealth near me,” “mental health counseling.”</li>
+                            <li>Accessibility (WCAG 2.1 AA) for vision/hearing-impaired users.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <h4>3.2 Example Use Cases & ROI</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Use Case</th>
+                            <th>Description</th>
+                            <th>Estimated ROI (12 Months)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>No-Show Prediction & Reminders</td>
+                            <td>Reduce no-show rate from 20% to 10%; save administrative time on rescheduling.</td>
+                            <td>$100K cost savings for a clinic with $1M annual payroll.</td>
+                        </tr>
+                        <tr>
+                            <td>Patient Chatbot Intake</td>
+                            <td>30% fewer calls; 50% faster registration process; improved patient satisfaction (NPS + 15).</td>
+                            <td>Saves $75K/year on front-desk staffing costs.</td>
+                        </tr>
+                        <tr>
+                            <td>Tele-Health Portal</td>
+                            <td>2× appointment volume via virtual visits; 20% reduction in overhead (office space utilization).</td>
+                            <td>$200K additional revenue for a 3-physician group.</td>
+                        </tr>
+                        <tr>
+                            <td>SEO for Local Keywords</td>
+                            <td>50% increase in organic appointment requests; 20% fewer paid ads required.</td>
+                            <td>$120K net revenue for outpatient clinic with $2M revenue.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Professional Services Section -->
+            <section>
+                <h3>4. Professional Services (Law Firms, Accounting, Consulting)</h3>
+                <h4>4.1 Industry Playbook</h4>
+                <p>Key Challenges:</p>
+                <ul>
+                    <li>Generating qualified leads in saturated markets.</li>
+                    <li>Communicating expertise/trust online.</li>
+                    <li>Managing multiple client projects simultaneously.</li>
+                    <li>Maintaining up-to-date content (regulatory changes, tax laws, case studies).</li>
+                </ul>
+                <p>Recommended Solutions:</p>
+                <ol>
+                    <li>AI-Driven Lead Scoring & CRM Integration
+                        <ul>
+                            <li>Automatically score inbound inquiries (website forms, email leads) based on firm size, case type, budget.</li>
+                            <li>Integrate with Clio (law) or QuickBooks (accounting) to sync client data.</li>
+                        </ul>
+                    </li>
+                    <li>Content Recommendation Engine
+                        <ul>
+                            <li>Suggest relevant blog posts, whitepapers, or case studies based on user behavior (reading time, pages visited).</li>
+                            <li>Increase time on site and perceived expertise.</li>
+                        </ul>
+                    </li>
+                    <li>Chatbot for Appointment Scheduling & FAQ
+                        <ul>
+                            <li>Qualify corporate vs. individual clients.</li>
+                            <li>Schedule consultations directly into Calendly/Google Calendar.</li>
+                            <li>Provide basic legal/accounting FAQs (e.g., “How do I form an LLC?”).</li>
+                        </ul>
+                    </li>
+                    <li>Website & SEO Enhancements
+                        <ul>
+                            <li>Implement schema for “LegalService,” “AccountingService,” “ConsultingService.”</li>
+                            <li>Optimize for “best estate planning attorney,” “tax preparation near me.”</li>
+                            <li>Showcase case results, testimonials, professional bios.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <h4>4.2 Example Use Cases & ROI</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Use Case</th>
+                            <th>Description</th>
+                            <th>Estimated ROI (12 Months)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>AI Lead Scoring</td>
+                            <td>25% higher conversion rate from website leads; 10% reduction in wasted outreach.</td>
+                            <td>$60K additional revenue for a $400K/year boutique firm.</td>
+                        </tr>
+                        <tr>
+                            <td>Content Recommendation Engine</td>
+                            <td>2× average pages per session; 15% more time on site indicates thought leadership.</td>
+                            <td>$30K upsell when combined with paid seminars/webinars.</td>
+                        </tr>
+                        <tr>
+                            <td>Chatbot for Scheduling</td>
+                            <td>40% fewer intake calls; 20% faster appointment booking.</td>
+                            <td>Saves $25K/year in administrative hours.</td>
+                        </tr>
+                        <tr>
+                            <td>Local SEO Optimizations</td>
+                            <td>35% increase in organic leads for targeted practice areas (e.g., “child custody lawyer”).</td>
+                            <td>$70K new revenue for a mid-sized legal practice.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Manufacturing & Industrial Section -->
+            <section>
+                <h3>5. Manufacturing & Industrial</h3>
+                <h4>5.1 Industry Playbook</h4>
+                <p>Key Challenges:</p>
+                <ul>
+                    <li>Supply chain disruptions; unpredictable demand.</li>
+                    <li>Equipment downtime (unplanned maintenance).</li>
+                    <li>Complex B2B purchasing cycles; long decision-making processes.</li>
+                    <li>Legacy websites with outdated technical architecture.</li>
+                </ul>
+                <p>Recommended Solutions:</p>
+                <ol>
+                    <li>Predictive Maintenance (IoT + Time-Series Analytics)
+                        <ul>
+                            <li>Collect sensor data from machinery, predict failures before they happen.</li>
+                            <li>Send automated maintenance work orders to EAM/CMMS systems.</li>
+                        </ul>
+                    </li>
+                    <li>Demand Forecasting & Inventory Optimization
+                        <ul>
+                            <li>Use historical sales/orders + macroeconomic indicators to forecast demand.</li>
+                            <li>Optimize raw material procurement to reduce holding costs.</li>
+                        </ul>
+                    </li>
+                    <li>B2B Portal & Product Catalog
+                        <ul>
+                            <li>Custom Web App for dealers/distributors: real-time pricing, order tracking, inventory levels.</li>
+                            <li>Role-based access (dealer vs. wholesaler vs. internal team).</li>
+                        </ul>
+                    </li>
+                    <li>Website Modernization & Technical SEO
+                        <ul>
+                            <li>Redesign for performance (single-page application or headless CMS).</li>
+                            <li>Implement product schema (e.g., “Industrial Pump,” “Precision Valve”).</li>
+                            <li>On-page SEO for “industrial equipment suppliers,” “OEM part catalogs.”</li>
+                        </ul>
+                    </li>
+                </ol>
+                <h4>5.2 Example Use Cases & ROI</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Use Case</th>
+                            <th>Description</th>
+                            <th>Estimated ROI (12 Months)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Predictive Maintenance</td>
+                            <td>Reduce unplanned downtime by 30%; extend equipment lifespan by 15%.</td>
+                            <td>$500K savings for a mid-sized manufacturer ($10M revenue).</td>
+                        </tr>
+                        <tr>
+                            <td>Demand Forecasting</td>
+                            <td>Decrease inventory carrying costs by 20%; reduce stockouts by 25%.</td>
+                            <td>$250K savings in working capital for $5M COGS.</td>
+                        </tr>
+                        <tr>
+                            <td>B2B Portal Development</td>
+                            <td>20% faster order processing; 15% increase in repeat orders from key distributors.</td>
+                            <td>$300K revenue increase for a $3M parts supplier.</td>
+                        </tr>
+                        <tr>
+                            <td>Website + SEO Overhaul</td>
+                            <td>50% increase in inbound RFQs (requests for quotes); 40% more organic leads.</td>
+                            <td>$150K additional revenue for an industrial equipment dealer.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <p>Note on ROI Estimates:</p>
+            <p>ROI numbers above are high-level, ballpark figures. Actual ROI will depend on factors such as data quality, client’s existing infrastructure, and adoption rates. Always perform a quick “ROI Readiness Assessment” during the proposal phase to refine these estimates.</p>
+        </section>
+
+<!-- Services Portfolio Section -->
+        <section id="services-portfolio" class="services-portfolio-section terminal-panel">
+            <h2>Services Portfolio</h2>
+            <p>Below is our end-to-end suite of offerings, organized by category.</p>
+
+            <div class="service-category">
+                <h3>1. AI Solutions</h3>
+                <p>We offer modular AI services—each can be mixed and matched or bundled into larger custom solutions:</p>
+                <div class="service-item">
+                    <h4>Predictive Analytics</h4>
+                    <p><strong>Use Cases:</strong></p>
+                    <ul>
+                        <li>Customer churn prediction</li>
+                        <li>Demand forecasting</li>
+                        <li>Sales pipeline scoring</li>
+                    </ul>
+                    <p><strong>Deliverables:</strong></p>
+                    <ul>
+                        <li>Data pipeline (ETL) scripts</li>
+                        <li>Trained model with metrics report (accuracy, precision, recall)</li>
+                        <li>REST API endpoint (e.g., POST /predict-churn)</li>
+                    </ul>
+                    <p><strong>Deployment Options:</strong></p>
+                    <ul>
+                        <li>Cloud (AWS SageMaker, GCP AI Platform)</li>
+                        <li>On-premise containers (Docker + Kubernetes)</li>
+                    </ul>
+                </div>
+                <div class="service-item">
+                    <h4>Recommendation Engines</h4>
+                    <p><strong>Use Cases:</strong></p>
+                    <ul>
+                        <li>E-commerce product recommendations</li>
+                        <li>Content suggestions for blogs/resources</li>
+                        <li>Personalized marketing offers</li>
+                    </ul>
+                    <p><strong>Deliverables:</strong></p>
+                    <ul>
+                        <li>Collaborative filtering or hybrid recommendation model</li>
+                        <li>Real-time API (`GET /recommendations?user_id=12345`)</li>
+                        <li>A/B testing framework</li>
+                    </ul>
+                    <p><strong>Integration Points:</strong></p>
+                    <ul>
+                        <li>Shopify, WooCommerce, Magento, custom CRMs</li>
+                    </ul>
+                </div>
+                <div class="service-item">
+                    <h4>NLP Chatbots & Virtual Assistants</h4>
+                    <p><strong>Use Cases:</strong></p>
+                    <ul>
+                        <li>Customer support chatbots (answer FAQs, route to agents)</li>
+                        <li>Lead qualification bots (ask qualifying questions, schedule demos)</li>
+                        <li>Internal knowledge assistants (help employees retrieve SOPs)</li>
+                    </ul>
+                    <p><strong>Deliverables:</strong></p>
+                    <ul>
+                        <li>Dialog flows defined in Botpress</li>
+                        <li>Integration with Messenger, WhatsApp, website webchat</li>
+                        <li>Analytics dashboard (conversation logs, intent performance)</li>
+                    </ul>
+                </div>
+                <div class="service-item">
+                    <h4>Computer Vision</h4>
+                    <p><strong>Use Cases:</strong></p>
+                    <ul>
+                        <li>Quality control (defect detection in manufacturing)</li>
+                        <li>Inventory counting (shelf scanning, object detection)</li>
+                        <li>Document digitization (OCR and data extraction)</li>
+                    </ul>
+                    <p><strong>Deliverables:</strong></p>
+                    <ul>
+                        <li>Trained detection or classification model</li>
+                        <li>Inference pipeline (e.g., AWS Lambda function triggered by S3 upload)</li>
+                        <li>Example integration (e.g., Python script for batch image processing)</li>
+                    </ul>
+                </div>
+                <div class="service-item">
+                    <h4>Custom AI Modules (Advanced/Niche)</h4>
+                    <p><strong>Examples:</strong></p>
+                    <ul>
+                        <li>Time-series anomaly detection (IoT data)</li>
+                        <li>Sentiment analysis for social media monitoring</li>
+                        <li>Speech-to-text transcription pipelines</li>
+                    </ul>
+                    <p><strong>Deliverables:</strong></p>
+                    <ul>
+                        <li>End-to-end training notebooks</li>
+                        <li>Deployment scaffolding (Docker, CI/CD scripts)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-category">
+                <h3>2. Website Development</h3>
+                <p>We design, develop, and deploy responsive, high-performance websites that align with brand and business goals.</p>
+                <div class="service-item">
+                    <h4>Basic Informational Sites</h4>
+                    <p><strong>Ideal For:</strong> Local businesses, small service providers (plumbers, lawyers, consultants).</p>
+                    <p><strong>Includes:</strong></p>
+                    <ul>
+                        <li>Up to 5 pages (Home, About, Services, Blog, Contact)</li>
+                        <li>Mobile-friendly responsive design</li>
+                        <li>Contact form with spam protection</li>
+                    </ul>
+                    <p><strong>Technology Options:</strong></p>
+                    <ul>
+                        <li>Static (Next.js / Gatsby)</li>
+                        <li>CMS-driven (WordPress, Ghost)</li>
+                    </ul>
+                </div>
+                <div class="service-item">
+                    <h4>E-commerce Sites</h4>
+                    <p><strong>Ideal For:</strong> Retailers, subscription boxes, small online stores.</p>
+                    <p><strong>Includes:</strong></p>
+                    <ul>
+                        <li>Product catalog (up to 50 SKUs as part of the base package)</li>
+                        <li>Shopping cart + secure checkout (Stripe, PayPal)</li>
+                        <li>Inventory management integration</li>
+                    </ul>
+                    <p><strong>Platform Options:</strong></p>
+                    <ul>
+                        <li>Shopify (hosted)</li>
+                        <li>WooCommerce (self-hosted WordPress)</li>
+                        <li>Custom React + Node.js stack</li>
+                    </ul>
+                </div>
+                <div class="service-item">
+                    <h4>Custom Web Applications</h4>
+                    <p><strong>Ideal For:</strong> Businesses needing more complex functionality (CRM portals, booking systems, dashboards).</p>
+                    <p><strong>Includes:</strong></p>
+                    <ul>
+                        <li>Full-stack architecture (React/Vue frontend, Node.js/Python backend)</li>
+                        <li>Role-based authentication/authorization</li>
+                        <li>Database (PostgreSQL, MongoDB)</li>
+                    </ul>
+                    <p><strong>Examples:</strong></p>
+                    <ul>
+                        <li>Employee training portal</li>
+                        <li>Client dashboard with analytics charts</li>
+                        <li>Appointment scheduling system</li>
+                    </ul>
+                </div>
+                <div class="service-item">
+                    <h4>Design & UX Services</h4>
+                    <p><strong>Deliverables:</strong></p>
+                    <ul>
+                        <li>Wireframes (Figma, Adobe XD)</li>
+                        <li>High-fidelity mockups</li>
+                        <li>Interactive prototypes</li>
+                    </ul>
+                    <p><strong>Focus Areas:</strong></p>
+                    <ul>
+                        <li>Brand consistency (fonts, colors)</li>
+                        <li>Accessibility (WCAG 2.1 AA compliance)</li>
+                        <li>Conversion-optimized layouts</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-category">
+                <h3>3. SEO & Digital Marketing</h3>
+                <p>We help clients improve organic visibility, drive qualified traffic, and convert visitors into customers.</p>
+                <div class="service-item">
+                    <h4>On-Page SEO</h4>
+                    <p><strong>Deliverables:</strong></p>
+                    <ul>
+                        <li>Title tags, meta descriptions, and header tag optimization</li>
+                        <li>Keyword research & mapping (per page)</li>
+                        <li>Content recommendations (keyword placement, internal linking)</li>
+                    </ul>
+                    <p><strong>Tools Used:</strong></p>
+                    <ul>
+                        <li>Ahrefs API, SEMrush API, Google Search Console</li>
+                    </ul>
+                </div>
+                <div class="service-item">
+                    <h4>Technical SEO</h4>
+                    <p><strong>Deliverables:</strong></p>
+                    <ul>
+                        <li>XML sitemap generation & submission</li>
+                        <li>robots.txt configuration</li>
+                        <li>Page speed optimization (image compression, minification)</li>
+                        <li>Schema markup implementation (JSON-LD for local business, products, articles)</li>
+                    </ul>
+                    <p><strong>Tools Used:</strong></p>
+                    <ul>
+                        <li>Lighthouse, Screaming Frog, Google PageSpeed Insights</li>
+                    </ul>
+                </div>
+                <div class="service-item">
+                    <h4>Off-Page SEO & Link Building</h4>
+                    <p><strong>Deliverables:</strong></p>
+                    <ul>
+                        <li>Guest post outreach (10 prospects/month)</li>
+                        <li>Directory submissions (industry-specific lists)</li>
+                        <li>Backlink monitoring & disavow list management</li>
+                    </ul>
+                    <p><strong>Tools Used:</strong></p>
+                    <ul>
+                        <li>Ahrefs, Moz Link Explorer</li>
+                    </ul>
+                </div>
+                <div class="service-item">
+                    <h4>Content Marketing & Strategy</h4>
+                    <p><strong>Deliverables:</strong></p>
+                    <ul>
+                        <li>Blog editorial calendar (12 topics/quarter)</li>
+                        <li>High-quality blog posts (1,000–1,500 words, optimized)</li>
+                        <li>Infographics and downloadable assets (eBooks, whitepapers)</li>
+                    </ul>
+                    <p><strong>Focus Areas:</strong></p>
+                    <ul>
+                        <li>Thought leadership (industry insights)</li>
+                        <li>Long-tail keyword targeting</li>
+                        <li>Social media amplification</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-category">
+                <h3>4. Maintenance & Support (Retainer Packages)</h3>
+                <p>We offer tiered monthly retainers to keep your site, SEO, and AI solutions running smoothly.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Package</th>
+                            <th>Hours/Month Included</th>
+                            <th>Services Covered</th>
+                            <th>SLA (Response Time)</th>
+                            <th>Monthly Fee</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Bronze</td>
+                            <td>5</td>
+                            <td>- Basic website updates<br>- On-Page SEO tweaks<br>- AI model health check (monthly)</td>
+                            <td>48-hour response (M-F)</td>
+                            <td>$1,200</td>
+                        </tr>
+                        <tr>
+                            <td>Silver</td>
+                            <td>10</td>
+                            <td>- All Bronze services<br>- Technical SEO fixes<br>- Monthly AI retraining (if data available)<br>- Minor feature enhancements (website/AI)</td>
+                            <td>24-hour response (M-F)</td>
+                            <td>$2,000</td>
+                        </tr>
+                        <tr>
+                            <td>Gold</td>
+                            <td>20</td>
+                            <td>- All Silver services<br>- Off-Page SEO/link-building (5 links/mo)<br>- Quarterly AI performance audit<br>- Priority dev hours for new features</td>
+                            <td>12-hour response (M-F)</td>
+                            <td>$3,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Notes:</p>
+                <ul>
+                    <li>Overage Hours: $150/hour (Bronze), $140/hour (Silver), $130/hour (Gold).</li>
+                    <li>SLAs do not cover major new feature development (quoted separately).</li>
+                    <li>Retainer can be paused with 30 days’ notice; unused hours expire monthly (non-rollover).</li>
+                </ul>
+            </div>
+        </section>
+<!-- Company Profile & Mission Statement Section -->
+        <section id="company-profile" class="company-profile-section terminal-panel">
+            <h2>Company Profile & Mission Statement</h2>
+
+            <!-- History / Founding Story -->
+            <section>
+                <h3>History / Founding Story</h3>
+                <p>AI Business Solutions was founded in 2022 by a small team of AI researchers and full‐stack developers who saw a gap in the market: many small-to‐midsize businesses (SMBs) wanted to harness AI, modern websites, and SEO but lacked the internal expertise to get started.</p>
+                <ul>
+                    <li>Founding Year: 2022</li>
+                    <li>Founders:
+                        <ul>
+                            <li>Dr. Elena Martinez (Ph.D. in Machine Learning, former research lead at a Tier‐1 university)</li>
+                            <li>Marcus Li (Full‐Stack Engineer, 8 years at top‐tier SaaS company)</li>
+                            <li>Priya Rao (Digital Marketing Strategist, 6 years at leading SEO agency)</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>In our first year, we built proof-of-concept AI prototypes for local retailers (predictive inventory models) and launched half-dozen WordPress websites optimized for mobile. By the end of 2023, we expanded into offering end-to-end digital solutions—combining AI, custom website development, and SEO—under one roof.</p>
+            </section>
+
+            <!-- Mission & Vision -->
+            <section>
+                <h3>Mission & Vision</h3>
+                <ul>
+                    <li>Mission:
+                        <p>Empower SMBs to compete and grow by making cutting-edge AI, modern website design, and data-driven SEO accessible, affordable, and easy to implement.</p>
+                    </li>
+                    <li>Vision:
+                        <p>To be the go-to partner for SMBs worldwide who want to modernize operations, attract more customers online, and leverage AI insights—without needing an in-house data science or dev team.</p>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Core Values -->
+            <section>
+                <h3>Core Values</h3>
+                <ol>
+                    <li>Customer-First:
+                        <ul>
+                            <li>We put our clients’ needs, feedback, and success at the center of everything we do.</li>
+                            <li>We listen first, then design solutions that align with their goals and budgets.</li>
+                        </ul>
+                    </li>
+                    <li>Innovation:
+                        <ul>
+                            <li>We stay ahead of industry trends—constantly researching new AI models, web frameworks, and SEO best practices.</li>
+                            <li>We encourage experimentation and iterative improvements.</li>
+                        </ul>
+                    </li>
+                    <li>Transparency:
+                        <ul>
+                            <li>We provide clear, itemized proposals and explain technical concepts in plain language.</li>
+                            <li>We maintain open communication throughout every project phase—no hidden fees, no black-box pricing.</li>
+                        </ul>
+                    </li>
+                    <li>Integrity:
+                        <ul>
+                            <li>We deliver on our promises. If something goes wrong, we own it, fix it promptly, and learn from it.</li>
+                            <li>We adhere to data privacy and security best practices (e.g., GDPR/CCPA compliance).</li>
+                        </ul>
+                    </li>
+                    <li>Collaboration:
+                        <ul>
+                            <li>We work as partners with our clients, fostering a collaborative environment and sharing progress at every step.</li>
+                            <li>We believe cross-functional teamwork (AI engineers + designers + marketers) yields better results.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </section>
+        </section>
 {% include footer.html %}
 </body>
 </html>
