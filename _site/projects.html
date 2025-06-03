@@ -81,6 +81,216 @@
     <!-- Include Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
+    <style>
+        /* OVERRIDE ANY EXTERNAL STYLING THAT MIGHT BE AFFECTING THE NAVIGATION */
+        header, .nav-container, .nav-menu, .nav-menu * {
+            box-sizing: border-box !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            line-height: normal !important;
+            vertical-align: baseline !important;
+        }
+
+        /* TradingView Widget */
+        .tradingview-widget-container {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            z-index: 20;
+            background-color: #1a1a1a;
+        }
+
+        /* Navigation Bar - FORCED STYLING */
+        header {
+            position: sticky !important;
+            top: 0 !important;
+            background-color: #a285e6 !important;
+            z-index: 10 !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+            height: 60px !important; /* Fixed height */
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        .nav-container {
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 auto !important;
+            padding: 0 !important;
+        }
+
+        .nav-menu {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            list-style-type: none !important;
+            width: 100% !important;
+            height: 100% !important;
+            position: relative !important;
+            padding: 0 20px !important;
+        }
+
+        /* Home icon - forced to left */
+        .home-icon {
+            position: absolute !important;
+            left: 20px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            margin: 0 !important;
+        }
+
+        /* Centered menu items container */
+        .centered-menu-items {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 10px !important;
+            height: 100% !important;
+            margin: 0 auto !important;
+        }
+
+        /* Individual menu items */
+        .nav-menu li {
+            display: inline-block !important;
+            float: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 100% !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        /* Menu links */
+        .nav-menu a {
+            color: white !important;
+            background-color: #a285e6 !important;
+            padding: 10px 20px !important;
+            border: none !important;
+            border-radius: 5px !important;
+            text-decoration: none !important;
+            font-weight: bold !important;
+            font-size: 1em !important;
+            transition: background-color 0.3s ease !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 5px !important;
+            white-space: nowrap !important;
+            height: 100% !important;
+            box-sizing: border-box !important;
+        }
+
+        .nav-menu a:hover {
+            background-color: #4b0687 !important;
+            color: white !important;
+            box-shadow: none !important;
+        }
+
+        /* Dropdown styles */
+        .dropdown {
+            position: relative !important;
+        }
+
+        .dropdown-content {
+            display: none !important;
+            position: absolute !important;
+            background-color: #a285e6 !important;
+            min-width: 130px !important;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3) !important;
+            z-index: 1 !important;
+            border-radius: 8px !important;
+            overflow: hidden !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            top: 100% !important;
+            left: 0 !important;
+        }
+
+        .dropdown-content a {
+            color: #d1c4e9 !important;
+            padding: 12px 16px !important;
+            text-decoration: none !important;
+            display: block !important;
+            text-align: left !important;
+            border: none !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+            background: rgba(106, 13, 173, 0.8) !important;
+            height: auto !important;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(106, 13, 173, 0.6) !important;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block !important;
+        }
+
+        /* Video Background */
+        #headerVideo {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            opacity: 0.15 !important;
+            z-index: -2 !important;
+            pointer-events: none !important;
+        }
+
+        /* Transparent overlay on top of video */
+        #particles-js::before {
+            content: "" !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: rgba(81, 146, 187, 0.367) !important;
+            pointer-events: none !important;
+            z-index: 0 !important;
+        }
+
+        /* Header Section */
+        #particles-js {
+            min-height: 100vh !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        .header {
+            flex: 1 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            text-align: center !important;
+            z-index: 1 !important;
+            margin-top: 0 !important;
+        }
+
+        .top-text-section {
+            text-align: center !important;
+            font-size: 1em !important;
+            margin: 10px 0 !important;
+            font-weight: normal !important;
+        }
+
+        .header-icons {
+            margin-top: 15px !important;
+        }
+
+        .header-icons a {
+            margin: 0 10px !important;
+            color: #fff !important;
+            font-size: 20px !important;
+            transition: color 0.3s ease !important;
+        }
+
+        .header-icons a:hover {
+            color: #d1c4e9 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -118,8 +328,8 @@
                 <!-- Home icon on the far left -->
                 <li class="home-icon"><a href="/"><i class="fas fa-home"></i></a></li>
                 
-                <!-- Centered menu items -->
-                <div class="menu-center">
+                <!-- Centered menu items container -->
+                <div class="centered-menu-items">
                     <li><a href="/about.html">About</a></li>
                     <li><a href="/projects.html">Projects</a></li>
                     <li class="dropdown">
@@ -131,9 +341,6 @@
                         </div>
                     </li>
                 </div>
-                
-                <!-- Empty spacer to balance home icon -->
-                <li class="spacer"></li>
             </ul>
         </div>
     </header>
@@ -161,196 +368,6 @@
             </div>
         </div>
     </div>
-
-    <style>
-        /* TradingView Widget */
-        .tradingview-widget-container {
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            z-index: 20;
-            background-color: #1a1a1a;
-        }
-
-        /* Navigation Bar */
-        header {
-            position: sticky;
-            top: 0;
-            background-color: #a285e6;
-            z-index: 10;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-container {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 10px 0;
-        }
-
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-        }
-
-        /* Home icon on the far left */
-        .home-icon {
-            margin-right: auto;
-            padding-left: 20px;
-        }
-
-        /* Centered menu items */
-        .menu-center {
-            display: flex;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            gap: 10px;
-        }
-
-        /* Spacer to balance the home icon */
-        .spacer {
-            flex: 1;
-        }
-
-        .nav-menu li {
-            margin: 0;
-        }
-
-        .home-icon a {
-            font-size: 1.2em;
-            padding: 10px 15px;
-            color: white;
-        }
-
-        .nav-menu a {
-            color: white;
-            background-color: #a285e6;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            white-space: nowrap;
-        }
-
-        .nav-menu a:hover {
-            background-color: #4b0687;
-            color: white;
-            box-shadow: none;
-        }
-
-        /* Dropdown styles */
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #a285e6;
-            min-width: 130px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
-            z-index: 1;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .dropdown-content a {
-            color: #d1c4e9;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-            border: none;
-            box-shadow: none;
-            border-radius: 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(106, 13, 173, 0.8);
-        }
-
-        .dropdown-content a:hover {
-            background-color: rgba(106, 13, 173, 0.6);
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Video Background */
-        #headerVideo {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.15;
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        /* Transparent overlay on top of video */
-        #particles-js::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(81, 146, 187, 0.367);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Header Section */
-        #particles-js {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .header {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-            z-index: 1;
-            margin-top: 0;
-        }
-
-        .top-text-section {
-            text-align: center;
-            font-size: 1em;
-            margin: 10px 0;
-            font-weight: normal;
-        }
-
-        .header-icons {
-            margin-top: 15px;
-        }
-
-        .header-icons a {
-            margin: 0 10px;
-            color: #fff;
-            font-size: 20px;
-            transition: color 0.3s ease;
-        }
-
-        .header-icons a:hover {
-            color: #d1c4e9;
-        }
-    </style>
 
     <!-- Particles.js Initialization -->
     <script>
