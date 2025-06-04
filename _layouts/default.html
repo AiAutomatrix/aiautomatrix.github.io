@@ -37,6 +37,12 @@
   {% include head.html %}
 
   <style>
+
+    /* Ensure all child elements are above the overlay */
+        body > * {
+            position: relative;
+            z-index: 2;
+        }
     :root {
       --color-primary: #1f2937; /* Dark gray */
       --color-accent: #3b82f6; /* Blue-500 */
@@ -1338,7 +1344,6 @@
       </div>
     </section>
   </main>
-
 
   {% include footer.html %}
 
