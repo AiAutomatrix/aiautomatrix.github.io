@@ -23,5 +23,15 @@
 <script src="https://cdn.botpress.cloud/webchat/v2.5/inject.js"></script>
 <script src="https://files.bpcontent.cloud/2025/05/14/23/20250514232436-UD08HCV3.js"></script>
 
+  <script>
+  // Your existing command (works in Studio)
+  window.botpress.open();
+  
+  // Fallback for production (if first command fails)
+  if (typeof window.botpressWebChat !== 'undefined') {
+    window.botpressWebChat.sendEvent({ type: 'show' });
+  }
+</script>
+
 </body>
 </html>
